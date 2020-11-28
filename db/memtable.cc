@@ -519,7 +519,7 @@ std::map<std::string, uint32_t> MemTable::SelectHotKeysWithMean(std::map<std::st
     if( it->second >= mean_update_frequency ){
       selectedHotMap[it -> first] = it -> second;
     }
-    if (selectedHotMap.size() >= max_elements){
+    if (selectedHotMap.size() >= static_cast<size_t>(max_elements)){
       break;
     }
   }
@@ -539,59 +539,61 @@ bool MemTable::GetHotColdKeys(MemTable* hot_key_mem, MemTable* cold_key_mem, Rea
   //std::map<std::string, uint32_t> hotKeysWithError = SelectHotKeysWithError(KeyFrequencies, 0); //last parameter indicates the error rate 
   std::map<std::string, uint32_t> hotKeysWithError = SelectHotKeysWithMean(KeyFrequencies);
 
-  auto iter = new MemTableIterator(*this, read_options, nullptr);
-  iter->SeekToFirst();
-  while(iter->Valid()){
+  {
+      MemTableIterator iter(*this, read_options, nullptr);
+      iter.SeekToFirst();
+      while(iter.Valid()){
 
-    Slice memtable_key = iter->key();
-    Slice memtable_value = iter->value();   
-    ParsedInternalKey parsed_key = ParsedInternalKey();
-    ParseInternalKey(memtable_key, &parsed_key);
+        Slice memtable_key = iter.key();
+        Slice memtable_value = iter.value();
+        ParsedInternalKey parsed_key;
+        ParseInternalKey(memtable_key, &parsed_key);
 
-    std::string s = std::string(memtable_key.data(), memtable_key.size()); 
+        std::string s = std::string(memtable_key.data(), memtable_key.size()); 
 
-    std::size_t found_header = s.find_first_of('\x01');
-    std::size_t found_null = s.find_first_of('\x00');
+        std::size_t found_header = s.find_first_of('\x01');
+        std::size_t found_null = s.find_first_of('\x00');
 
-    std::string slice_str = s.substr(0, std::min(found_header, found_null));
-    auto it = KeyFrequencies.find(slice_str);
-    uint32_t val = 0;
-    if (it != KeyFrequencies.end()){
-       val = it->second;
-    }
- 
-    if (val != 0){
+        std::string slice_str = s.substr(0, std::min(found_header, found_null));
+        auto it = KeyFrequencies.find(slice_str);
+        uint32_t val = 0;
+        if (it != KeyFrequencies.end()){
+           val = it->second;
+        }
+     
+        if (val != 0){
 
-      auto it_hot_error = hotKeysWithError.find(slice_str);
+          auto it_hot_error = hotKeysWithError.find(slice_str);
 
-      //check whether this is a key considered hot
-      if (it_hot_error != hotKeysWithError.end()){
-        hotKeysWithError.erase(slice_str);
-        KeyFrequencies.erase(slice_str);
-        slice_str += '\0';
-        hot_key_mem->Add(parsed_key.sequence, parsed_key.type, Slice(slice_str.c_str()), memtable_value);
-      } else{
-        hotKeysWithError.erase(slice_str);
-        KeyFrequencies.erase(slice_str);
-        slice_str += '\0';
-        cold_key_mem->Add(parsed_key.sequence, parsed_key.type, Slice(slice_str.c_str()), memtable_value);
+          //check whether this is a key considered hot
+          if (it_hot_error != hotKeysWithError.end()){
+            hotKeysWithError.erase(slice_str);
+            KeyFrequencies.erase(slice_str);
+            slice_str += '\0';
+            hot_key_mem->Add(parsed_key.sequence, parsed_key.type, Slice(slice_str.c_str()), memtable_value);
+          } else{
+            hotKeysWithError.erase(slice_str);
+            KeyFrequencies.erase(slice_str);
+            slice_str += '\0';
+            cold_key_mem->Add(parsed_key.sequence, parsed_key.type, Slice(slice_str.c_str()), memtable_value);
+          }
+        }
+     
+        iter.Next();
       }
-    }
- 
-    iter->Next();
-  } 
+  }
 
   //PRINT printf("HotKeys size: %lu\n", hot_key_mem->num_entries());
   //PRINT printf("ColdKeys size: %lu\n", cold_key_mem->num_entries());
   if (cold_key_mem->num_entries() < 100) {
     coldKeyMapCreated = false;
-    auto iter = new MemTableIterator(*cold_key_mem, read_options, nullptr);
-    iter->SeekToFirst();
-    while(iter->Valid()){
+    MemTableIterator iter(*cold_key_mem, read_options, nullptr);
+    iter.SeekToFirst();
+    while(iter.Valid()){
 
-      Slice memtable_key = iter->key();
-      Slice memtable_value = iter->value();   
-      ParsedInternalKey parsed_key = ParsedInternalKey();
+      Slice memtable_key = iter.key();
+      Slice memtable_value = iter.value();
+      ParsedInternalKey parsed_key;
       ParseInternalKey(memtable_key, &parsed_key);
 
       std::string s = std::string(memtable_key.data(), memtable_key.size()); 
@@ -601,7 +603,7 @@ bool MemTable::GetHotColdKeys(MemTable* hot_key_mem, MemTable* cold_key_mem, Rea
       
       hot_key_mem->Add(parsed_key.sequence, parsed_key.type, Slice(slice_str.c_str()), memtable_value);
 
-      iter->Next();
+      iter.Next();
     }
  
     //PRINT printf("HotKeys size: %lu\n", hot_key_mem->num_entries());

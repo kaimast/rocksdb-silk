@@ -54,6 +54,14 @@ struct FileDescriptor {
     return *this;
   }
 
+  FileDescriptor(const FileDescriptor &other) : FileDescriptor(0,0,0) {
+    *this = other;
+  }
+
+  FileDescriptor(FileDescriptor &&other) : FileDescriptor(0,0,0) {
+    *this = other;
+  }
+
   uint64_t GetNumber() const {
     return packed_number_and_path_id & kFileNumberMask;
   }

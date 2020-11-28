@@ -1031,8 +1031,6 @@ Status DBImpl::SwitchMemtable(ColumnFamilyData* cfd, WriteContext* context) {
   log::Writer* new_log = nullptr;
   MemTable* new_mem = nullptr;
 
-  MemTable* new_mem_hot = nullptr;
-  MemTable* old_mem_cold = nullptr;
   bool coldMapValid;
 
   // In case of pipelined write is enabled, wait for all pending memtable
@@ -1121,11 +1119,11 @@ Status DBImpl::SwitchMemtable(ColumnFamilyData* cfd, WriteContext* context) {
     SequenceNumber seq = versions_->LastSequence();
     MemTable* cur_mem = cfd->mem();
 
-    new_mem_hot = cfd->ConstructNewMemtable(mutable_cf_options, seq);
-    old_mem_cold = cfd->ConstructNewMemtable(mutable_cf_options, seq);
+    auto new_mem_hot = cfd->ConstructNewMemtable(mutable_cf_options, seq);
+    auto old_mem_cold = cfd->ConstructNewMemtable(mutable_cf_options, seq);
 
     ReadOptions read_options;
-    //coldMapValid = cur_mem->GetHotColdKeys(new_mem_hot, old_mem_cold, read_options);
+    coldMapValid = false; //FIXME cur_mem->GetHotColdKeys(new_mem_hot, old_mem_cold, read_options);
     
     //old_mem_cold->Ref();
     // PRINT printf("Switch Memtable: HotKeys size: %d\n", new_mem_hot->num_entries());
