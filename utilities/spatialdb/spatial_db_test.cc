@@ -15,7 +15,7 @@
 #include "util/testutil.h"
 #include "util/random.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace spatial {
 
 class SpatialDBTest : public testing::Test {

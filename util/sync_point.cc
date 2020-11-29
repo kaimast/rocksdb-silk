@@ -13,7 +13,7 @@ int rocksdb_kill_odds = 0;
 std::vector<std::string> rocksdb_kill_prefix_blacklist;
 
 #ifndef NDEBUG
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void TestKillRandom(std::string kill_point, int odds,
                     const std::string& srcfile, int srcline) {

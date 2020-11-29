@@ -20,7 +20,7 @@
 #include "port/port.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SanityTest {
  public:
@@ -291,7 +291,7 @@ int main(int argc, char** argv) {
     path += "/";
   }
 
-  bool sanity_ok = rocksdb::RunSanityTests(command, path);
+  bool sanity_ok = rocksdb_silk::RunSanityTests(command, path);
 
   return sanity_ok ? 0 : 1;
 }

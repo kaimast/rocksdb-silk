@@ -29,7 +29,7 @@
 #include "util/file_reader_writer.h"
 #include "util/stop_watch.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

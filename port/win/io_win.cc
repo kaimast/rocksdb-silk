@@ -14,7 +14,7 @@
 #include "util/coding.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 /*

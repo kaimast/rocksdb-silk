@@ -15,7 +15,7 @@
 #include "utilities/merge_operators.h"
 #include "utilities/cassandra/format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 
 // Implementation for the merge operation (merges two Cassandra values)
@@ -97,7 +97,7 @@ const char* CassandraValueMergeOperator::Name() const  {
 
 std::shared_ptr<MergeOperator>
     MergeOperators::CreateCassandraMergeOperator() {
-  return std::make_shared<rocksdb::cassandra::CassandraValueMergeOperator>();
+  return std::make_shared<rocksdb_silk::cassandra::CassandraValueMergeOperator>();
 }
 
 } // namespace rocksdb

@@ -11,7 +11,7 @@
 // See ../doc/log_format.txt for more detail.
 
 #pragma once
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace log {
 
 enum RecordType {

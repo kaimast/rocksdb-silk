@@ -15,7 +15,7 @@
 #include "util/random.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 typedef uint64_t Key;
 

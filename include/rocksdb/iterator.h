@@ -24,7 +24,7 @@
 #include "rocksdb/slice.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Iterator : public Cleanable {
  public:

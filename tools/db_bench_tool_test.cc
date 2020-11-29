@@ -17,7 +17,7 @@
 #ifdef GFLAGS
 #include <gflags/gflags.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 static const int kMaxArgCount = 100;
 static const size_t kArgBufferSize = 100000;

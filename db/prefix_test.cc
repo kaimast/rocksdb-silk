@@ -53,9 +53,9 @@ DEFINE_int32(value_size, 40, "");
 DEFINE_bool(enable_print, false, "Print options generated to console.");
 
 // Path to the database on file system
-const std::string kDbName = rocksdb::test::TmpDir() + "/prefix_test";
+const std::string kDbName = rocksdb_silk::test::TmpDir() + "/prefix_test";
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct TestKey {
   uint64_t prefix;

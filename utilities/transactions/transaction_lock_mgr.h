@@ -19,7 +19,7 @@
 #include "util/thread_local.h"
 #include "utilities/transactions/transaction_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnFamilyHandle;
 struct LockInfo;

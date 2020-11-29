@@ -16,7 +16,7 @@
 #include <cstddef>
 #include "rocksdb/cache.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WriteBufferManager {
  public:

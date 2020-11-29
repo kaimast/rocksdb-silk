@@ -9,7 +9,7 @@
 #include "monitoring/thread_status_util.h"
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef NDEBUG
 // the delay for debugging purpose.

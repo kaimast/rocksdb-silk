@@ -14,7 +14,7 @@
 #include "util/fault_injection_test_env.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class DBWALTest : public DBTestBase {
  public:
   DBWALTest() : DBTestBase("/db_wal_test") {}
@@ -79,15 +79,15 @@ TEST_F(DBWALTest, SyncWALNotBlockWrite) {
   ASSERT_OK(Put("foo1", "bar1"));
   ASSERT_OK(Put("foo5", "bar5"));
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"WritableFileWriter::SyncWithoutFlush:1",
        "DBWALTest::SyncWALNotBlockWrite:1"},
       {"DBWALTest::SyncWALNotBlockWrite:2",
        "WritableFileWriter::SyncWithoutFlush:2"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
-  rocksdb::port::Thread thread([&]() { ASSERT_OK(db_->SyncWAL()); });
+  rocksdb_silk::port::Thread thread([&]() { ASSERT_OK(db_->SyncWAL()); });
 
   TEST_SYNC_POINT("DBWALTest::SyncWALNotBlockWrite:1");
   ASSERT_OK(Put("foo2", "bar2"));
@@ -106,20 +106,20 @@ TEST_F(DBWALTest, SyncWALNotBlockWrite) {
   ASSERT_EQ(Get("foo3"), "bar3");
   ASSERT_EQ(Get("foo4"), "bar4");
   ASSERT_EQ(Get("foo5"), "bar5");
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBWALTest, SyncWALNotWaitWrite) {
   ASSERT_OK(Put("foo1", "bar1"));
   ASSERT_OK(Put("foo3", "bar3"));
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"SpecialEnv::WalFile::Append:1", "DBWALTest::SyncWALNotWaitWrite:1"},
       {"DBWALTest::SyncWALNotWaitWrite:2", "SpecialEnv::WalFile::Append:2"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
-  rocksdb::port::Thread thread([&]() { ASSERT_OK(Put("foo2", "bar2")); });
+  rocksdb_silk::port::Thread thread([&]() { ASSERT_OK(Put("foo2", "bar2")); });
   // Moving this to SyncWAL before the actual fsync
   // TEST_SYNC_POINT("DBWALTest::SyncWALNotWaitWrite:1");
   ASSERT_OK(db_->SyncWAL());
@@ -130,7 +130,7 @@ TEST_F(DBWALTest, SyncWALNotWaitWrite) {
 
   ASSERT_EQ(Get("foo1"), "bar1");
   ASSERT_EQ(Get("foo2"), "bar2");
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBWALTest, Recover) {
@@ -307,38 +307,38 @@ TEST_F(DBWALTest, PreallocateBlock) {
   DestroyAndReopen(options);
 
   std::atomic<int> called(0);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBTestWalFile.GetPreallocationStatus", [&](void* arg) {
         ASSERT_TRUE(arg != nullptr);
         size_t preallocation_size = *(static_cast<size_t*>(arg));
         ASSERT_EQ(expected_preallocation_size, preallocation_size);
         called.fetch_add(1);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   Put("", "");
   Flush();
   Put("", "");
   Close();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   ASSERT_EQ(2, called.load());
 
   options.max_total_wal_size = 1000 * 1000;
   expected_preallocation_size = static_cast<size_t>(options.max_total_wal_size);
   Reopen(options);
   called.store(0);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBTestWalFile.GetPreallocationStatus", [&](void* arg) {
         ASSERT_TRUE(arg != nullptr);
         size_t preallocation_size = *(static_cast<size_t*>(arg));
         ASSERT_EQ(expected_preallocation_size, preallocation_size);
         called.fetch_add(1);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   Put("", "");
   Flush();
   Put("", "");
   Close();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   ASSERT_EQ(2, called.load());
 
   options.db_write_buffer_size = 800 * 1000;
@@ -346,19 +346,19 @@ TEST_F(DBWALTest, PreallocateBlock) {
       static_cast<size_t>(options.db_write_buffer_size);
   Reopen(options);
   called.store(0);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBTestWalFile.GetPreallocationStatus", [&](void* arg) {
         ASSERT_TRUE(arg != nullptr);
         size_t preallocation_size = *(static_cast<size_t*>(arg));
         ASSERT_EQ(expected_preallocation_size, preallocation_size);
         called.fetch_add(1);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   Put("", "");
   Flush();
   Put("", "");
   Close();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   ASSERT_EQ(2, called.load());
 
   expected_preallocation_size = 700 * 1000;
@@ -367,19 +367,19 @@ TEST_F(DBWALTest, PreallocateBlock) {
   options.write_buffer_manager = write_buffer_manager;
   Reopen(options);
   called.store(0);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBTestWalFile.GetPreallocationStatus", [&](void* arg) {
         ASSERT_TRUE(arg != nullptr);
         size_t preallocation_size = *(static_cast<size_t*>(arg));
         ASSERT_EQ(expected_preallocation_size, preallocation_size);
         called.fetch_add(1);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   Put("", "");
   Flush();
   Put("", "");
   Close();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   ASSERT_EQ(2, called.load());
 }
 #endif  // !(defined NDEBUG) || !defined(OS_WIN)
@@ -1223,7 +1223,7 @@ TEST_F(DBWALTest, WalTermTest) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

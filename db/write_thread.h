@@ -22,7 +22,7 @@
 #include "rocksdb/write_batch.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WriteThread {
  public:

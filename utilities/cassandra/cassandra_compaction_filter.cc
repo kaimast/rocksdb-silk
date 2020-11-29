@@ -9,7 +9,7 @@
 #include "utilities/cassandra/format.h"
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 
 const char* CassandraCompactionFilter::Name() const {

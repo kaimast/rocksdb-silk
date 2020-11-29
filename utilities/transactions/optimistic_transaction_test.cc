@@ -21,7 +21,7 @@
 
 using std::string;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class OptimisticTransactionTest : public testing::Test {
  public:

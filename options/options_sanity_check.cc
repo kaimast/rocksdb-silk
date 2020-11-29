@@ -7,7 +7,7 @@
 
 #include "options/options_sanity_check.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 OptionsSanityCheckLevel SanityCheckLevelHelper(

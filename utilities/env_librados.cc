@@ -6,7 +6,7 @@
 #include <mutex>
 #include <cstdlib>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 /* GLOBAL DIFINE */
 // #define DEBUG
 #ifdef DEBUG

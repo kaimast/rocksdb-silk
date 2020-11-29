@@ -10,7 +10,7 @@
 #include "rocksdb/write_buffer_manager.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WriteBufferManagerTest : public testing::Test {};
 

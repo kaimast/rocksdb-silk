@@ -24,7 +24,7 @@
 #include "rocksdb/table.h"
 #include "table/table_reader.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Env;
 class Arena;

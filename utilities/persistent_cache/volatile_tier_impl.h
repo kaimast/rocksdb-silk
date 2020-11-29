@@ -38,7 +38,7 @@
 // implementation is not concurrent at this point though.
 //
 // The eviction algorithm is LRU
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class VolatileCacheTier : public PersistentCacheTier {
  public:

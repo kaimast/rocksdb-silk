@@ -21,7 +21,7 @@
 #include "util/hyperloglog.h"
 #include "util/murmurhash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class VersionSet;
 

@@ -9,7 +9,7 @@
 #include "db/dbformat.h"
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const std::vector<Slice> empty_operand_list;
 

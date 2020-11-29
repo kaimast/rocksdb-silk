@@ -20,7 +20,7 @@
 #include "rocksdb/utilities/write_batch_with_index.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status TransactionUtil::CheckKeyForConflicts(DBImpl* db_impl,
                                              ColumnFamilyHandle* column_family,

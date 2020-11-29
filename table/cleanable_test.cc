@@ -12,7 +12,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CleanableTest : public testing::Test {};
 
@@ -271,7 +271,7 @@ TEST_F(CleanableTest, PinnableSlice) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

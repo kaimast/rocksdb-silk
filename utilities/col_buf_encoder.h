@@ -12,7 +12,7 @@
 #include <vector>
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 enum ColCompressionType {
   kColNoCompression,

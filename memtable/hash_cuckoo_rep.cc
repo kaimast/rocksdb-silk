@@ -22,7 +22,7 @@
 #include "rocksdb/memtablerep.h"
 #include "util/murmurhash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 
 // the default maximum size of the cuckoo path searching queue

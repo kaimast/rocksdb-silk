@@ -17,7 +17,7 @@
 
 #ifndef ROCKSDB_LITE
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct HashTableTest : public testing::Test {
   ~HashTableTest() { map_.Clear(&HashTableTest::ClearNode); }

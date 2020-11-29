@@ -23,7 +23,7 @@
 #include "table/plain_table_factory.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 DBOptions BuildDBOptions(const ImmutableDBOptions& immutable_db_options,
                          const MutableDBOptions& mutable_db_options) {

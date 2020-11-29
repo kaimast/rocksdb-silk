@@ -19,7 +19,7 @@
 #include "util/sync_point.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // TODO(yhchiang): the rate will not be accurate when we run test in parallel.
 class RateLimiterTest : public testing::Test {};
@@ -126,7 +126,7 @@ TEST_F(RateLimiterTest, LimitChangeTest) {
   // starvation test when limit changes to a smaller value
   int64_t refill_period = 1000 * 1000;
   auto* env = Env::Default();
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   struct Arg {
     Arg(int32_t _request_size, Env::IOPriority _pri,
         std::shared_ptr<RateLimiter> _limiter)
@@ -148,7 +148,7 @@ TEST_F(RateLimiterTest, LimitChangeTest) {
     for (int iter = 0; iter < 2; iter++) {
       std::shared_ptr<RateLimiter> limiter =
           std::make_shared<GenericRateLimiter>(target, refill_period, 10);
-      rocksdb::SyncPoint::GetInstance()->LoadDependency(
+      rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
           {{"GenericRateLimiter::Request",
             "RateLimiterTest::LimitChangeTest:changeLimitStart"},
            {"RateLimiterTest::LimitChangeTest:changeLimitEnd",

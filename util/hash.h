@@ -15,7 +15,7 @@
 
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 extern uint32_t Hash(const char* data, size_t n, uint32_t seed);
 

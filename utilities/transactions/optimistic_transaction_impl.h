@@ -24,7 +24,7 @@
 #include "utilities/transactions/transaction_base.h"
 #include "utilities/transactions/transaction_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class OptimisticTransactionImpl : public TransactionBaseImpl {
  public:

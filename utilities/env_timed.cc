@@ -7,7 +7,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 

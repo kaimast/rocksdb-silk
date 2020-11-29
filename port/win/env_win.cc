@@ -36,7 +36,7 @@
 #include <rpc.h>  // for uuid generation
 #include <windows.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ThreadStatusUpdater* CreateThreadStatusUpdater() {
   return new ThreadStatusUpdater();

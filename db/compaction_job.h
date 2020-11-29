@@ -43,7 +43,7 @@
 #include "util/stop_watch.h"
 #include "util/thread_local.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MemTable;
 class TableCache;

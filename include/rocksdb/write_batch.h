@@ -32,7 +32,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/write_batch_base.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class ColumnFamilyHandle;

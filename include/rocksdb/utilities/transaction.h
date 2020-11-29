@@ -14,7 +14,7 @@
 #include "rocksdb/db.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Iterator;
 class TransactionDB;

@@ -16,7 +16,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/table.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 DBOptions BuildDBOptions(const ImmutableDBOptions& immutable_db_options,
                          const MutableDBOptions& mutable_db_options);

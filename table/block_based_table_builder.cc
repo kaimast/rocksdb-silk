@@ -51,7 +51,7 @@
 #include "table/index_builder.h"
 #include "table/partitioned_filter_block.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 extern const std::string kHashIndexPrefixesBlock;
 extern const std::string kHashIndexPrefixesMetadataBlock;

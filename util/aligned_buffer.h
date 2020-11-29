@@ -11,7 +11,7 @@
 #include <algorithm>
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 inline size_t TruncateToPageBoundary(size_t page_size, size_t s) {
   s -= (s & (page_size - 1));

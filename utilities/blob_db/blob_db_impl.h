@@ -33,7 +33,7 @@
 #include "utilities/blob_db/blob_log_reader.h"
 #include "utilities/blob_db/blob_log_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBImpl;
 class ColumnFamilyHandle;
@@ -147,28 +147,28 @@ class BlobDBImpl : public BlobDB {
   friend class BlobDBIterator;
 
  public:
-  using rocksdb::StackableDB::Put;
+  using rocksdb_silk::StackableDB::Put;
   Status Put(const WriteOptions& options, ColumnFamilyHandle* column_family,
              const Slice& key, const Slice& value) override;
 
-  using rocksdb::StackableDB::Delete;
+  using rocksdb_silk::StackableDB::Delete;
   Status Delete(const WriteOptions& options, ColumnFamilyHandle* column_family,
                 const Slice& key) override;
 
-  using rocksdb::StackableDB::SingleDelete;
+  using rocksdb_silk::StackableDB::SingleDelete;
   virtual Status SingleDelete(const WriteOptions& wopts,
                               ColumnFamilyHandle* column_family,
                               const Slice& key) override;
 
-  using rocksdb::StackableDB::Get;
+  using rocksdb_silk::StackableDB::Get;
   Status Get(const ReadOptions& options, ColumnFamilyHandle* column_family,
              const Slice& key, PinnableSlice* value) override;
 
-  using rocksdb::StackableDB::NewIterator;
+  using rocksdb_silk::StackableDB::NewIterator;
   virtual Iterator* NewIterator(const ReadOptions& opts,
                                 ColumnFamilyHandle* column_family) override;
 
-  using rocksdb::StackableDB::MultiGet;
+  using rocksdb_silk::StackableDB::MultiGet;
   virtual std::vector<Status> MultiGet(
       const ReadOptions& options,
       const std::vector<ColumnFamilyHandle*>& column_family,

@@ -12,7 +12,7 @@
 #include "port/likely.h"
 #include <stdlib.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct Entry {
   Entry() : ptr(nullptr) {}

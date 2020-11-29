@@ -16,7 +16,7 @@
 #include "rocksdb/merge_operator.h"
 #include "table/internal_iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status MergeHelper::TimedFullMerge(const MergeOperator* merge_operator,
                                    const Slice& key, const Slice* value,

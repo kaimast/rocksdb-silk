@@ -6,7 +6,7 @@
 #include "rocksdb/iostats_context.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 TEST(IOStatsContextTest, ToString) {
   get_iostats_context()->Reset();

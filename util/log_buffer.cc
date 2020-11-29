@@ -8,7 +8,7 @@
 #include "port/sys_time.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 LogBuffer::LogBuffer(const InfoLogLevel log_level,
                      Logger*info_log)

@@ -21,7 +21,7 @@
 #include "util/string_util.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 uint64_t TotalFileSize(const std::vector<FileMetaData*>& files) {
   uint64_t sum = 0;

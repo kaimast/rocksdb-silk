@@ -33,7 +33,7 @@
 //   key  : 'k' + : + $id
 //   value:  $quadkey
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const double GeoDBImpl::PI = 3.141592653589793;
 const double GeoDBImpl::EarthRadius = 6378137;
@@ -261,8 +261,8 @@ GeoIterator* GeoDBImpl::SearchRadial(const GeoPosition& pos,
 
 std::string GeoDBImpl::MakeKey1(const GeoPosition& pos, Slice id,
                                 std::string quadkey) {
-  std::string lat = rocksdb::ToString(pos.latitude);
-  std::string lon = rocksdb::ToString(pos.longitude);
+  std::string lat = rocksdb_silk::ToString(pos.latitude);
+  std::string lon = rocksdb_silk::ToString(pos.longitude);
   std::string key = "p:";
   key.reserve(5 + quadkey.size() + id.size() + lat.size() + lon.size());
   key.append(quadkey);

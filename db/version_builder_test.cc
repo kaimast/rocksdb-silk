@@ -11,7 +11,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class VersionBuilderTest : public testing::Test {
  public:

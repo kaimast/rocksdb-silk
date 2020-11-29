@@ -13,7 +13,7 @@
 #include "util/filename.h"
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 

@@ -26,7 +26,7 @@
 #include "rocksdb/options.h"
 #include "util/thread_local.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Version;
 class VersionSet;

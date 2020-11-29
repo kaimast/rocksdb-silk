@@ -12,7 +12,7 @@
 
 #include <algorithm>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 HistogramWindowingImpl::HistogramWindowingImpl() {
   env_ = Env::Default();

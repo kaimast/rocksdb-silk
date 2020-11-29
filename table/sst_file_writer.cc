@@ -13,7 +13,7 @@
 #include "util/file_reader_writer.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const std::string ExternalSstFilePropertyNames::kVersion =
     "rocksdb.external_sst_file.version";

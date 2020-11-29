@@ -9,7 +9,7 @@
 
 #include "db/column_family.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void FlushScheduler::ScheduleFlush(ColumnFamilyData* cfd) {
 #ifndef NDEBUG

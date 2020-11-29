@@ -27,7 +27,7 @@
 #include "util/string_util.h"
 #include "util/xxhash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 extern const uint64_t kLegacyBlockBasedTableMagicNumber;
 extern const uint64_t kBlockBasedTableMagicNumber;
@@ -204,14 +204,14 @@ std::string Footer::ToString() const {
     result.append("metaindex handle: " + metaindex_handle_.ToString() + "\n  ");
     result.append("index handle: " + index_handle_.ToString() + "\n  ");
     result.append("table_magic_number: " +
-                  rocksdb::ToString(table_magic_number_) + "\n  ");
+                  rocksdb_silk::ToString(table_magic_number_) + "\n  ");
   } else {
-    result.append("checksum: " + rocksdb::ToString(checksum_) + "\n  ");
+    result.append("checksum: " + rocksdb_silk::ToString(checksum_) + "\n  ");
     result.append("metaindex handle: " + metaindex_handle_.ToString() + "\n  ");
     result.append("index handle: " + index_handle_.ToString() + "\n  ");
-    result.append("footer version: " + rocksdb::ToString(version_) + "\n  ");
+    result.append("footer version: " + rocksdb_silk::ToString(version_) + "\n  ");
     result.append("table_magic_number: " +
-                  rocksdb::ToString(table_magic_number_) + "\n  ");
+                  rocksdb_silk::ToString(table_magic_number_) + "\n  ");
   }
   return result;
 }
@@ -337,7 +337,7 @@ Status ReadBlockContents(RandomAccessFileReader* file, const Footer& footer,
   std::unique_ptr<char[]> heap_buf;
   char stack_buf[DefaultStackBufferSize];
   char* used_buf = nullptr;
-  rocksdb::CompressionType compression_type;
+  rocksdb_silk::CompressionType compression_type;
 
   if (cache_options.persistent_cache &&
       !cache_options.persistent_cache->IsCompressed()) {
@@ -404,7 +404,7 @@ Status ReadBlockContents(RandomAccessFileReader* file, const Footer& footer,
 
   PERF_TIMER_GUARD(block_decompress_time);
 
-  compression_type = static_cast<rocksdb::CompressionType>(slice.data()[n]);
+  compression_type = static_cast<rocksdb_silk::CompressionType>(slice.data()[n]);
 
   if (decompression_requested && compression_type != kNoCompression) {
     // compressed page, uncompress, update cache

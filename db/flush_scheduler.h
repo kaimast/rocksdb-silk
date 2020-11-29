@@ -10,7 +10,7 @@
 #include <mutex>
 #include <set>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnFamilyData;
 

@@ -29,7 +29,7 @@
 #include "rocksdb/statistics.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Cache;
 

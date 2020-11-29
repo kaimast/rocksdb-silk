@@ -17,7 +17,7 @@
 #include <sys/types.h>
 #elif defined(OS_WIN)
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 struct dirent {

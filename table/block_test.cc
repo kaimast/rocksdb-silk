@@ -26,7 +26,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static std::string RandomString(Random* rnd, int len) {
   std::string r;
@@ -270,7 +270,7 @@ TEST_F(BlockTest, BlockReadAmpBitmap) {
 
   Random rnd(301);
   for (size_t block_size : block_sizes) {
-    std::shared_ptr<Statistics> stats = rocksdb::CreateDBStatistics();
+    std::shared_ptr<Statistics> stats = rocksdb_silk::CreateDBStatistics();
     BlockReadAmpBitmap read_amp_bitmap(block_size, kBytesPerBit, stats.get());
     BlockReadAmpBitmapSlowAndAccurate read_amp_slow_and_accurate;
 
@@ -353,7 +353,7 @@ TEST_F(BlockTest, BlockWithReadAmpBitmap) {
 
   // Read the block sequentially using Next()
   {
-    std::shared_ptr<Statistics> stats = rocksdb::CreateDBStatistics();
+    std::shared_ptr<Statistics> stats = rocksdb_silk::CreateDBStatistics();
 
     // create block reader
     BlockContents contents;
@@ -387,7 +387,7 @@ TEST_F(BlockTest, BlockWithReadAmpBitmap) {
 
   // Read the block sequentially using Seek()
   {
-    std::shared_ptr<Statistics> stats = rocksdb::CreateDBStatistics();
+    std::shared_ptr<Statistics> stats = rocksdb_silk::CreateDBStatistics();
 
     // create block reader
     BlockContents contents;
@@ -423,7 +423,7 @@ TEST_F(BlockTest, BlockWithReadAmpBitmap) {
 
   // Read the block randomly
   {
-    std::shared_ptr<Statistics> stats = rocksdb::CreateDBStatistics();
+    std::shared_ptr<Statistics> stats = rocksdb_silk::CreateDBStatistics();
 
     // create block reader
     BlockContents contents;
@@ -463,7 +463,7 @@ TEST_F(BlockTest, BlockWithReadAmpBitmap) {
 }
 
 TEST_F(BlockTest, ReadAmpBitmapPow2) {
-  std::shared_ptr<Statistics> stats = rocksdb::CreateDBStatistics();
+  std::shared_ptr<Statistics> stats = rocksdb_silk::CreateDBStatistics();
   ASSERT_EQ(BlockReadAmpBitmap(100, 1, stats.get()).GetBytesPerBit(), 1);
   ASSERT_EQ(BlockReadAmpBitmap(100, 2, stats.get()).GetBytesPerBit(), 2);
   ASSERT_EQ(BlockReadAmpBitmap(100, 4, stats.get()).GetBytesPerBit(), 4);

@@ -15,7 +15,7 @@
 #include "rocksdb/options.h"
 #include "rocksdb/table.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 LevelDBOptions::LevelDBOptions()
     : comparator(BytewiseComparator()),

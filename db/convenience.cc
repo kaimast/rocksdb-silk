@@ -10,7 +10,7 @@
 
 #include "db/db_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void CancelAllBackgroundWork(DB* db, bool wait) {
   (dynamic_cast<DBImpl*>(db->GetRootDB()))->CancelAllBackgroundWork(wait);

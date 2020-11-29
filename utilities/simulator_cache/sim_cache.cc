@@ -8,7 +8,7 @@
 #include "monitoring/statistics.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 // SimCacheImpl definition

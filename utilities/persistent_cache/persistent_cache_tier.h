@@ -52,7 +52,7 @@
 //               |
 //               V
 //              null
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Persistent Cache Config
 //

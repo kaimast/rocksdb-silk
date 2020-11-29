@@ -12,7 +12,7 @@
 #include "util/logging.h"
 #include "utilities/merge_operators.h"
 
-using namespace rocksdb;
+using namespace rocksdb_silk;
 
 namespace { // anonymous namespace
 
@@ -64,7 +64,7 @@ class UInt64AddOperator : public AssociativeMergeOperator {
 
 }
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::shared_ptr<MergeOperator> MergeOperators::CreateUInt64AddOperator() {
   return std::make_shared<UInt64AddOperator>();

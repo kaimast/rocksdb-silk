@@ -12,7 +12,7 @@
 #include "utilities/blob_db/blob_dump_tool.h"
 
 using namespace rocksdb;
-using namespace rocksdb::blob_db;
+using namespace rocksdb_silk::blob_db;
 
 int main(int argc, char** argv) {
   using DisplayType = BlobDumpTool::DisplayType;

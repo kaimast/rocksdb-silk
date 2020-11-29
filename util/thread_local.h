@@ -18,7 +18,7 @@
 #include "util/autovector.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Cleanup function that will be called for a stored thread local
 // pointer (if not NULL) when one of the following happens:

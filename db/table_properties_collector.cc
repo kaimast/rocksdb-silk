@@ -9,7 +9,7 @@
 #include "util/coding.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status InternalKeyPropertiesCollector::InternalAdd(const Slice& key,
                                                    const Slice& value,

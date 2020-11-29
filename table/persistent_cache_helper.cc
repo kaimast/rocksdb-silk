@@ -7,7 +7,7 @@
 #include "table/block_based_table_reader.h"
 #include "table/format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void PersistentCacheHelper::InsertRawPage(
     const PersistentCacheOptions& cache_options, const BlockHandle& handle,

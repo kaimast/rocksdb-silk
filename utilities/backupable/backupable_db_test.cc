@@ -31,7 +31,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 
@@ -1006,7 +1006,7 @@ TEST_F(BackupableDBTest, BackupOptions) {
     db_.reset();
     db_.reset(OpenDB());
     ASSERT_OK(backup_engine_->CreateNewBackup(db_.get(), true));
-    rocksdb::GetLatestOptionsFileName(db_->GetName(), options_.env, &name);
+    rocksdb_silk::GetLatestOptionsFileName(db_->GetName(), options_.env, &name);
     ASSERT_OK(file_manager_->FileExists(OptionsPath(backupdir_, i) + name));
     backup_chroot_env_->GetChildren(OptionsPath(backupdir_, i), &filenames);
     for (auto fn : filenames) {
@@ -1401,20 +1401,20 @@ TEST_F(BackupableDBTest, ChangeManifestDuringBackupCreation) {
   OpenDBAndBackupEngine(true);
   FillDB(db_.get(), 0, 100);
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"CheckpointImpl::CreateCheckpoint:SavedLiveFiles1",
        "VersionSet::LogAndApply:WriteManifest"},
       {"VersionSet::LogAndApply:WriteManifestDone",
        "CheckpointImpl::CreateCheckpoint:SavedLiveFiles2"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
-  rocksdb::port::Thread flush_thread{[this]() { ASSERT_OK(db_->Flush(FlushOptions())); }};
+  rocksdb_silk::port::Thread flush_thread{[this]() { ASSERT_OK(db_->Flush(FlushOptions())); }};
 
   ASSERT_OK(backup_engine_->CreateNewBackup(db_.get(), false));
 
   flush_thread.join();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   // The last manifest roll would've already been cleaned up by the full scan
   // that happens when CreateNewBackup invokes EnableFileDeletions. We need to
@@ -1532,7 +1532,7 @@ TEST_F(BackupableDBTest, LimitBackupsOpened) {
 } //  namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

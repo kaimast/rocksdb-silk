@@ -11,7 +11,7 @@
 
 #include <stddef.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Cache;
 class Comparator;

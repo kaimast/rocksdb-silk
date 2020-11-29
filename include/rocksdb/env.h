@@ -33,7 +33,7 @@
 #undef GetCurrentTime
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class FileLock;
 class Logger;

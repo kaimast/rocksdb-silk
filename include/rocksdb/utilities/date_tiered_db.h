@@ -12,7 +12,7 @@
 
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Date tiered database is a wrapper of DB that implements
 // a simplified DateTieredCompactionStrategy by using multiple column famillies

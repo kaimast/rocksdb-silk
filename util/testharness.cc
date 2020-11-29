@@ -10,7 +10,7 @@
 #include "util/testharness.h"
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace test {
 
 ::testing::AssertionResult AssertStatus(const char* s_expr, const Status& s) {

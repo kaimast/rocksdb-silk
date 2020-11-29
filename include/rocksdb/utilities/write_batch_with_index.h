@@ -22,7 +22,7 @@
 #include "rocksdb/write_batch.h"
 #include "rocksdb/write_batch_base.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnFamilyHandle;
 class Comparator;

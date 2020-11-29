@@ -17,7 +17,7 @@
 #include "util/string_util.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

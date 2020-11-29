@@ -45,7 +45,7 @@
 //
 // Write IO code path :
 //
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WriteableCacheFile;
 struct BlockInfo;

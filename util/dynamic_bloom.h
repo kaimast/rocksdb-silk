@@ -14,7 +14,7 @@
 #include <atomic>
 #include <memory>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class Allocator;

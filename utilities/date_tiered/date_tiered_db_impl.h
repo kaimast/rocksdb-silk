@@ -15,7 +15,7 @@
 #include "rocksdb/db.h"
 #include "rocksdb/utilities/date_tiered_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Implementation of DateTieredDB.
 class DateTieredDBImpl : public DateTieredDB {

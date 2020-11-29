@@ -21,7 +21,7 @@
 #include "util/sst_file_manager_impl.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 Options SanitizeOptions(const std::string& dbname,
                         const Options& src) {
   auto db_options = SanitizeOptions(dbname, DBOptions(src));

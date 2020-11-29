@@ -10,7 +10,7 @@
 
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // TransactionDBMutex and TransactionDBCondVar APIs allows applications to
 // implement custom mutexes and condition variables to be used by a

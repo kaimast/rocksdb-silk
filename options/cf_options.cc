@@ -18,7 +18,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ImmutableCFOptions::ImmutableCFOptions(const Options& options)
     : ImmutableCFOptions(ImmutableDBOptions(options), options) {}

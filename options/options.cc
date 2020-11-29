@@ -34,7 +34,7 @@
 #include "table/block_based_table_factory.h"
 #include "util/compression.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 AdvancedColumnFamilyOptions::AdvancedColumnFamilyOptions() {
   assert(memtable_factory.get() != nullptr);

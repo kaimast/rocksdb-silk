@@ -11,7 +11,7 @@
 #include "rocksdb/utilities/db_ttl.h"
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Please don't use this class. It's deprecated
 class UtilityDB {

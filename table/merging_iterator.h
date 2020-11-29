@@ -11,7 +11,7 @@
 
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Comparator;
 class InternalIterator;

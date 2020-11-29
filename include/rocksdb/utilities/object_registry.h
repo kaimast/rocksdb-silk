@@ -15,7 +15,7 @@
 
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Creates a new T using the factory function that was registered with a pattern
 // that matches the provided "target" string according to std::regex_match.

@@ -14,7 +14,7 @@
 #include <unistd.h>
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

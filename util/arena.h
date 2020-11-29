@@ -23,7 +23,7 @@
 #include "util/allocator.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Arena : public Allocator {
  public:

@@ -14,7 +14,7 @@
 #include <memory>
 #include <functional>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 
 class ThreadPoolImpl : public ThreadPool {

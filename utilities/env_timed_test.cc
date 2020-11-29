@@ -9,7 +9,7 @@
 #include "rocksdb/perf_context.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TimedEnvTest : public testing::Test {
 };

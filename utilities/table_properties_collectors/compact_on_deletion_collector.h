@@ -7,7 +7,7 @@
 
 #ifndef ROCKSDB_LITE
 #include "rocksdb/utilities/table_properties_collectors.h"
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // A factory of a table property collector that marks a SST
 // file as need-compaction when it observe at least "D" deletion

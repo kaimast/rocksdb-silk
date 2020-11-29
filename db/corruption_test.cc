@@ -28,7 +28,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static const int kValueSize = 1000;
 
@@ -89,7 +89,7 @@ class CorruptionTest : public testing::Test {
   void RepairDB() {
     delete db_;
     db_ = nullptr;
-    ASSERT_OK(::rocksdb::RepairDB(dbname_, options_));
+    ASSERT_OK(::rocksdb_silk::RepairDB(dbname_, options_));
   }
 
   void Build(int n, int flush_every = 0) {

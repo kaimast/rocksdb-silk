@@ -10,7 +10,7 @@
 #include "rocksdb/options.h"
 #include "rocksdb/utilities/optimistic_transaction_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class OptimisticTransactionDBImpl : public OptimisticTransactionDB {
  public:

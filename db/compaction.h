@@ -13,7 +13,7 @@
 #include "util/arena.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // The structure that manages compaction input files associated
 // with the same physical level.

@@ -22,7 +22,7 @@
 #define ROCKSDB_FIELD_UNUSED
 #endif  // __clang__
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 enum TickersInternal : uint32_t {
   INTERNAL_TICKER_ENUM_START = TICKER_ENUM_MAX,

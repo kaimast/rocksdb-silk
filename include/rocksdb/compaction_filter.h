@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class SliceTransform;

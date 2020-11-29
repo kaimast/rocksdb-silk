@@ -41,7 +41,7 @@
 #include "port/xpress.h"
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 inline bool Snappy_Supported() {
 #ifdef SNAPPY

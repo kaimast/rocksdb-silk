@@ -17,7 +17,7 @@
 #include "options/cf_options.h"
 #include "rocksdb/compaction_filter.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CompactionEventListener;
 

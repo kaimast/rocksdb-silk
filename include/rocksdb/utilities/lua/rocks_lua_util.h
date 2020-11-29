@@ -17,7 +17,7 @@ extern "C" {
 
 #include "rocksdb/utilities/lua/rocks_lua_custom_library.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace lua {
 class LuaStateWrapper {
  public:

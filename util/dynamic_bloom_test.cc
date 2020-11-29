@@ -38,7 +38,7 @@ DEFINE_int32(bits_per_key, 10, "");
 DEFINE_int32(num_probes, 6, "");
 DEFINE_bool(enable_perf, false, "");
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static Slice Key(uint64_t i, char* buffer) {
   memcpy(buffer, &i, sizeof(i));

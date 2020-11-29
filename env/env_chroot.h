@@ -11,7 +11,7 @@
 
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Returns an Env that translates paths such that the root directory appears to
 // be chroot_dir. chroot_dir should refer to an existing directory.

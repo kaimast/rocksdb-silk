@@ -25,7 +25,7 @@
 #include "rocksdb/transaction_log.h"
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 class WalManager {

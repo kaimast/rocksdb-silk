@@ -19,7 +19,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // A specific implementation of GeoDB
 

@@ -8,7 +8,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class InternalIterator;
 class BlockHandle;

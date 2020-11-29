@@ -74,7 +74,7 @@ typedef SSIZE_T ssize_t;
 #define PLATFORM_IS_LITTLE_ENDIAN (__BYTE_ORDER == __LITTLE_ENDIAN)
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #define PREFETCH(addr, rw, locality)
 

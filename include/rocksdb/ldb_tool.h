@@ -9,7 +9,7 @@
 #include "rocksdb/db.h"
 #include "rocksdb/options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // An interface for converting a slice to a readable string
 class SliceFormatter {

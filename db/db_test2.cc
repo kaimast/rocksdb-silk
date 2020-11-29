@@ -16,7 +16,7 @@
 #include "rocksdb/persistent_cache.h"
 #include "rocksdb/wal_filter.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBTest2 : public DBTestBase {
  public:
@@ -38,7 +38,7 @@ TEST_P(PrefixFullBloomWithReverseComparator,
   Options options = last_options_;
   options.comparator = ReverseBytewiseComparator();
   options.prefix_extractor.reset(NewCappedPrefixTransform(3));
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions bbto;
   if (if_cache_filter_) {
     bbto.no_block_cache = false;
@@ -130,7 +130,7 @@ TEST_F(DBTest2, IteratorPropertyVersionNumber) {
 TEST_F(DBTest2, CacheIndexAndFilterWithDBRestart) {
   Options options = CurrentOptions();
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions table_options;
   table_options.cache_index_and_filter_blocks = true;
   table_options.filter_policy.reset(NewBloomFilterPolicy(20));
@@ -149,7 +149,7 @@ TEST_F(DBTest2, CacheIndexAndFilterWithDBRestart) {
 TEST_F(DBTest2, MaxSuccessiveMergesChangeWithDBRecovery) {
   Options options = CurrentOptions();
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   options.max_successive_merges = 3;
   options.merge_operator = MergeOperators::CreatePutOperator();
   options.disable_auto_compactions = true;
@@ -183,19 +183,19 @@ TEST_P(DBTestSharedWriteBufferAcrossCFs, SharedWriteBufferAcrossCFs) {
 
   // Avoid undeterministic value by malloc_usable_size();
   // Force arena block size to 1
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "Arena::Arena:0", [&](void* arg) {
         size_t* block_size = static_cast<size_t*>(arg);
         *block_size = 1;
       });
 
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "Arena::AllocateNewBlock:0", [&](void* arg) {
         std::pair<size_t*, size_t*>* pair =
             static_cast<std::pair<size_t*, size_t*>*>(arg);
         *std::get<0>(*pair) = *std::get<1>(*pair);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   // The total soft write buffer size is about 105000
   std::shared_ptr<Cache> cache = NewLRUCache(4 * 1024 * 1024, 2);
@@ -343,7 +343,7 @@ TEST_P(DBTestSharedWriteBufferAcrossCFs, SharedWriteBufferAcrossCFs) {
     options.write_buffer_manager.reset();
     ASSERT_LT(cache->GetUsage(), 1024 * 1024);
   }
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 INSTANTIATE_TEST_CASE_P(DBTestSharedWriteBufferAcrossCFs,
@@ -358,19 +358,19 @@ TEST_F(DBTest2, SharedWriteBufferLimitAcrossDB) {
   options.arena_block_size = 4096;
   // Avoid undeterministic value by malloc_usable_size();
   // Force arena block size to 1
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "Arena::Arena:0", [&](void* arg) {
         size_t* block_size = static_cast<size_t*>(arg);
         *block_size = 1;
       });
 
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "Arena::AllocateNewBlock:0", [&](void* arg) {
         std::pair<size_t*, size_t*>* pair =
             static_cast<std::pair<size_t*, size_t*>*>(arg);
         *std::get<0>(*pair) = *std::get<1>(*pair);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   options.write_buffer_size = 500000;  // this is never hit
   // Use a write buffer total size so that the soft limit is about
@@ -450,7 +450,7 @@ TEST_F(DBTest2, SharedWriteBufferLimitAcrossDB) {
   delete db2;
   ASSERT_OK(DestroyDB(dbname2, options));
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 namespace {
@@ -1071,7 +1071,7 @@ TEST_F(DBTest2, PresetCompressionDict) {
         options.compression_opts.max_dict_bytes = 0;
       }
 
-      options.statistics = rocksdb::CreateDBStatistics();
+      options.statistics = rocksdb_silk::CreateDBStatistics();
       options.table_factory.reset(NewBlockBasedTableFactory(table_options));
       CreateAndReopenWithCF({"pikachu"}, options);
       Random rnd(301);
@@ -1222,12 +1222,12 @@ class CompactionStallTestListener : public EventListener {
 };
 
 TEST_F(DBTest2, CompactionStall) {
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"DBImpl::BGWorkCompaction", "DBTest2::CompactionStall:0"},
        {"DBImpl::BGWorkCompaction", "DBTest2::CompactionStall:1"},
        {"DBTest2::CompactionStall:2",
         "DBImpl::NotifyOnCompactionCompleted::UnlockMutex"}});
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   Options options = CurrentOptions();
   options.level0_file_num_compaction_trigger = 4;
@@ -1254,7 +1254,7 @@ TEST_F(DBTest2, CompactionStall) {
 
   // Clear "DBImpl::BGWorkCompaction" SYNC_POINT since we want to hold it again
   // at DBTest2::CompactionStall::1
-  rocksdb::SyncPoint::GetInstance()->ClearTrace();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
 
   // Another 6 L0 files to trigger compaction again
   for (int i = 0; i < 6; i++) {
@@ -1276,7 +1276,7 @@ TEST_F(DBTest2, CompactionStall) {
   ASSERT_GT(listener->compacted_files_cnt_.load(),
             10 - options.level0_file_num_compaction_trigger);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 #endif  // ROCKSDB_LITE
@@ -1307,7 +1307,7 @@ class PinL0IndexAndFilterBlocksTest : public DBTestBase,
       options->max_open_files = -1;
     }
     options->create_if_missing = true;
-    options->statistics = rocksdb::CreateDBStatistics();
+    options->statistics = rocksdb_silk::CreateDBStatistics();
     BlockBasedTableOptions table_options;
     table_options.cache_index_and_filter_blocks = true;
     table_options.pin_l0_filter_and_index_blocks_in_cache = true;
@@ -1346,7 +1346,7 @@ TEST_P(PinL0IndexAndFilterBlocksTest,
     options.max_open_files = -1;
   }
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions table_options;
   table_options.cache_index_and_filter_blocks = true;
   table_options.pin_l0_filter_and_index_blocks_in_cache = true;
@@ -1535,8 +1535,8 @@ static void UniqueIdCallback(void* arg) {
     *result = 0;
   }
 
-  rocksdb::SyncPoint::GetInstance()->ClearTrace();
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "GetUniqueIdFromFile:FS_IOC_GETVERSION", UniqueIdCallback);
 }
 
@@ -1544,8 +1544,8 @@ class MockPersistentCache : public PersistentCache {
  public:
   explicit MockPersistentCache(const bool is_compressed, const size_t max_size)
       : is_compressed_(is_compressed), max_size_(max_size) {
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
-    rocksdb::SyncPoint::GetInstance()->SetCallBack(
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
         "GetUniqueIdFromFile:FS_IOC_GETVERSION", UniqueIdCallback);
   }
 
@@ -1603,7 +1603,7 @@ TEST_F(DBTest2, PersistentCache) {
 
   Options options;
   options.write_buffer_size = 64 * 1024;  // small write buffer
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   options = CurrentOptions(options);
 
   auto bsizes = {/*no block cache*/ 0, /*1M*/ 1 * 1024 * 1024};
@@ -1671,7 +1671,7 @@ void CountSyncPoint() {
 
 TEST_F(DBTest2, SyncPointMarker) {
   std::atomic<int> sync_point_called(0);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBTest2::MarkedPoint",
       [&](void* arg) { sync_point_called.fetch_add(1); });
 
@@ -1683,11 +1683,11 @@ TEST_F(DBTest2, SyncPointMarker) {
   // |  MarkedPoint  |             |
   // | Thread1First  |             |
   // |               | MarkedPoint |
-  rocksdb::SyncPoint::GetInstance()->LoadDependencyAndMarkers(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependencyAndMarkers(
       {{"DBTest2::SyncPointMarker:Thread1First", "DBTest2::MarkedPoint"}},
       {{"DBTest2::SyncPointMarker:Marker", "DBTest2::MarkedPoint"}});
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   std::function<void()> func1 = [&]() {
     CountSyncPoint();
@@ -1706,7 +1706,7 @@ TEST_F(DBTest2, SyncPointMarker) {
 
   // Callback is only executed once
   ASSERT_EQ(sync_point_called.load(), 1);
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 #endif
 
@@ -1731,7 +1731,7 @@ TEST_F(DBTest2, ReadAmpBitmap) {
     bbto.block_cache = NewLRUCache(1024 * 1024 * 1024);
     bbto.read_amp_bytes_per_bit = bytes_per_bit[k];
     options.table_factory.reset(NewBlockBasedTableFactory(bbto));
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     DestroyAndReopen(options);
 
     const size_t kNumEntries = 10000;
@@ -1810,7 +1810,7 @@ TEST_F(DBTest2, ReadAmpBitmapLiveInCacheAfterDBClose) {
   uint32_t bytes_per_bit[2] = {1, 16};
   for (size_t k = 0; k < 2; k++) {
     std::shared_ptr<Cache> lru_cache = NewLRUCache(1024 * 1024 * 1024);
-    std::shared_ptr<Statistics> stats = rocksdb::CreateDBStatistics();
+    std::shared_ptr<Statistics> stats = rocksdb_silk::CreateDBStatistics();
 
     Options options = CurrentOptions();
     BlockBasedTableOptions bbto;
@@ -1857,7 +1857,7 @@ TEST_F(DBTest2, ReadAmpBitmapLiveInCacheAfterDBClose) {
         options.statistics->getTickerCount(READ_AMP_TOTAL_READ_BYTES);
 
     Close();
-    std::shared_ptr<Statistics> new_statistics = rocksdb::CreateDBStatistics();
+    std::shared_ptr<Statistics> new_statistics = rocksdb_silk::CreateDBStatistics();
     // Destroy old statistics obj that the blocks in lru_cache are pointing to
     options.statistics.reset();
     // Use the statistics object that we just created
@@ -1941,7 +1941,7 @@ TEST_F(DBTest2, AutomaticCompactionOverlapManualCompaction) {
   // While the compaction is running, we will create 2 new files that
   // can fit in L2, these 2 files will be moved to L2 and overlap with
   // the running compaction and break the LSM consistency.
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "CompactionJob::Run():Start", [&](void* arg) {
         ASSERT_OK(
             dbfull()->SetOptions({{"level0_file_num_compaction_trigger", "2"},
@@ -1954,7 +1954,7 @@ TEST_F(DBTest2, AutomaticCompactionOverlapManualCompaction) {
         ASSERT_OK(Put(Key(9), "a"));
         ASSERT_OK(Flush());
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   // Run a manual compaction that will compact the 2 files in L2
   // into 1 file in L2
@@ -1962,7 +1962,7 @@ TEST_F(DBTest2, AutomaticCompactionOverlapManualCompaction) {
   cro.bottommost_level_compaction = BottommostLevelCompaction::kForce;
   ASSERT_OK(db_->CompactRange(cro, nullptr, nullptr));
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   // Test that the stats GetMapProperty API reporting 1 file in L2
   {
@@ -2001,13 +2001,13 @@ TEST_F(DBTest2, ManualCompactionOverlapManualCompaction) {
     cro.exclusive_manual_compaction = false;
     ASSERT_OK(db_->CompactRange(cro, &k1s, &k2s));
   };
-  rocksdb::port::Thread bg_thread;
+  rocksdb_silk::port::Thread bg_thread;
 
   // While the compaction is running, we will create 2 new files that
   // can fit in L1, these 2 files will be moved to L1 and overlap with
   // the running compaction and break the LSM consistency.
   std::atomic<bool> flag(false);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "CompactionJob::Run():Start", [&](void* arg) {
         if (flag.exchange(true)) {
           // We want to make sure to call this callback only once
@@ -2027,7 +2027,7 @@ TEST_F(DBTest2, ManualCompactionOverlapManualCompaction) {
         // so it should wait until the first compaction finish
         env_->SleepForMicroseconds(1000000);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   // Run a manual compaction that will compact the 2 files in L1
   // into 1 file in L1
@@ -2037,7 +2037,7 @@ TEST_F(DBTest2, ManualCompactionOverlapManualCompaction) {
   ASSERT_OK(db_->CompactRange(cro, nullptr, nullptr));
   bg_thread.join();
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBTest2, OptimizeForPointLookup) {
@@ -2057,13 +2057,13 @@ TEST_F(DBTest2, OptimizeForPointLookup) {
 TEST_F(DBTest2, GetRaceFlush1) {
   ASSERT_OK(Put("foo", "v1"));
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"DBImpl::GetImpl:1", "DBTest2::GetRaceFlush:1"},
        {"DBTest2::GetRaceFlush:2", "DBImpl::GetImpl:2"}});
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
-  rocksdb::port::Thread t1([&] {
+  rocksdb_silk::port::Thread t1([&] {
     TEST_SYNC_POINT("DBTest2::GetRaceFlush:1");
     ASSERT_OK(Put("foo", "v2"));
     Flush();
@@ -2074,17 +2074,17 @@ TEST_F(DBTest2, GetRaceFlush1) {
   // "v1" or "v2".
   ASSERT_NE("NOT_FOUND", Get("foo"));
   t1.join();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBTest2, GetRaceFlush2) {
   ASSERT_OK(Put("foo", "v1"));
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"DBImpl::GetImpl:3", "DBTest2::GetRaceFlush:1"},
        {"DBTest2::GetRaceFlush:2", "DBImpl::GetImpl:4"}});
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   port::Thread t1([&] {
     TEST_SYNC_POINT("DBTest2::GetRaceFlush:1");
@@ -2097,7 +2097,7 @@ TEST_F(DBTest2, GetRaceFlush2) {
   // "v1" or "v2".
   ASSERT_NE("NOT_FOUND", Get("foo"));
   t1.join();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBTest2, DirectIO) {
@@ -2197,17 +2197,17 @@ TEST_F(DBTest2, LowPriWrite) {
 
   std::atomic<int> rate_limit_count(0);
 
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "GenericRateLimiter::Request:1", [&](void* arg) {
         rate_limit_count.fetch_add(1);
         int64_t* rate_bytes_per_sec = static_cast<int64_t*>(arg);
         ASSERT_EQ(1024 * 1024, *rate_bytes_per_sec);
       });
   // Block compaction
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DBTest.LowPriWrite:0", "DBImpl::BGWorkCompaction"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   WriteOptions wo;
   for (int i = 0; i < 6; i++) {
     wo.low_pri = false;
@@ -2225,7 +2225,7 @@ TEST_F(DBTest2, LowPriWrite) {
   ASSERT_EQ(1, rate_limit_count.load());
 
   TEST_SYNC_POINT("DBTest.LowPriWrite:0");
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   dbfull()->TEST_WaitForCompact();
   wo.low_pri = true;
@@ -2303,7 +2303,7 @@ TEST_F(DBTest2, RateLimitedCompactionReads) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

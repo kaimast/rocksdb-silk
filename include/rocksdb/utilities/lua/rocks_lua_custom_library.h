@@ -13,7 +13,7 @@ extern "C" {
 #include <lualib.h>
 }
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace lua {
 // A class that used to define custom C Library that is callable
 // from Lua script

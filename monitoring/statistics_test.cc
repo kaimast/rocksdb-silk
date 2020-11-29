@@ -10,7 +10,7 @@
 
 #include "rocksdb/statistics.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class StatisticsTest : public testing::Test {};
 
@@ -29,7 +29,7 @@ TEST_F(StatisticsTest, Sanity) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

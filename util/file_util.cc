@@ -12,7 +12,7 @@
 #include "util/sst_file_manager_impl.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Utility function to copy a file up to a specified length
 Status CopyFile(Env* env, const std::string& source,

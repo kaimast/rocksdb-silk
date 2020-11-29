@@ -34,7 +34,7 @@
 
 cmake_minimum_required(VERSION 3.5.1)
 
-project(rocksdb)
+project(rocksdb-silk)
 
 if(POLICY CMP0042)
   cmake_policy(SET CMP0042 NEW)
@@ -550,8 +550,8 @@ else()
     env/io_posix.cc)
 endif()
 
-set(ROCKSDB_STATIC_LIB rocksdb${ARTIFACT_SUFFIX})
-set(ROCKSDB_SHARED_LIB rocksdb-shared${ARTIFACT_SUFFIX})
+set(ROCKSDB_STATIC_LIB rocksdb-silk-${ARTIFACT_SUFFIX})
+set(ROCKSDB_SHARED_LIB rocksdb-silk-shared${ARTIFACT_SUFFIX})
 set(ROCKSDB_IMPORT_LIB ${ROCKSDB_SHARED_LIB})
 if(WIN32)
   set(SYSTEM_LIBS ${SYSTEM_LIBS} Shlwapi.lib Rpcrt4.lib)

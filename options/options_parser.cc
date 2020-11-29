@@ -21,7 +21,7 @@
 
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static const std::string option_file_header =
     "# This is a RocksDB option file.\n"

@@ -24,7 +24,7 @@
 #include "util/logging.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // MSVC complains that it is already defined since it is static in the header.
 #ifndef _MSC_VER

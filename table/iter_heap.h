@@ -9,7 +9,7 @@
 #include "rocksdb/comparator.h"
 #include "table/iterator_wrapper.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // When used with std::priority_queue, this comparison functor puts the
 // iterator with the max/largest key on top.

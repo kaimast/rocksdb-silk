@@ -26,7 +26,7 @@
 #include "util/mutexlock.h"
 #include "util/random.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TestWritableFile;
 class FaultInjectionTestEnv;

@@ -16,7 +16,7 @@
 #include "rocksdb/table.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SliceTransformTest : public testing::Test {};
 
@@ -98,7 +98,7 @@ uint64_t TestGetTickerCount(const Options& options, Tickers ticker_type) {
 
 TEST_F(SliceTransformDBTest, CapPrefix) {
   last_options_.prefix_extractor.reset(NewCappedPrefixTransform(8));
-  last_options_.statistics = rocksdb::CreateDBStatistics();
+  last_options_.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions bbto;
   bbto.filter_policy.reset(NewBloomFilterPolicy(10, false));
   bbto.whole_key_filtering = false;

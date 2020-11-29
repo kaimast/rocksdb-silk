@@ -16,7 +16,7 @@
 #include <string>
 #include <sstream>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::string PersistentCacheConfig::ToString() const {
   std::string ret;

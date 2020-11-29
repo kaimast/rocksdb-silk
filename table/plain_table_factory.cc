@@ -12,7 +12,7 @@
 #include "table/plain_table_reader.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status PlainTableFactory::NewTableReader(
     const TableReaderOptions& table_reader_options,

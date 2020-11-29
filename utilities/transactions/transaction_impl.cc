@@ -24,7 +24,7 @@
 #include "utilities/transactions/transaction_db_impl.h"
 #include "utilities/transactions/transaction_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct WriteOptions;
 

@@ -10,9 +10,9 @@
 #include "utilities/cassandra/serialize.h"
 #include "utilities/cassandra/test_utils.h"
 
-using namespace rocksdb::cassandra;
+using namespace rocksdb_silk::cassandra;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 
 TEST(ColumnTest, Column) {

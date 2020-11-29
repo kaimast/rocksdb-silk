@@ -10,7 +10,7 @@
 #include "rocksdb/slice.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Simple implementation of SlicePart variants of Put().  Child classes
 // can override these method with more performant solutions if they choose.

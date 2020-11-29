@@ -16,7 +16,7 @@
 #include "port/port.h"
 #include "port/stack_trace.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class DBTestDynamicLevel : public DBTestBase {
  public:
   DBTestDynamicLevel() : DBTestBase("/db_dynamic_level_test") {}
@@ -192,10 +192,10 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesBase2) {
   // Trigger parallel compaction, and the first one would change the base
   // level.
   // Hold compaction jobs to make sure
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "CompactionJob::Run():Start",
       [&](void* arg) { env_->SleepForMicroseconds(100000); });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   ASSERT_OK(dbfull()->SetOptions({
       {"disable_auto_compactions", "true"},
   }));
@@ -214,7 +214,7 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesBase2) {
   dbfull()->TEST_WaitForCompact();
   ASSERT_TRUE(db_->GetIntProperty("rocksdb.base-level", &int_prop));
   ASSERT_EQ(3U, int_prop);
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   // Trigger a condition that the compaction changes base level and L0->Lbase
   // happens at the same time.
@@ -240,18 +240,18 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesBase2) {
   // A manual compaction will trigger the base level to become L2
   // Keep Writing data until base level changed 2->1. There will be L0->L2
   // compaction going on at the same time.
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"CompactionJob::Run():Start", "DynamicLevelMaxBytesBase2:0"},
       {"DynamicLevelMaxBytesBase2:1", "CompactionJob::Run():End"},
       {"DynamicLevelMaxBytesBase2:compact_range_finish",
        "FlushJob::WriteLevel0Table"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
-  rocksdb::port::Thread thread([this] {
+  rocksdb_silk::port::Thread thread([this] {
     TEST_SYNC_POINT("DynamicLevelMaxBytesBase2:compact_range_start");
     ASSERT_OK(db_->CompactRange(CompactRangeOptions(), nullptr, nullptr));
     TEST_SYNC_POINT("DynamicLevelMaxBytesBase2:compact_range_finish");
@@ -268,8 +268,8 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesBase2) {
 
   thread.join();
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
   ASSERT_TRUE(db_->GetIntProperty("rocksdb.base-level", &int_prop));
   ASSERT_EQ(1U, int_prop);
@@ -332,16 +332,16 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesCompactRange) {
   ASSERT_TRUE(db_->GetProperty("rocksdb.num-files-at-level2", &str_prop));
   ASSERT_EQ("0", str_prop);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
   std::set<int> output_levels;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "CompactionPicker::CompactRange:Return", [&](void* arg) {
         Compaction* compaction = reinterpret_cast<Compaction*>(arg);
         output_levels.insert(compaction->output_level());
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   dbfull()->CompactRange(CompactRangeOptions(), nullptr, nullptr);
   ASSERT_EQ(output_levels.size(), 2);
@@ -376,10 +376,10 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesBaseInc) {
   DestroyAndReopen(options);
 
   int non_trivial = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBImpl::BackgroundCompaction:NonTrivial",
       [&](void* arg) { non_trivial++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   Random rnd(301);
   const int total_keys = 3000;
@@ -391,7 +391,7 @@ TEST_F(DBTestDynamicLevel, DynamicLevelMaxBytesBaseInc) {
   }
   Flush();
   dbfull()->TEST_WaitForCompact();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   ASSERT_EQ(non_trivial, 0);
 
@@ -460,7 +460,7 @@ TEST_F(DBTestDynamicLevel, DISABLED_MigrateToDynamicLevelMaxBytesBase) {
   compaction_finished = false;
   // Issue manual compaction in one thread and still verify DB state
   // in main thread.
-  rocksdb::port::Thread t([&]() {
+  rocksdb_silk::port::Thread t([&]() {
     CompactRangeOptions compact_options;
     compact_options.change_level = true;
     compact_options.target_level = options.num_levels - 1;
@@ -497,7 +497,7 @@ TEST_F(DBTestDynamicLevel, DISABLED_MigrateToDynamicLevelMaxBytesBase) {
 
 int main(int argc, char** argv) {
 #if !defined(ROCKSDB_LITE)
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 #else

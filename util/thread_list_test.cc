@@ -12,7 +12,7 @@
 
 #ifdef ROCKSDB_USING_THREAD_STATUS
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SimulatedBackgroundTask {
  public:

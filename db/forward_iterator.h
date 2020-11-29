@@ -17,7 +17,7 @@
 #include "table/internal_iterator.h"
 #include "util/arena.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBImpl;
 class Env;

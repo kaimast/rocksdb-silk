@@ -10,7 +10,7 @@
 #include "table/cuckoo_table_builder.h"
 #include "table/cuckoo_table_reader.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status CuckooTableFactory::NewTableReader(
     const TableReaderOptions& table_reader_options,

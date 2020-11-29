@@ -28,7 +28,7 @@
 #include <thread>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void ThreadPoolImpl::PthreadCall(const char* label, int result) {
   if (result != 0) {

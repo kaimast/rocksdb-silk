@@ -8,7 +8,7 @@
 #include "monitoring/thread_status_updater.h"
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 
 #ifdef ROCKSDB_USING_THREAD_STATUS

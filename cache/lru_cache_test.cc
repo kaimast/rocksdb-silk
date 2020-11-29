@@ -9,7 +9,7 @@
 #include <vector>
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LRUCacheTest : public testing::Test {
  public:

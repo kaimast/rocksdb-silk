@@ -13,7 +13,7 @@
 #include <memory>
 #include <string.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_JEMALLOC
 #include "jemalloc/jemalloc.h"

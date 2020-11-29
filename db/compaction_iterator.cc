@@ -7,7 +7,7 @@
 #include "rocksdb/listener.h"
 #include "table/internal_iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 CompactionEventListener::CompactionListenerValueType fromInternalValueType(

@@ -17,7 +17,7 @@
 #include "rocksdb/table.h"
 #include "db/dbformat.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct EnvOptions;
 

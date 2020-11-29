@@ -13,7 +13,7 @@
 #include "util/file_reader_writer.h"
 #include "utilities/blob_db/blob_log_format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace blob_db {
 
 class BlobDumpTool {

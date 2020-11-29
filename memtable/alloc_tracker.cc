@@ -12,7 +12,7 @@
 #include "util/allocator.h"
 #include "util/arena.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 AllocTracker::AllocTracker(WriteBufferManager* write_buffer_manager)
     : write_buffer_manager_(write_buffer_manager),

@@ -36,15 +36,15 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  rocksdb::UndumpOptions undump_options;
+  rocksdb_silk::UndumpOptions undump_options;
   undump_options.db_path = FLAGS_db_path;
   undump_options.dump_location = FLAGS_dump_location;
   undump_options.compact_db = FLAGS_compact;
 
-  rocksdb::Options db_options;
+  rocksdb_silk::Options db_options;
   if (FLAGS_db_options != "") {
-    rocksdb::Options parsed_options;
-    rocksdb::Status s = rocksdb::GetOptionsFromString(
+    rocksdb_silk::Options parsed_options;
+    rocksdb_silk::Status s = rocksdb_silk::GetOptionsFromString(
         db_options, FLAGS_db_options, &parsed_options);
     if (!s.ok()) {
       fprintf(stderr, "Cannot parse provided db_options\n");
@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
     db_options = parsed_options;
   }
 
-  rocksdb::DbUndumpTool tool;
+  rocksdb_silk::DbUndumpTool tool;
   if (!tool.Run(undump_options, db_options)) {
     return 1;
   }

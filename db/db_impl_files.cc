@@ -17,7 +17,7 @@
 #include "util/sst_file_manager_impl.h"
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 uint64_t DBImpl::FindMinPrepLogReferencedByMemTable() {
   if (!allow_2pc()) {
     return 0;

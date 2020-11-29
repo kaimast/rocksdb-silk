@@ -11,7 +11,7 @@
 #include "port/port.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Binary heap implementation optimized for use in multi-way merge sort.
 // Comparison to std::priority_queue:

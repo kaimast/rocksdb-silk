@@ -17,7 +17,7 @@
 #include "rocksdb/types.h"
 #include "util/filename.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LogFileImpl : public LogFile {
  public:

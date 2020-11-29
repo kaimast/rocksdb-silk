@@ -11,7 +11,7 @@
 #include "db/dbformat.h"
 #include "table/plain_table_reader.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WritableFile;
 struct ParsedInternalKey;

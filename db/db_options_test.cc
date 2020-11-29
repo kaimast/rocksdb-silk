@@ -22,7 +22,7 @@
 #include "util/sync_point.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBOptionsTest : public DBTestBase {
  public:
@@ -446,7 +446,7 @@ TEST_F(DBOptionsTest, SanitizeDelayedWriteRate) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

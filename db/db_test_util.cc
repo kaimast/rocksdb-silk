@@ -11,7 +11,7 @@
 #include "db/forward_iterator.h"
 #include "rocksdb/env_encryption.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Special Env used to delay background operations
 
@@ -68,9 +68,9 @@ DBTestBase::DBTestBase(const std::string path)
 }
 
 DBTestBase::~DBTestBase() {
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({});
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({});
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
   Close();
   Options options;
   options.db_paths.emplace_back(dbname_, 0);
@@ -279,9 +279,9 @@ Options DBTestBase::GetOptions(
   bool set_block_based_table_factory = true;
 #if !defined(OS_MACOSX) && !defined(OS_WIN) && !defined(OS_SOLARIS) &&  \
   !defined(OS_AIX)
-  rocksdb::SyncPoint::GetInstance()->ClearCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->ClearCallBack(
       "NewRandomAccessFile:O_DIRECT");
-  rocksdb::SyncPoint::GetInstance()->ClearCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->ClearCallBack(
       "NewWritableFile:O_DIRECT");
 #endif
 
@@ -456,17 +456,17 @@ Options DBTestBase::GetOptions(
       options.compaction_readahead_size = 2 * 1024 * 1024;
 #if !defined(OS_MACOSX) && !defined(OS_WIN) && !defined(OS_SOLARIS) && \
     !defined(OS_AIX)
-      rocksdb::SyncPoint::GetInstance()->SetCallBack(
+      rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
           "NewWritableFile:O_DIRECT", [&](void* arg) {
             int* val = static_cast<int*>(arg);
             *val &= ~O_DIRECT;
           });
-      rocksdb::SyncPoint::GetInstance()->SetCallBack(
+      rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
           "NewRandomAccessFile:O_DIRECT", [&](void* arg) {
             int* val = static_cast<int*>(arg);
             *val &= ~O_DIRECT;
           });
-      rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+      rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 #endif
       break;
     }

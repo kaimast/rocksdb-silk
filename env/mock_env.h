@@ -17,7 +17,7 @@
 #include "port/port.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MemFile;
 class MockEnv : public EnvWrapper {

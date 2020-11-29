@@ -17,7 +17,7 @@
 #include "utilities/persistent_cache/hash_table_evictable.h"
 #include "utilities/persistent_cache/lrulist.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // Block Cache Tier Metadata

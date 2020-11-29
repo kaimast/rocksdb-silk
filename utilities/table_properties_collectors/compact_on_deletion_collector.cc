@@ -9,7 +9,7 @@
 #include <memory>
 #include "rocksdb/utilities/table_properties_collectors.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 CompactOnDeletionCollector::CompactOnDeletionCollector(
     size_t sliding_window_size,

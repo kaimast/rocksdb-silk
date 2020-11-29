@@ -12,7 +12,7 @@
 #include "rocksdb/slice_transform.h"
 #include "rocksdb/memtablerep.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class HashCuckooRepFactory : public MemTableRepFactory {
  public:

@@ -10,7 +10,7 @@
 
 #include <cassert>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Flush block by size
 class FlushBlockBySizePolicy : public FlushBlockPolicy {

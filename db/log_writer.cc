@@ -15,7 +15,7 @@
 #include "util/crc32c.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace log {
 
 Writer::Writer(unique_ptr<WritableFileWriter>&& dest, uint64_t log_number,

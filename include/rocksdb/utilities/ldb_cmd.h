@@ -24,7 +24,7 @@
 #include "rocksdb/utilities/db_ttl.h"
 #include "rocksdb/utilities/ldb_cmd_execute_result.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LDBCommand {
  public:

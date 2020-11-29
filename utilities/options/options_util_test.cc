@@ -29,7 +29,7 @@ using GFLAGS::ParseCommandLineFlags;
 DEFINE_bool(enable_print, false, "Print options generated to console.");
 #endif  // GFLAGS
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class OptionsUtilTest : public testing::Test {
  public:
   OptionsUtilTest() : rnd_(0xFB) {

@@ -18,7 +18,7 @@
 #include "util/hash.h"
 #include "util/murmurhash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // PlainTableIndex contains buckets size of index_size_, each is a
 // 32-bit integer. The lower 31 bits contain an offset value (explained below)

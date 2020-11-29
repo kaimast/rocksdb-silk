@@ -17,7 +17,7 @@
 #include <system_error>
 #include <thread>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 struct WindowsThread::Data {

@@ -10,7 +10,7 @@
 #include "rocksdb/filter_policy.h"
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 FullFilterBlockBuilder::FullFilterBlockBuilder(
     const SliceTransform* prefix_extractor, bool whole_key_filtering,

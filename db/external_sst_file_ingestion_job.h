@@ -18,7 +18,7 @@
 #include "rocksdb/sst_file_writer.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct IngestedFileInfo {
   // External file path

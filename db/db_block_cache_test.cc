@@ -11,7 +11,7 @@
 #include "db/db_test_util.h"
 #include "port/stack_trace.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBBlockCacheTest : public DBTestBase {
  private:
@@ -42,7 +42,7 @@ class DBBlockCacheTest : public DBTestBase {
     options.create_if_missing = true;
     options.avoid_flush_during_recovery = false;
     // options.compression = kNoCompression;
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     options.table_factory.reset(new BlockBasedTableFactory(table_options));
     return options;
   }
@@ -232,7 +232,7 @@ TEST_F(DBBlockCacheTest, TestWithCompressedBlockCache) {
 TEST_F(DBBlockCacheTest, IndexAndFilterBlocksOfNewTableAddedToCache) {
   Options options = CurrentOptions();
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions table_options;
   table_options.cache_index_and_filter_blocks = true;
   table_options.filter_policy.reset(NewBloomFilterPolicy(20));
@@ -283,7 +283,7 @@ TEST_F(DBBlockCacheTest, IndexAndFilterBlocksOfNewTableAddedToCache) {
 TEST_F(DBBlockCacheTest, IndexAndFilterBlocksStats) {
   Options options = CurrentOptions();
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions table_options;
   table_options.cache_index_and_filter_blocks = true;
   // 200 bytes are enough to hold the first two blocks
@@ -353,7 +353,7 @@ TEST_F(DBBlockCacheTest, IndexAndFilterBlocksCachePriority) {
   for (auto priority : {Cache::Priority::LOW, Cache::Priority::HIGH}) {
     Options options = CurrentOptions();
     options.create_if_missing = true;
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     BlockBasedTableOptions table_options;
     table_options.cache_index_and_filter_blocks = true;
     table_options.block_cache.reset(new MockCache());
@@ -409,7 +409,7 @@ TEST_F(DBBlockCacheTest, IndexAndFilterBlocksCachePriority) {
 TEST_F(DBBlockCacheTest, ParanoidFileChecks) {
   Options options = CurrentOptions();
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   options.level0_file_num_compaction_trigger = 2;
   options.paranoid_file_checks = true;
   BlockBasedTableOptions table_options;
@@ -465,7 +465,7 @@ TEST_F(DBBlockCacheTest, CompressedCache) {
   for (int iter = 0; iter < 4; iter++) {
     Options options = CurrentOptions();
     options.write_buffer_size = 64 * 1024;  // small write buffer
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
 
     BlockBasedTableOptions table_options;
     switch (iter) {
@@ -573,7 +573,7 @@ TEST_F(DBBlockCacheTest, CompressedCache) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

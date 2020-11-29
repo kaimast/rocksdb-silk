@@ -16,7 +16,7 @@
 #include "util/random.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Our test skip list stores 8-byte unsigned integers
 typedef uint64_t Key;

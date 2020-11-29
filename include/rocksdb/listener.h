@@ -12,7 +12,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/table_properties.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 typedef std::unordered_map<std::string, std::shared_ptr<const TableProperties>>
     TablePropertiesCollection;

@@ -11,7 +11,7 @@
 #include "rocksdb/types.h"
 #include "table/block.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class MergeContext;
 class PinnedIteratorsManager;
 

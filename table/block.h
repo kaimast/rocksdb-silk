@@ -31,14 +31,14 @@
 #include "util/sync_point.h"
 #include "format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct BlockContents;
 class Comparator;
 class BlockIter;
 class BlockPrefixIndex;
 
-// BlockReadAmpBitmap is a bitmap that map the rocksdb::Block data bytes to
+// BlockReadAmpBitmap is a bitmap that map the rocksdb_silk::Block data bytes to
 // a bitmap with ratio bytes_per_bit. Whenever we access a range of bytes in
 // the Block we update the bitmap and increment READ_AMP_ESTIMATE_USEFUL_BYTES.
 class BlockReadAmpBitmap {

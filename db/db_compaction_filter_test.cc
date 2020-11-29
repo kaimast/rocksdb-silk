@@ -10,7 +10,7 @@
 #include "db/db_test_util.h"
 #include "port/stack_trace.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static int cfilter_count = 0;
 static int cfilter_skips = 0;
@@ -839,7 +839,7 @@ TEST_F(DBTestCompactionFilter, SkipUntilWithBloomFilter) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

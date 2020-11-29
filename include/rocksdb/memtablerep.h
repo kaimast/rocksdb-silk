@@ -40,7 +40,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Arena;
 class Allocator;

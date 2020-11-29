@@ -11,7 +11,7 @@
 #include <vector>
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBImplReadOnly : public DBImpl {
  public:

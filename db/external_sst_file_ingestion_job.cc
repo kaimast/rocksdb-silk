@@ -28,7 +28,7 @@
 #include "util/stop_watch.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status ExternalSstFileIngestionJob::Prepare(
     const std::vector<std::string>& external_files_paths) {

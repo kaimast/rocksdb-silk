@@ -8,7 +8,7 @@
 
 #include "rocksdb/utilities/transaction_db_mutex.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TransactionDBMutex;
 class TransactionDBCondVar;

@@ -24,7 +24,7 @@
 #include "util/stop_watch.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 // Without anonymous namespace here, we fail the warning -Wmissing-prototypes
 namespace {
 typedef BinaryHeap<IteratorWrapper*, MaxIteratorComparator> MergerMaxIterHeap;

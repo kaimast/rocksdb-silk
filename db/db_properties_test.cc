@@ -21,7 +21,7 @@
 #include "util/random.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBPropertiesTest : public DBTestBase {
  public:
@@ -336,7 +336,7 @@ TEST_F(DBPropertiesTest, ReadLatencyHistogramByLevel) {
   options.max_bytes_for_level_base = 4500 << 10;
   options.target_file_size_base = 98 << 10;
   options.max_write_buffer_number = 2;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   options.max_open_files = 100;
 
   BlockBasedTableOptions table_options;
@@ -1313,7 +1313,7 @@ TEST_F(DBPropertiesTest, EstimateNumKeysUnderflow) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

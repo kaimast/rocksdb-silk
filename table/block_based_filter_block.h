@@ -24,7 +24,7 @@
 #include "table/filter_block.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 
 // A BlockBasedFilterBlockBuilder is used to construct all of the filters for a

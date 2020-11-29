@@ -52,7 +52,7 @@
 #include "util/testutil.h"
 #include "utilities/merge_operators.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 extern const uint64_t kLegacyBlockBasedTableMagicNumber;
 extern const uint64_t kLegacyPlainTableMagicNumber;
@@ -2207,10 +2207,10 @@ TEST_F(BlockBasedTableTest, NoObjectInCacheAfterTableClose) {
             table_options.cache_index_and_filter_blocks =
                 index_and_filter_in_cache;
             // big enough so we don't ever lose cached values.
-            table_options.block_cache = std::shared_ptr<rocksdb::Cache>(
+            table_options.block_cache = std::shared_ptr<rocksdb_silk::Cache>(
                 new MockCache(16 * 1024 * 1024, 4, false, 0.0));
             table_options.filter_policy.reset(
-                rocksdb::NewBloomFilterPolicy(10, block_based_filter));
+                rocksdb_silk::NewBloomFilterPolicy(10, block_based_filter));
             opt.table_factory.reset(NewBlockBasedTableFactory(table_options));
 
             TableConstructor c(BytewiseComparator());
@@ -2331,7 +2331,7 @@ TEST_F(BlockBasedTableTest, NewIndexIteratorLeak) {
   c.Finish(options, ioptions, table_options,
            GetPlainInternalComparator(options.comparator), &keys, &kvmap);
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependencyAndMarkers(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependencyAndMarkers(
       {
           {"BlockBasedTable::NewIndexIterator::thread1:1",
            "BlockBasedTable::NewIndexIterator::thread2:2"},
@@ -2349,7 +2349,7 @@ TEST_F(BlockBasedTableTest, NewIndexIteratorLeak) {
            "BlockBasedTable::NewIndexIterator::thread2:3"},
       });
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   ReadOptions ro;
   auto* reader = c.GetTableReader();
 
@@ -2368,7 +2368,7 @@ TEST_F(BlockBasedTableTest, NewIndexIteratorLeak) {
   auto thread2 = port::Thread(func2);
   thread1.join();
   thread2.join();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   c.ResetTableReader();
 }
 
@@ -2850,24 +2850,24 @@ class PrefixTest : public testing::Test {
 
 namespace {
 // A simple PrefixExtractor that only works for test PrefixAndWholeKeyTest
-class TestPrefixExtractor : public rocksdb::SliceTransform {
+class TestPrefixExtractor : public rocksdb_silk::SliceTransform {
  public:
   ~TestPrefixExtractor() override{};
   const char* Name() const override { return "TestPrefixExtractor"; }
 
-  rocksdb::Slice Transform(const rocksdb::Slice& src) const override {
+  rocksdb_silk::Slice Transform(const rocksdb_silk::Slice& src) const override {
     assert(IsValid(src));
-    return rocksdb::Slice(src.data(), 3);
+    return rocksdb_silk::Slice(src.data(), 3);
   }
 
-  bool InDomain(const rocksdb::Slice& src) const override {
+  bool InDomain(const rocksdb_silk::Slice& src) const override {
     assert(IsValid(src));
     return true;
   }
 
-  bool InRange(const rocksdb::Slice& dst) const override { return true; }
+  bool InRange(const rocksdb_silk::Slice& dst) const override { return true; }
 
-  bool IsValid(const rocksdb::Slice& src) const {
+  bool IsValid(const rocksdb_silk::Slice& src) const {
     if (src.size() != 4) {
       return false;
     }
@@ -2889,30 +2889,30 @@ class TestPrefixExtractor : public rocksdb::SliceTransform {
 }  // namespace
 
 TEST_F(PrefixTest, PrefixAndWholeKeyTest) {
-  rocksdb::Options options;
-  options.compaction_style = rocksdb::kCompactionStyleUniversal;
+  rocksdb_silk::Options options;
+  options.compaction_style = rocksdb_silk::kCompactionStyleUniversal;
   options.num_levels = 20;
   options.create_if_missing = true;
   options.optimize_filters_for_hits = false;
   options.target_file_size_base = 268435456;
   options.prefix_extractor = std::make_shared<TestPrefixExtractor>();
-  rocksdb::BlockBasedTableOptions bbto;
-  bbto.filter_policy.reset(rocksdb::NewBloomFilterPolicy(10));
+  rocksdb_silk::BlockBasedTableOptions bbto;
+  bbto.filter_policy.reset(rocksdb_silk::NewBloomFilterPolicy(10));
   bbto.block_size = 262144;
   bbto.whole_key_filtering = true;
 
   const std::string kDBPath = test::TmpDir() + "/table_prefix_test";
   options.table_factory.reset(NewBlockBasedTableFactory(bbto));
   DestroyDB(kDBPath, options);
-  rocksdb::DB* db;
-  ASSERT_OK(rocksdb::DB::Open(options, kDBPath, &db));
+  rocksdb_silk::DB* db;
+  ASSERT_OK(rocksdb_silk::DB::Open(options, kDBPath, &db));
 
   // Create a bunch of keys with 10 filters.
   for (int i = 0; i < 10; i++) {
     std::string prefix = "[" + std::to_string(i) + "]";
     for (int j = 0; j < 10; j++) {
       std::string key = prefix + std::to_string(j);
-      db->Put(rocksdb::WriteOptions(), key, "1");
+      db->Put(rocksdb_silk::WriteOptions(), key, "1");
     }
   }
 

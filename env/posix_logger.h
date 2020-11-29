@@ -28,7 +28,7 @@
 #include "rocksdb/env.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class PosixLogger : public Logger {
  private:

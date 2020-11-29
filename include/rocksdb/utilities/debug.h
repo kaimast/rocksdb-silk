@@ -12,7 +12,7 @@
 #include "rocksdb/db.h"
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Data associated with a particular version of a key. A database may internally
 // store multiple versions of a same user key due to snapshots, compaction not

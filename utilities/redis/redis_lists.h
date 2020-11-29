@@ -16,7 +16,7 @@
 #include "redis_list_iterator.h"
 #include "redis_list_exception.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 /// The Redis functionality (see http://redis.io/commands#list)
 /// All functions may THROW a RedisListException

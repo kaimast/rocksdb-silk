@@ -27,7 +27,7 @@
 #include "util/thread_local.h"
 #include "utilities/transactions/transaction_db_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct LockInfo {
   bool exclusive;

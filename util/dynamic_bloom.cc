@@ -12,7 +12,7 @@
 #include "util/allocator.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

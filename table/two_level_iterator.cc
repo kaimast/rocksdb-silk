@@ -15,7 +15,7 @@
 #include "table/format.h"
 #include "util/arena.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

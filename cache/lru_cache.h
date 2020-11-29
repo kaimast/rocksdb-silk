@@ -15,7 +15,7 @@
 #include "port/port.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // LRU cache implementation
 

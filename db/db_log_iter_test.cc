@@ -15,7 +15,7 @@
 #include "db/db_test_util.h"
 #include "port/stack_trace.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBTestXactLogIterator : public DBTestBase {
  public:
@@ -98,14 +98,14 @@ TEST_F(DBTestXactLogIterator, TransactionLogIteratorRace) {
   for (int test = 0; test < LOG_ITERATOR_RACE_TEST_COUNT; ++test) {
     // Setup sync point dependency to reproduce the race condition of
     // a log file moved to archived dir, in the middle of GetSortedWalFiles
-    rocksdb::SyncPoint::GetInstance()->LoadDependency(
+    rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       { { sync_points[test][0], sync_points[test][1] },
         { sync_points[test][2], sync_points[test][3] },
       });
 
     do {
-      rocksdb::SyncPoint::GetInstance()->ClearTrace();
-      rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+      rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+      rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
       Options options = OptionsForLogIterTest();
       DestroyAndReopen(options);
       Put("key1", DummyString(1024));
@@ -123,7 +123,7 @@ TEST_F(DBTestXactLogIterator, TransactionLogIteratorRace) {
         ExpectRecords(4, iter);
       }
 
-      rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+      rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
       // trigger async flush, and log move. Well, log move will
       // wait until the GetSortedWalFiles:1 to reproduce the race
       // condition
@@ -185,7 +185,7 @@ TEST_F(DBTestXactLogIterator, TransactionLogIteratorCorruptedLog) {
     dbfull()->Flush(FlushOptions());
     dbfull()->FlushWAL(false);
     // Corrupt this log to create a gap
-    rocksdb::VectorLogPtr wal_files;
+    rocksdb_silk::VectorLogPtr wal_files;
     ASSERT_OK(dbfull()->GetSortedWalFiles(wal_files));
     const auto logfile_path = dbname_ + "/" + wal_files.front()->PathName();
     if (mem_env_) {
@@ -285,7 +285,7 @@ TEST_F(DBTestXactLogIterator, TransactionLogIteratorBlobs) {
 
 int main(int argc, char** argv) {
 #if !defined(ROCKSDB_LITE)
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 #else

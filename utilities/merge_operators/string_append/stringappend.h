@@ -8,7 +8,7 @@
 #include "rocksdb/merge_operator.h"
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class StringAppendOperator : public AssociativeMergeOperator {
  public:

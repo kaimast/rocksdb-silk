@@ -20,7 +20,7 @@
 #include "utilities/merge_operators.h"
 #include "util/testharness.h"
 
-using namespace rocksdb;
+using namespace rocksdb_silk;
 
 namespace {
 size_t num_merge_operator_calls;
@@ -360,7 +360,7 @@ void testPartialMerge(Counters* counters, DB* db, size_t max_merge,
   // Test case 2: partial merge should not be called when a put is found.
   resetNumPartialMergeCalls();
   tmp_sum = 0;
-  db->Put(rocksdb::WriteOptions(), "c", "10");
+  db->Put(rocksdb_silk::WriteOptions(), "c", "10");
   for (size_t i = 1; i <= count; i++) {
     counters->assert_add("c", i);
     tmp_sum += i;
@@ -506,7 +506,7 @@ void runTest(int argc, const std::string& dbname, const bool use_ttl = false) {
 
 int main(int argc, char *argv[]) {
   //TODO: Make this test like a general rocksdb unit-test
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   runTest(argc, test::TmpDir() + "/merge_testdb");
 // DBWithTTL is not supported in ROCKSDB_LITE
 #ifndef ROCKSDB_LITE

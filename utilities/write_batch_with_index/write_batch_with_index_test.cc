@@ -20,7 +20,7 @@
 #include "utilities/merge_operators.h"
 #include "utilities/merge_operators/string_append/stringappend.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 class ColumnFamilyHandleImplDummy : public ColumnFamilyHandleImpl {
@@ -1789,7 +1789,7 @@ TEST_F(WriteBatchWithIndexTest, SingleDeleteDeltaIterTest) {
 }  // namespace
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

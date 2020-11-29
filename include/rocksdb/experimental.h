@@ -8,7 +8,7 @@
 #include "rocksdb/db.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace experimental {
 
 // Supported only for Leveled compaction

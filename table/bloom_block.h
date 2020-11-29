@@ -8,7 +8,7 @@
 #include <string>
 #include "util/dynamic_bloom.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class Logger;
 
 class BloomBlockBuilder {

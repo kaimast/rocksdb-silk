@@ -37,24 +37,24 @@
 namespace {
 int kBlockBasedTableVersionFormat = 2;
 
-void extendTTL(rocksdb::blob_db::ttlrange_t* ttl_range, uint32_t ttl) {
+void extendTTL(rocksdb_silk::blob_db::ttlrange_t* ttl_range, uint32_t ttl) {
   ttl_range->first = std::min(ttl_range->first, ttl);
   ttl_range->second = std::max(ttl_range->second, ttl);
 }
 
-void extendTimestamps(rocksdb::blob_db::tsrange_t* ts_range, uint64_t ts) {
+void extendTimestamps(rocksdb_silk::blob_db::tsrange_t* ts_range, uint64_t ts) {
   ts_range->first = std::min(ts_range->first, ts);
   ts_range->second = std::max(ts_range->second, ts);
 }
 
-void extendSN(rocksdb::blob_db::snrange_t* sn_range,
-              rocksdb::SequenceNumber sn) {
+void extendSN(rocksdb_silk::blob_db::snrange_t* sn_range,
+              rocksdb_silk::SequenceNumber sn) {
   sn_range->first = std::min(sn_range->first, sn);
   sn_range->second = std::max(sn_range->second, sn);
 }
 }  // end namespace
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 

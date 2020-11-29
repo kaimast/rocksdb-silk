@@ -14,7 +14,7 @@
 #include "util/testutil.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 void AssertField(const JSONDocument& json, const std::string& field) {
   ASSERT_TRUE(json.Contains(field));

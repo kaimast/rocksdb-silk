@@ -9,7 +9,7 @@
 #include "monitoring/statistics.h"
 #include "rocksdb/persistent_cache.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // PersistentCacheOptions
 //

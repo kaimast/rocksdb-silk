@@ -11,7 +11,7 @@
 #include <random>
 #include <stdint.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // A very simple random number generator.  Not especially good at
 // generating truly random bits, but good enough for our needs in this

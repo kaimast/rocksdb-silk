@@ -8,7 +8,7 @@
 #include "rocksdb/env.h"
 #include "util/stop_watch.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class PerfStepTimer {
  public:

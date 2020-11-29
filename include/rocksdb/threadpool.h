@@ -10,7 +10,7 @@
 
 #include <functional>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 /*
  * ThreadPool is a component that will spawn N background threads that will

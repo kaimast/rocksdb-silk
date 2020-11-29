@@ -11,7 +11,7 @@
 #include "port/stack_trace.h"
 #include "rocksdb/perf_context.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // DB tests related to bloom filter.
 
@@ -60,7 +60,7 @@ TEST_P(DBBloomFilterTestWithParam, KeyMayExist) {
       // indexes
       continue;
     }
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     CreateAndReopenWithCF({"pikachu"}, options);
 
     ASSERT_TRUE(!db_->KeyMayExist(ropts, handles_[1], "a", &value));
@@ -121,7 +121,7 @@ TEST_F(DBBloomFilterTest, GetFilterByPrefixBloom) {
   for (bool partition_filters : {true, false}) {
     Options options = last_options_;
     options.prefix_extractor.reset(NewFixedPrefixTransform(8));
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     BlockBasedTableOptions bbto;
     bbto.filter_policy.reset(NewBloomFilterPolicy(10, false));
     if (partition_filters) {
@@ -167,7 +167,7 @@ TEST_F(DBBloomFilterTest, WholeKeyFilterProp) {
   for (bool partition_filters : {true, false}) {
     Options options = last_options_;
     options.prefix_extractor.reset(NewFixedPrefixTransform(3));
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
 
     BlockBasedTableOptions bbto;
     bbto.filter_policy.reset(NewBloomFilterPolicy(10, false));
@@ -397,7 +397,7 @@ INSTANTIATE_TEST_CASE_P(DBBloomFilterTestWithParam, DBBloomFilterTestWithParam,
 TEST_F(DBBloomFilterTest, BloomFilterRate) {
   while (ChangeFilterOptions()) {
     Options options = CurrentOptions();
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     CreateAndReopenWithCF({"pikachu"}, options);
 
     const int maxKey = 10000;
@@ -424,7 +424,7 @@ TEST_F(DBBloomFilterTest, BloomFilterRate) {
 
 TEST_F(DBBloomFilterTest, BloomFilterCompatibility) {
   Options options = CurrentOptions();
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions table_options;
   table_options.filter_policy.reset(NewBloomFilterPolicy(10, true));
   options.table_factory.reset(NewBlockBasedTableFactory(table_options));
@@ -468,7 +468,7 @@ TEST_F(DBBloomFilterTest, BloomFilterCompatibility) {
 TEST_F(DBBloomFilterTest, BloomFilterReverseCompatibility) {
   for (bool partition_filters : {true, false}) {
     Options options = CurrentOptions();
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     BlockBasedTableOptions table_options;
     if (partition_filters) {
       table_options.partition_filters = true;
@@ -513,17 +513,17 @@ class WrappedBloom : public FilterPolicy {
 
   const char* Name() const override { return "WrappedRocksDbFilterPolicy"; }
 
-  void CreateFilter(const rocksdb::Slice* keys, int n,
+  void CreateFilter(const rocksdb_silk::Slice* keys, int n,
                     std::string* dst) const override {
-    std::unique_ptr<rocksdb::Slice[]> user_keys(new rocksdb::Slice[n]);
+    std::unique_ptr<rocksdb_silk::Slice[]> user_keys(new rocksdb_silk::Slice[n]);
     for (int i = 0; i < n; ++i) {
       user_keys[i] = convertKey(keys[i]);
     }
     return filter_->CreateFilter(user_keys.get(), n, dst);
   }
 
-  bool KeyMayMatch(const rocksdb::Slice& key,
-                   const rocksdb::Slice& filter) const override {
+  bool KeyMayMatch(const rocksdb_silk::Slice& key,
+                   const rocksdb_silk::Slice& filter) const override {
     counter_++;
     return filter_->KeyMayMatch(convertKey(key), filter);
   }
@@ -534,13 +534,13 @@ class WrappedBloom : public FilterPolicy {
   const FilterPolicy* filter_;
   mutable uint32_t counter_;
 
-  rocksdb::Slice convertKey(const rocksdb::Slice& key) const { return key; }
+  rocksdb_silk::Slice convertKey(const rocksdb_silk::Slice& key) const { return key; }
 };
 }  // namespace
 
 TEST_F(DBBloomFilterTest, BloomFilterWrapper) {
   Options options = CurrentOptions();
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
 
   BlockBasedTableOptions table_options;
   WrappedBloom* policy = new WrappedBloom(10);
@@ -594,7 +594,7 @@ class SliceTransformLimitedDomain : public SliceTransform {
 TEST_F(DBBloomFilterTest, PrefixExtractorFullFilter) {
   BlockBasedTableOptions bbto;
   // Full Filter Block
-  bbto.filter_policy.reset(rocksdb::NewBloomFilterPolicy(10, false));
+  bbto.filter_policy.reset(rocksdb_silk::NewBloomFilterPolicy(10, false));
   bbto.whole_key_filtering = false;
 
   Options options = CurrentOptions();
@@ -623,7 +623,7 @@ TEST_F(DBBloomFilterTest, PrefixExtractorFullFilter) {
 TEST_F(DBBloomFilterTest, PrefixExtractorBlockFilter) {
   BlockBasedTableOptions bbto;
   // Block Filter Block
-  bbto.filter_policy.reset(rocksdb::NewBloomFilterPolicy(10, true));
+  bbto.filter_policy.reset(rocksdb_silk::NewBloomFilterPolicy(10, true));
 
   Options options = CurrentOptions();
   options.prefix_extractor = std::make_shared<SliceTransformLimitedDomain>();
@@ -664,7 +664,7 @@ class BloomStatsTestWithParam
     partition_filters_ = std::get<2>(GetParam());
 
     options_.create_if_missing = true;
-    options_.prefix_extractor.reset(rocksdb::NewFixedPrefixTransform(4));
+    options_.prefix_extractor.reset(rocksdb_silk::NewFixedPrefixTransform(4));
     options_.memtable_prefix_bloom_size_ratio =
         8.0 * 1024.0 / static_cast<double>(options_.write_buffer_size);
     if (use_block_table_) {
@@ -939,7 +939,7 @@ TEST_F(DBBloomFilterTest, OptimizeFiltersForHits) {
   bbto.whole_key_filtering = true;
   options.table_factory.reset(NewBlockBasedTableFactory(bbto));
   options.optimize_filters_for_hits = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   CreateAndReopenWithCF({"mypikachu"}, options);
 
   int numkeys = 200000;
@@ -1055,13 +1055,13 @@ TEST_F(DBBloomFilterTest, OptimizeFiltersForHits) {
 
   int32_t trivial_move = 0;
   int32_t non_trivial_move = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBImpl::BackgroundCompaction:TrivialMove",
       [&](void* arg) { trivial_move++; });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBImpl::BackgroundCompaction:NonTrivial",
       [&](void* arg) { non_trivial_move++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   CompactRangeOptions compact_options;
   compact_options.bottommost_level_compaction =
@@ -1102,7 +1102,7 @@ TEST_F(DBBloomFilterTest, OptimizeFiltersForHits) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

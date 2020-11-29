@@ -19,7 +19,7 @@
 #include "table/index_builder.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class PartitionedFilterBlockBuilder : public FullFilterBlockBuilder {
  public:

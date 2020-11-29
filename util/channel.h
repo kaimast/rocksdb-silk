@@ -10,7 +10,7 @@
 
 #pragma once
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 template <class T>
 class channel {

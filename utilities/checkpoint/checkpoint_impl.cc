@@ -30,7 +30,7 @@
 #include "util/filename.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status Checkpoint::Create(DB* db, Checkpoint** checkpoint_ptr) {
   *checkpoint_ptr = new CheckpointImpl(db);

@@ -31,7 +31,7 @@
 
 using std::string;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TransactionTest
     : public ::testing::TestWithParam<std::tuple<bool, bool>> {
@@ -210,7 +210,7 @@ TEST_P(TransactionTest, WaitingTxn) {
   ASSERT_TRUE(txn1);
   ASSERT_TRUE(txn2);
 
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "TransactionLockMgr::AcquireWithTimeout:WaitingTxn", [&](void* arg) {
         std::string key;
         uint32_t cf_id;
@@ -260,14 +260,14 @@ TEST_P(TransactionTest, WaitingTxn) {
   ASSERT_EQ(cf_iterator->second.ids.size(), 1);
   ASSERT_EQ(cf_iterator->second.ids[0], txn1->GetID());
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   s = txn2->GetForUpdate(read_options, "foo", &value);
   ASSERT_TRUE(s.IsTimedOut());
   ASSERT_EQ(s.ToString(), "Operation timed out: Timeout waiting to lock key");
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
   delete cfa;
   delete txn1;
@@ -431,10 +431,10 @@ TEST_P(TransactionTest, DeadlockCycleShared) {
   }
 
   std::atomic<uint32_t> checkpoints(0);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "TransactionLockMgr::AcquireWithTimeout:WaitingTxn",
       [&](void* arg) { checkpoints.fetch_add(1); });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   // We want the leaf transactions to block and hold everyone back.
   std::vector<port::Thread> threads;
@@ -454,8 +454,8 @@ TEST_P(TransactionTest, DeadlockCycleShared) {
     /* sleep override */
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
   // Complete the cycle T[16 - 31] -> T1
   for (uint32_t i = 15; i < 31; i++) {
@@ -499,10 +499,10 @@ TEST_P(TransactionTest, DeadlockCycle) {
     }
 
     std::atomic<uint32_t> checkpoints(0);
-    rocksdb::SyncPoint::GetInstance()->SetCallBack(
+    rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
         "TransactionLockMgr::AcquireWithTimeout:WaitingTxn",
         [&](void* arg) { checkpoints.fetch_add(1); });
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
     // We want the last transaction in the chain to block and hold everyone
     // back.
@@ -523,8 +523,8 @@ TEST_P(TransactionTest, DeadlockCycle) {
       /* sleep override */
       std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-    rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
     // Complete the cycle Tlen -> T1
     auto s = txns[len - 1]->GetForUpdate(read_options, "0", nullptr);
@@ -1063,7 +1063,7 @@ TEST_P(TransactionTest, DISABLED_TwoPhaseMultiThreadTest) {
   std::atomic<uint32_t> t_wait_on_prepare(0);
   std::atomic<uint32_t> t_wait_on_commit(0);
 
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "WriteThread::JoinBatchGroup:Wait", [&](void* arg) {
         auto* writer = reinterpret_cast<WriteThread::Writer*>(arg);
 
@@ -1084,7 +1084,7 @@ TEST_P(TransactionTest, DISABLED_TwoPhaseMultiThreadTest) {
         }
       });
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   // do all the writes
   std::vector<port::Thread> threads;
@@ -1095,8 +1095,8 @@ TEST_P(TransactionTest, DISABLED_TwoPhaseMultiThreadTest) {
     t.join();
   }
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 
   ReadOptions read_options;
   std::string value;
@@ -4420,9 +4420,9 @@ TEST_P(TransactionTest, ToggleAutoCompactionTest) {
 TEST_P(TransactionTest, ExpiredTransactionDataRace1) {
   // In this test, txn1 should succeed committing,
   // as the callback is called after txn1 starts committing.
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"TransactionTest::ExpirableTransactionDataRace:1"}});
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "TransactionTest::ExpirableTransactionDataRace:1", [&](void* arg) {
         WriteOptions write_options;
         TransactionOptions txn_options;
@@ -4440,7 +4440,7 @@ TEST_P(TransactionTest, ExpiredTransactionDataRace1) {
         delete txn2;
       });
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   WriteOptions write_options;
   TransactionOptions txn_options;
@@ -4460,7 +4460,7 @@ TEST_P(TransactionTest, ExpiredTransactionDataRace1) {
   ASSERT_EQ("1", value);
 
   delete txn1;
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 namespace {

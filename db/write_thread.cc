@@ -11,7 +11,7 @@
 #include "util/random.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 WriteThread::WriteThread(const ImmutableDBOptions& db_options)
     : max_yield_usec_(db_options.enable_write_thread_adaptive_yield

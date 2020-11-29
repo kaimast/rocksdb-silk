@@ -16,7 +16,7 @@
 
 #include "utilities/persistent_cache/block_cache_tier.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static const double kStressFactor = .125;
 
@@ -24,7 +24,7 @@ static const double kStressFactor = .125;
 static void OnOpenForRead(void* arg) {
   int* val = static_cast<int*>(arg);
   *val &= ~O_DIRECT;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "NewRandomAccessFile:O_DIRECT",
       std::bind(OnOpenForRead, std::placeholders::_1));
 }
@@ -32,7 +32,7 @@ static void OnOpenForRead(void* arg) {
 static void OnOpenForWrite(void* arg) {
   int* val = static_cast<int*>(arg);
   *val &= ~O_DIRECT;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "NewWritableFile:O_DIRECT",
       std::bind(OnOpenForWrite, std::placeholders::_1));
 }
@@ -134,10 +134,10 @@ std::unique_ptr<PersistentTieredCache> NewTieredCache(
 PersistentCacheTierTest::PersistentCacheTierTest()
     : path_(test::TmpDir(Env::Default()) + "/cache_test") {
 #ifdef OS_LINUX
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
-  rocksdb::SyncPoint::GetInstance()->SetCallBack("NewRandomAccessFile:O_DIRECT",
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack("NewRandomAccessFile:O_DIRECT",
                                                  OnOpenForRead);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack("NewWritableFile:O_DIRECT",
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack("NewWritableFile:O_DIRECT",
                                                  OnOpenForWrite);
 #endif
 }
@@ -147,14 +147,14 @@ TEST_F(PersistentCacheTierTest, DISABLED_BlockCacheInsertWithFileCreateError) {
   cache_ = NewBlockCache(Env::Default(), path_,
                          /*size=*/std::numeric_limits<uint64_t>::max(),
                          /*direct_writes=*/ false);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack( 
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack( 
     "BlockCacheTier::NewCacheFile:DeleteDir", OnDeleteDir);
 
   RunNegativeInsertTest(/*nthreads=*/ 1,
                         /*max_keys*/
                           static_cast<size_t>(10 * 1024 * kStressFactor));
 
-  rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+  rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
 }
 
 #ifdef TRAVIS
@@ -270,8 +270,8 @@ static void UniqueIdCallback(void* arg) {
     *result = 0;
   }
 
-  rocksdb::SyncPoint::GetInstance()->ClearTrace();
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "GetUniqueIdFromFile:FS_IOC_GETVERSION", UniqueIdCallback);
 }
 #endif
@@ -293,10 +293,10 @@ TEST_F(PersistentCacheTierTest, FactoryTest) {
 
 PersistentCacheDBTest::PersistentCacheDBTest() : DBTestBase("/cache_test") {
 #ifdef OS_LINUX
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "GetUniqueIdFromFile:FS_IOC_GETVERSION", UniqueIdCallback);
-  rocksdb::SyncPoint::GetInstance()->SetCallBack("NewRandomAccessFile:O_DIRECT",
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack("NewRandomAccessFile:O_DIRECT",
                                                  OnOpenForRead);
 #endif
 }
@@ -316,7 +316,7 @@ void PersistentCacheDBTest::RunTest(
     Options options;
     options.write_buffer_size =
       static_cast<size_t>(64 * 1024 * kStressFactor);  // small write buffer
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     options = CurrentOptions(options);
 
     // setup page cache

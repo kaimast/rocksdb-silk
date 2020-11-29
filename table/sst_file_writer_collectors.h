@@ -8,7 +8,7 @@
 #include "rocksdb/types.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Table Properties that are specific to tables created by SstFileWriter.
 struct ExternalSstFilePropertyNames {

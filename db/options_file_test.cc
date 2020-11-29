@@ -12,7 +12,7 @@
 #include "rocksdb/table.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class OptionsFileTest : public testing::Test {
  public:
   OptionsFileTest() : dbname_(test::TmpDir() + "/options_file_test") {}

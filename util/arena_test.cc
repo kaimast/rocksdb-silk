@@ -11,7 +11,7 @@
 #include "util/random.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 const size_t kHugePageSize = 2 * 1024 * 1024;

@@ -38,7 +38,7 @@
 #include "util/allocator.h"
 #include "util/random.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 template<typename Key, class Comparator>
 class SkipList {

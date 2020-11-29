@@ -21,7 +21,7 @@
 #include "util/crc32c.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace blob_db {
 
 BlobDumpTool::BlobDumpTool()

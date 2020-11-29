@@ -14,7 +14,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/utilities/stackable_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 
@@ -100,13 +100,13 @@ class BlobDB : public StackableDB {
   static const uint64_t kTTLSuffixLength = 8;
 
  public:
-  using rocksdb::StackableDB::Put;
+  using rocksdb_silk::StackableDB::Put;
 
   virtual Status Put(const WriteOptions& options,
                      ColumnFamilyHandle* column_family, const Slice& key,
                      const Slice& value) override = 0;
 
-  using rocksdb::StackableDB::Delete;
+  using rocksdb_silk::StackableDB::Delete;
   virtual Status Delete(const WriteOptions& options,
                         ColumnFamilyHandle* column_family,
                         const Slice& key) override = 0;
@@ -129,24 +129,24 @@ class BlobDB : public StackableDB {
     return PutUntil(options, DefaultColumnFamily(), key, value, expiration);
   }
 
-  using rocksdb::StackableDB::Get;
+  using rocksdb_silk::StackableDB::Get;
   virtual Status Get(const ReadOptions& options,
                      ColumnFamilyHandle* column_family, const Slice& key,
                      PinnableSlice* value) override = 0;
 
-  using rocksdb::StackableDB::MultiGet;
+  using rocksdb_silk::StackableDB::MultiGet;
   virtual std::vector<Status> MultiGet(
       const ReadOptions& options,
       const std::vector<ColumnFamilyHandle*>& column_family,
       const std::vector<Slice>& keys,
       std::vector<std::string>* values) override = 0;
 
-  using rocksdb::StackableDB::SingleDelete;
+  using rocksdb_silk::StackableDB::SingleDelete;
   virtual Status SingleDelete(const WriteOptions& wopts,
                               ColumnFamilyHandle* column_family,
                               const Slice& key) override = 0;
 
-  using rocksdb::StackableDB::Merge;
+  using rocksdb_silk::StackableDB::Merge;
   virtual Status Merge(const WriteOptions& options,
                        ColumnFamilyHandle* column_family, const Slice& key,
                        const Slice& value) override {

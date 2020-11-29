@@ -8,7 +8,7 @@
 #include "rocksdb/memtablerep.h"
 #include "util/arena.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 class SkipListRep : public MemTableRep {
   InlineSkipList<const MemTableRep::KeyComparator&> skip_list_;

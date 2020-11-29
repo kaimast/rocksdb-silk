@@ -49,7 +49,7 @@
 #include "util/string_util.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 extern const uint64_t kBlockBasedTableMagicNumber;
 extern const std::string kHashIndexPrefixesBlock;
@@ -655,9 +655,9 @@ Status BlockBasedTable::Open(const ImmutableCFOptions& ioptions,
     // TODO(andrewkr): ReadMetaBlock repeats SeekToCompressionDictBlock().
     // maybe decode a handle from meta_iter
     // and do ReadBlockContents(handle) instead
-    s = rocksdb::ReadMetaBlock(rep->file.get(), file_size,
+    s = rocksdb_silk::ReadMetaBlock(rep->file.get(), file_size,
                                kBlockBasedTableMagicNumber, rep->ioptions,
-                               rocksdb::kCompressionDictBlock,
+                               rocksdb_silk::kCompressionDictBlock,
                                compression_dict_block.get());
     if (!s.ok()) {
       ROCKS_LOG_WARN(
@@ -1968,11 +1968,11 @@ Status BlockBasedTable::DumpTable(WritableFile* out_file) {
       if (!s.ok()) {
         return s;
       }
-      if (meta_iter->key() == rocksdb::kPropertiesBlock) {
+      if (meta_iter->key() == rocksdb_silk::kPropertiesBlock) {
         out_file->Append("  Properties block handle: ");
         out_file->Append(meta_iter->value().ToString(true).c_str());
         out_file->Append("\n");
-      } else if (meta_iter->key() == rocksdb::kCompressionDictBlock) {
+      } else if (meta_iter->key() == rocksdb_silk::kCompressionDictBlock) {
         out_file->Append("  Compression dictionary block handle: ");
         out_file->Append(meta_iter->value().ToString(true).c_str());
         out_file->Append("\n");
@@ -1981,7 +1981,7 @@ Status BlockBasedTable::DumpTable(WritableFile* out_file) {
         out_file->Append("  Filter block handle: ");
         out_file->Append(meta_iter->value().ToString(true).c_str());
         out_file->Append("\n");
-      } else if (meta_iter->key() == rocksdb::kRangeDelBlock) {
+      } else if (meta_iter->key() == rocksdb_silk::kRangeDelBlock) {
         out_file->Append("  Range deletion block handle: ");
         out_file->Append(meta_iter->value().ToString(true).c_str());
         out_file->Append("\n");
@@ -1993,7 +1993,7 @@ Status BlockBasedTable::DumpTable(WritableFile* out_file) {
   }
 
   // Output TableProperties
-  const rocksdb::TableProperties* table_properties;
+  const rocksdb_silk::TableProperties* table_properties;
   table_properties = rep_->table_properties.get();
 
   if (table_properties != nullptr) {
@@ -2008,8 +2008,8 @@ Status BlockBasedTable::DumpTable(WritableFile* out_file) {
   // Output Filter blocks
   if (!rep_->filter && !table_properties->filter_policy_name.empty()) {
     // Support only BloomFilter as off now
-    rocksdb::BlockBasedTableOptions table_options;
-    table_options.filter_policy.reset(rocksdb::NewBloomFilterPolicy(1));
+    rocksdb_silk::BlockBasedTableOptions table_options;
+    table_options.filter_policy.reset(rocksdb_silk::NewBloomFilterPolicy(1));
     if (table_properties->filter_policy_name.compare(
             table_options.filter_policy->Name()) == 0) {
       std::string filter_block_key = kFilterBlockPrefix;
@@ -2052,7 +2052,7 @@ Status BlockBasedTable::DumpTable(WritableFile* out_file) {
         "Compression Dictionary:\n"
         "--------------------------------------\n");
     out_file->Append("  size (bytes): ");
-    out_file->Append(rocksdb::ToString(compression_dict.size()));
+    out_file->Append(rocksdb_silk::ToString(compression_dict.size()));
     out_file->Append("\n\n");
     out_file->Append("  HEX    ");
     out_file->Append(compression_dict.ToString(true).c_str());
@@ -2176,7 +2176,7 @@ Status BlockBasedTable::DumpDataBlocks(WritableFile* out_file) {
     datablock_size_sum += datablock_size;
 
     out_file->Append("Data Block # ");
-    out_file->Append(rocksdb::ToString(block_id));
+    out_file->Append(rocksdb_silk::ToString(block_id));
     out_file->Append(" @ ");
     out_file->Append(blockhandles_iter->value().ToString(true).c_str());
     out_file->Append("\n");
@@ -2211,13 +2211,13 @@ Status BlockBasedTable::DumpDataBlocks(WritableFile* out_file) {
     out_file->Append("Data Block Summary:\n");
     out_file->Append("--------------------------------------");
     out_file->Append("\n  # data blocks: ");
-    out_file->Append(rocksdb::ToString(num_datablocks));
+    out_file->Append(rocksdb_silk::ToString(num_datablocks));
     out_file->Append("\n  min data block size: ");
-    out_file->Append(rocksdb::ToString(datablock_size_min));
+    out_file->Append(rocksdb_silk::ToString(datablock_size_min));
     out_file->Append("\n  max data block size: ");
-    out_file->Append(rocksdb::ToString(datablock_size_max));
+    out_file->Append(rocksdb_silk::ToString(datablock_size_max));
     out_file->Append("\n  avg data block size: ");
-    out_file->Append(rocksdb::ToString(datablock_size_avg));
+    out_file->Append(rocksdb_silk::ToString(datablock_size_avg));
     out_file->Append("\n");
   }
 

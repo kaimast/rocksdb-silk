@@ -19,7 +19,7 @@
 #include "util/arena.h"
 #include "util/murmurhash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 
 typedef const char* Key;

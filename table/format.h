@@ -19,7 +19,7 @@
 #include "port/port.h"  // noexcept
 #include "table/persistent_cache_options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Block;
 class RandomAccessFile;

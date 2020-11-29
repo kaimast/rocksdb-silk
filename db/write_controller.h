@@ -11,7 +11,7 @@
 #include <memory>
 #include "rocksdb/rate_limiter.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Env;
 class WriteControllerToken;

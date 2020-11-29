@@ -11,7 +11,7 @@
 #include "rocksdb/db.h"
 #include "rocksdb/options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // This function can be used to list the Information logs,
 // given the db pointer.

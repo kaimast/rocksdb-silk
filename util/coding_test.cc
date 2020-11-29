@@ -11,7 +11,7 @@
 
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Coding { };
 

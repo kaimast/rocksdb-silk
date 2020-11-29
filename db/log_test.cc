@@ -17,7 +17,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace log {
 
 // Construct a string of the specified length made out of the supplied

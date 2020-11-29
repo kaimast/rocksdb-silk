@@ -12,7 +12,7 @@
 #include "rocksdb/utilities/object_registry.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Normalizes trivial differences across Envs such that these test cases can
 // run on all Envs.

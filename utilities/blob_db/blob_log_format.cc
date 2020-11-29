@@ -9,7 +9,7 @@
 #include "util/coding.h"
 #include "util/crc32c.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace blob_db {
 
 const uint32_t kMagicNumber = 2395959;

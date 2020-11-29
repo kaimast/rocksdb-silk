@@ -27,7 +27,7 @@
 #include "util/string_util.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 // Used in universal compaction when trivial move is enabled.
 // This structure is used for the construction of min heap

@@ -7,7 +7,7 @@
 
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DB;
 

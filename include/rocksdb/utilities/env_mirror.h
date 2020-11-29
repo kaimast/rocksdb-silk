@@ -24,7 +24,7 @@
 #include <vector>
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SequentialFileMirror;
 class RandomAccessFileMirror;

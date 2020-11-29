@@ -21,7 +21,7 @@
 #include "util/coding.h"
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class InternalKey;
 

@@ -22,7 +22,7 @@
 #include "util/log_buffer.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class InternalKeyComparator;
 class Mutex;

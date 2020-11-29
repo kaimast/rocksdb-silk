@@ -11,7 +11,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace crc32c {
 
 extern bool IsFastCrc32Supported();

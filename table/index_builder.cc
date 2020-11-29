@@ -20,7 +20,7 @@
 #include "table/partitioned_filter_block.h"
 
 // Without anonymous namespace here, we fail the warning -Wmissing-prototypes
-namespace rocksdb {
+namespace rocksdb_silk {
 // using namespace rocksdb;
 // Create a index builder based on its type.
 IndexBuilder* IndexBuilder::CreateIndexBuilder(

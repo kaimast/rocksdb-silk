@@ -11,7 +11,7 @@
 #include <memory>
 #include "table/internal_iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Iterator;
 struct ParsedInternalKey;

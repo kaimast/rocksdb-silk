@@ -12,7 +12,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/statistics.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class RateLimiter {
  public:

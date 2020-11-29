@@ -22,7 +22,7 @@
 #include "db/db_impl.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 

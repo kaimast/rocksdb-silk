@@ -10,7 +10,7 @@
 #include "rocksdb/comparator.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class RangeDelAggregatorTest : public testing::Test {};
 

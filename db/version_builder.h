@@ -10,7 +10,7 @@
 #pragma once
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TableCache;
 class VersionStorageInfo;

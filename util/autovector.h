@@ -11,7 +11,7 @@
 #include <stdexcept>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_LITE
 template <class T, size_t kSize = 8>

@@ -36,7 +36,7 @@
 
 #ifndef ROCKSDB_LITE
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class EventListenerTest : public DBTestBase {
  public:
@@ -45,16 +45,16 @@ class EventListenerTest : public DBTestBase {
   const size_t k110KB = 110 << 10;
 };
 
-struct TestPropertiesCollector : public rocksdb::TablePropertiesCollector {
-  virtual rocksdb::Status AddUserKey(const rocksdb::Slice& key,
-                                     const rocksdb::Slice& value,
-                                     rocksdb::EntryType type,
-                                     rocksdb::SequenceNumber seq,
+struct TestPropertiesCollector : public rocksdb_silk::TablePropertiesCollector {
+  virtual rocksdb_silk::Status AddUserKey(const rocksdb_silk::Slice& key,
+                                     const rocksdb_silk::Slice& value,
+                                     rocksdb_silk::EntryType type,
+                                     rocksdb_silk::SequenceNumber seq,
                                      uint64_t file_size) override {
     return Status::OK();
   }
-  virtual rocksdb::Status Finish(
-      rocksdb::UserCollectedProperties* properties) override {
+  virtual rocksdb_silk::Status Finish(
+      rocksdb_silk::UserCollectedProperties* properties) override {
     properties->insert({"0", "1"});
     return Status::OK();
   }
@@ -63,8 +63,8 @@ struct TestPropertiesCollector : public rocksdb::TablePropertiesCollector {
     return "TestTablePropertiesCollector";
   }
 
-  rocksdb::UserCollectedProperties GetReadableProperties() const override {
-    rocksdb::UserCollectedProperties ret;
+  rocksdb_silk::UserCollectedProperties GetReadableProperties() const override {
+    rocksdb_silk::UserCollectedProperties ret;
     ret["2"] = "3";
     return ret;
   }
@@ -833,10 +833,10 @@ TEST_F(EventListenerTest, BackgroundErrorListenerFailedFlushTest) {
 
   // the usual TEST_WaitForFlushMemTable() doesn't work for failed flushes, so
   // forge a custom one for the failed flush case.
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"DBImpl::BGWorkFlush:done",
         "EventListenerTest:BackgroundErrorListenerFailedFlushTest:1"}});
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   env_->drop_writes_.store(true, std::memory_order_release);
   env_->no_slowdown_ = true;

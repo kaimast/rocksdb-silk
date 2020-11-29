@@ -20,7 +20,7 @@
 #include "rocksdb/slice_transform.h"
 #include "table/merging_iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 // Helper class that locks a mutex on construction and unlocks the mutex when

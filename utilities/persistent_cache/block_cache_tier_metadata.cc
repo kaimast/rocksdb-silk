@@ -8,7 +8,7 @@
 
 #include <functional>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 bool BlockCacheTierMetadata::Insert(BlockCacheFile* file) {
   return cache_file_index_.Insert(file);

@@ -18,7 +18,7 @@
 #include "rocksdb/slice.h"
 #include "util/stop_watch.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Comparator;
 class Iterator;

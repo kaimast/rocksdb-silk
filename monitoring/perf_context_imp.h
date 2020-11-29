@@ -8,7 +8,7 @@
 #include "rocksdb/perf_context.h"
 #include "util/stop_watch.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #if defined(NPERF_CONTEXT)
 

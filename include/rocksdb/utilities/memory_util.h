@@ -15,7 +15,7 @@
 #include "rocksdb/cache.h"
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Returns the current memory usage of the specified DB instances.
 class MemoryUtil {

@@ -11,7 +11,7 @@
 
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // LRU element definition
 //

@@ -9,7 +9,7 @@
 
 #include "db/db_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status MemoryUtil::GetApproximateMemoryUsageByType(
     const std::vector<DB*>& dbs,

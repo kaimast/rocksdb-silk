@@ -13,7 +13,7 @@
 
 #include "table/internal_iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // A internal wrapper class with an interface similar to Iterator that caches
 // the valid() and key() results for an underlying iterator.

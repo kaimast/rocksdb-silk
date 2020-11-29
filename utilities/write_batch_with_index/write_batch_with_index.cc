@@ -21,7 +21,7 @@
 #include "util/arena.h"
 #include "utilities/write_batch_with_index/write_batch_with_index_internal.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // when direction == forward
 // * current_at_base_ <=> base_iterator > delta_iterator

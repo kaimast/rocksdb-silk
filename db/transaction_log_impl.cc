@@ -13,7 +13,7 @@
 #include "db/write_batch_internal.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 TransactionLogIteratorImpl::TransactionLogIteratorImpl(
     const std::string& dir, const ImmutableDBOptions* options,

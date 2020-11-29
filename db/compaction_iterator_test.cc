@@ -12,7 +12,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Expects no merging attempts.
 class NoMergingMergeOp : public MergeOperator {
@@ -395,7 +395,7 @@ TEST_F(CompactionIteratorTest, ShuttingDownInFilter) {
   compaction_proxy_->key_not_exists_beyond_output_level = true;
 
   std::atomic<bool> seek_done{false};
-  rocksdb::port::Thread compaction_thread([&] {
+  rocksdb_silk::port::Thread compaction_thread([&] {
     c_iter_->SeekToFirst();
     EXPECT_FALSE(c_iter_->Valid());
     EXPECT_TRUE(c_iter_->status().IsShutdownInProgress());
@@ -431,7 +431,7 @@ TEST_F(CompactionIteratorTest, ShuttingDownInMerge) {
   compaction_proxy_->key_not_exists_beyond_output_level = true;
 
   std::atomic<bool> seek_done{false};
-  rocksdb::port::Thread compaction_thread([&] {
+  rocksdb_silk::port::Thread compaction_thread([&] {
     c_iter_->SeekToFirst();
     ASSERT_FALSE(c_iter_->Valid());
     ASSERT_TRUE(c_iter_->status().IsShutdownInProgress());

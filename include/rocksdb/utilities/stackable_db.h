@@ -13,7 +13,7 @@
 #endif
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // This class contains APIs to stack rocksdb wrappers.Eg. Stack TTL over base d
 class StackableDB : public DB {

@@ -15,7 +15,7 @@
 #include "port/port.h"
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Comparator::~Comparator() { }
 

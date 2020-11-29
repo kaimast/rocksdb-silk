@@ -18,7 +18,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // TODO(icanadi) Mock out everything else:
 // 1. VersionSet

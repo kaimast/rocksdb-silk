@@ -13,7 +13,7 @@
 
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void DumpMallocStats(std::string*);
 

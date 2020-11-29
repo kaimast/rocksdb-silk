@@ -18,7 +18,7 @@
 #include "rocksdb/env.h"
 #include "util/filename.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void DumpDBFileSummary(const ImmutableDBOptions& options,
                        const std::string& dbname) {

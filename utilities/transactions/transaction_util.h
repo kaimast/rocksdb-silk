@@ -15,7 +15,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct TransactionKeyMapInfo {
   // Earliest sequence number that is relevant to this transaction for this key

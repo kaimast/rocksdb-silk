@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class BlockBuilder {
  public:

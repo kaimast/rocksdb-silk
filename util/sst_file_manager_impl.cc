@@ -13,7 +13,7 @@
 #include "util/mutexlock.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 SstFileManagerImpl::SstFileManagerImpl(Env* env, std::shared_ptr<Logger> logger,

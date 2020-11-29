@@ -10,7 +10,7 @@
 #include <ratio>
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::unique_ptr<WriteControllerToken> WriteController::GetStopToken() {
   ++total_stopped_;

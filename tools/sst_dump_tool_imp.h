@@ -13,7 +13,7 @@
 #include "options/cf_options.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SstFileReader {
  public:

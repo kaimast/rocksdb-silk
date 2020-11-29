@@ -13,7 +13,7 @@
 #include "util/coding.h"
 #include "utilities/col_buf_encoder.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct ColDeclaration;
 

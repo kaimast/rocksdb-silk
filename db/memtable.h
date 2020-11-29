@@ -32,7 +32,7 @@
 #include "util/dynamic_bloom.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Mutex;
 class MemTableIterator;

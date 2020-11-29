@@ -13,7 +13,7 @@
 #include "util/sync_point.h"
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBBasicTest : public DBTestBase {
  public:
@@ -23,8 +23,8 @@ class DBBasicTest : public DBTestBase {
 TEST_F(DBBasicTest, OpenWhenOpen) {
   Options options = CurrentOptions();
   options.env = env_;
-  rocksdb::DB* db2 = nullptr;
-  rocksdb::Status s = DB::Open(options, dbname_, &db2);
+  rocksdb_silk::DB* db2 = nullptr;
+  rocksdb_silk::Status s = DB::Open(options, dbname_, &db2);
 
   ASSERT_EQ(Status::Code::kIOError, s.code());
   ASSERT_EQ(Status::SubCode::kNone, s.subcode());
@@ -849,7 +849,7 @@ TEST_F(DBBasicTest, MmapAndBufferOptions) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

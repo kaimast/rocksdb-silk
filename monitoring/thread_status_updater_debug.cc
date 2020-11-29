@@ -8,7 +8,7 @@
 #include "db/column_family.h"
 #include "monitoring/thread_status_updater.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef NDEBUG
 #ifdef ROCKSDB_USING_THREAD_STATUS

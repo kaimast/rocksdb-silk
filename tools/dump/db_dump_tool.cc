@@ -17,13 +17,13 @@
 #include "rocksdb/env.h"
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 bool DbDumpTool::Run(const DumpOptions& dump_options,
-                     rocksdb::Options options) {
-  rocksdb::DB* dbptr;
-  rocksdb::Status status;
-  std::unique_ptr<rocksdb::WritableFile> dumpfile;
+                     rocksdb_silk::Options options) {
+  rocksdb_silk::DB* dbptr;
+  rocksdb_silk::Status status;
+  std::unique_ptr<rocksdb_silk::WritableFile> dumpfile;
   char hostname[1024];
   int64_t timesec = 0;
   std::string abspath;
@@ -32,35 +32,35 @@ bool DbDumpTool::Run(const DumpOptions& dump_options,
   static const char* magicstr = "ROCKDUMP";
   static const char versionstr[8] = {0, 0, 0, 0, 0, 0, 0, 1};
 
-  rocksdb::Env* env = rocksdb::Env::Default();
+  rocksdb_silk::Env* env = rocksdb_silk::Env::Default();
 
   // Open the database
   options.create_if_missing = false;
-  status = rocksdb::DB::OpenForReadOnly(options, dump_options.db_path, &dbptr);
+  status = rocksdb_silk::DB::OpenForReadOnly(options, dump_options.db_path, &dbptr);
   if (!status.ok()) {
     std::cerr << "Unable to open database '" << dump_options.db_path
               << "' for reading: " << status.ToString() << std::endl;
     return false;
   }
 
-  const std::unique_ptr<rocksdb::DB> db(dbptr);
+  const std::unique_ptr<rocksdb_silk::DB> db(dbptr);
 
   status = env->NewWritableFile(dump_options.dump_location, &dumpfile,
-                                rocksdb::EnvOptions());
+                                rocksdb_silk::EnvOptions());
   if (!status.ok()) {
     std::cerr << "Unable to open dump file '" << dump_options.dump_location
               << "' for writing: " << status.ToString() << std::endl;
     return false;
   }
 
-  rocksdb::Slice magicslice(magicstr, 8);
+  rocksdb_silk::Slice magicslice(magicstr, 8);
   status = dumpfile->Append(magicslice);
   if (!status.ok()) {
     std::cerr << "Append failed: " << status.ToString() << std::endl;
     return false;
   }
 
-  rocksdb::Slice versionslice(versionstr, 8);
+  rocksdb_silk::Slice versionslice(versionstr, 8);
   status = dumpfile->Append(versionslice);
   if (!status.ok()) {
     std::cerr << "Append failed: " << status.ToString() << std::endl;
@@ -79,10 +79,10 @@ bool DbDumpTool::Run(const DumpOptions& dump_options,
              abspath.c_str(), hostname, timesec);
   }
 
-  rocksdb::Slice infoslice(json, strlen(json));
+  rocksdb_silk::Slice infoslice(json, strlen(json));
   char infosize[4];
-  rocksdb::EncodeFixed32(infosize, (uint32_t)infoslice.size());
-  rocksdb::Slice infosizeslice(infosize, 4);
+  rocksdb_silk::EncodeFixed32(infosize, (uint32_t)infoslice.size());
+  rocksdb_silk::Slice infosizeslice(infosize, 4);
   status = dumpfile->Append(infosizeslice);
   if (!status.ok()) {
     std::cerr << "Append failed: " << status.ToString() << std::endl;
@@ -94,12 +94,12 @@ bool DbDumpTool::Run(const DumpOptions& dump_options,
     return false;
   }
 
-  const std::unique_ptr<rocksdb::Iterator> it(
-      db->NewIterator(rocksdb::ReadOptions()));
+  const std::unique_ptr<rocksdb_silk::Iterator> it(
+      db->NewIterator(rocksdb_silk::ReadOptions()));
   for (it->SeekToFirst(); it->Valid(); it->Next()) {
     char keysize[4];
-    rocksdb::EncodeFixed32(keysize, (uint32_t)it->key().size());
-    rocksdb::Slice keysizeslice(keysize, 4);
+    rocksdb_silk::EncodeFixed32(keysize, (uint32_t)it->key().size());
+    rocksdb_silk::Slice keysizeslice(keysize, 4);
     status = dumpfile->Append(keysizeslice);
     if (!status.ok()) {
       std::cerr << "Append failed: " << status.ToString() << std::endl;
@@ -112,8 +112,8 @@ bool DbDumpTool::Run(const DumpOptions& dump_options,
     }
 
     char valsize[4];
-    rocksdb::EncodeFixed32(valsize, (uint32_t)it->value().size());
-    rocksdb::Slice valsizeslice(valsize, 4);
+    rocksdb_silk::EncodeFixed32(valsize, (uint32_t)it->value().size());
+    rocksdb_silk::Slice valsizeslice(valsize, 4);
     status = dumpfile->Append(valsizeslice);
     if (!status.ok()) {
       std::cerr << "Append failed: " << status.ToString() << std::endl;
@@ -134,21 +134,21 @@ bool DbDumpTool::Run(const DumpOptions& dump_options,
 }
 
 bool DbUndumpTool::Run(const UndumpOptions& undump_options,
-                       rocksdb::Options options) {
-  rocksdb::DB* dbptr;
-  rocksdb::Status status;
-  rocksdb::Env* env;
-  std::unique_ptr<rocksdb::SequentialFile> dumpfile;
-  rocksdb::Slice slice;
+                       rocksdb_silk::Options options) {
+  rocksdb_silk::DB* dbptr;
+  rocksdb_silk::Status status;
+  rocksdb_silk::Env* env;
+  std::unique_ptr<rocksdb_silk::SequentialFile> dumpfile;
+  rocksdb_silk::Slice slice;
   char scratch8[8];
 
   static const char* magicstr = "ROCKDUMP";
   static const char versionstr[8] = {0, 0, 0, 0, 0, 0, 0, 1};
 
-  env = rocksdb::Env::Default();
+  env = rocksdb_silk::Env::Default();
 
   status = env->NewSequentialFile(undump_options.dump_location, &dumpfile,
-                                  rocksdb::EnvOptions());
+                                  rocksdb_silk::EnvOptions());
   if (!status.ok()) {
     std::cerr << "Unable to open dump file '" << undump_options.dump_location
               << "' for reading: " << status.ToString() << std::endl;
@@ -176,7 +176,7 @@ bool DbUndumpTool::Run(const UndumpOptions& undump_options,
     std::cerr << "Unable to read info blob size." << std::endl;
     return false;
   }
-  uint32_t infosize = rocksdb::DecodeFixed32(slice.data());
+  uint32_t infosize = rocksdb_silk::DecodeFixed32(slice.data());
   status = dumpfile->Skip(infosize);
   if (!status.ok()) {
     std::cerr << "Unable to skip info blob: " << status.ToString() << std::endl;
@@ -184,14 +184,14 @@ bool DbUndumpTool::Run(const UndumpOptions& undump_options,
   }
 
   options.create_if_missing = true;
-  status = rocksdb::DB::Open(options, undump_options.db_path, &dbptr);
+  status = rocksdb_silk::DB::Open(options, undump_options.db_path, &dbptr);
   if (!status.ok()) {
     std::cerr << "Unable to open database '" << undump_options.db_path
               << "' for writing: " << status.ToString() << std::endl;
     return false;
   }
 
-  const std::unique_ptr<rocksdb::DB> db(dbptr);
+  const std::unique_ptr<rocksdb_silk::DB> db(dbptr);
 
   uint32_t last_keysize = 64;
   size_t last_valsize = 1 << 20;
@@ -200,12 +200,12 @@ bool DbUndumpTool::Run(const UndumpOptions& undump_options,
 
   while (1) {
     uint32_t keysize, valsize;
-    rocksdb::Slice keyslice;
-    rocksdb::Slice valslice;
+    rocksdb_silk::Slice keyslice;
+    rocksdb_silk::Slice valslice;
 
     status = dumpfile->Read(4, &slice, scratch8);
     if (!status.ok() || slice.size() != 4) break;
-    keysize = rocksdb::DecodeFixed32(slice.data());
+    keysize = rocksdb_silk::DecodeFixed32(slice.data());
     if (keysize > last_keysize) {
       while (keysize > last_keysize) last_keysize *= 2;
       keyscratch = std::unique_ptr<char[]>(new char[last_keysize]);
@@ -226,7 +226,7 @@ bool DbUndumpTool::Run(const UndumpOptions& undump_options,
                 << std::endl;
       return false;
     }
-    valsize = rocksdb::DecodeFixed32(slice.data());
+    valsize = rocksdb_silk::DecodeFixed32(slice.data());
     if (valsize > last_valsize) {
       while (valsize > last_valsize) last_valsize *= 2;
       valscratch = std::unique_ptr<char[]>(new char[last_valsize]);
@@ -240,7 +240,7 @@ bool DbUndumpTool::Run(const UndumpOptions& undump_options,
       return false;
     }
 
-    status = db->Put(rocksdb::WriteOptions(), keyslice, valslice);
+    status = db->Put(rocksdb_silk::WriteOptions(), keyslice, valslice);
     if (!status.ok()) {
       fprintf(stderr, "Unable to write database entry\n");
       return false;
@@ -248,7 +248,7 @@ bool DbUndumpTool::Run(const UndumpOptions& undump_options,
   }
 
   if (undump_options.compact_db) {
-    status = db->CompactRange(rocksdb::CompactRangeOptions(), nullptr, nullptr);
+    status = db->CompactRange(rocksdb_silk::CompactRangeOptions(), nullptr, nullptr);
     if (!status.ok()) {
       fprintf(stderr,
               "Unable to compact the database after loading the dumped file\n");

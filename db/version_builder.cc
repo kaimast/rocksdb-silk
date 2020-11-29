@@ -31,7 +31,7 @@
 #include "port/port.h"
 #include "table/table_reader.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 bool NewestFirstBySeqNo(FileMetaData* a, FileMetaData* b) {
   if (a->largest_seqno != b->largest_seqno) {

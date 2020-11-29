@@ -12,7 +12,7 @@
 // A thread local context for gathering io-stats efficiently and transparently.
 // Use SetPerfLevel(PerfLevel::kEnableTime) to enable time stats.
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct IOStatsContext {
   // reset all io-stats counter to zero

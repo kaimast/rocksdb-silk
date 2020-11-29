@@ -9,7 +9,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // -- Table Properties
 // Other than basic table properties, each table may also have the user
@@ -158,7 +158,7 @@ struct TableProperties {
   // ID of column family for this SST file, corresponding to the CF identified
   // by column_family_name.
   uint64_t column_family_id =
-      rocksdb::TablePropertiesCollectorFactory::Context::kUnknownColumnFamily;
+      rocksdb_silk::TablePropertiesCollectorFactory::Context::kUnknownColumnFamily;
   // The time when the SST file was created.
   // Since SST files are immutable, this is equivalent to last modified time.
   uint64_t creation_time = 0;

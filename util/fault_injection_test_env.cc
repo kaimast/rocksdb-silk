@@ -15,7 +15,7 @@
 #include <functional>
 #include <utility>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Assume a filename, and not a directory name like "/foo/bar/"
 std::string GetDirName(const std::string filename) {
@@ -39,7 +39,7 @@ Status Truncate(Env* env, const std::string& filename, uint64_t length) {
   }
 
   std::unique_ptr<char[]> scratch(new char[length]);
-  rocksdb::Slice result;
+  rocksdb_silk::Slice result;
   s = orig_file->Read(length, &result, scratch.get());
 #ifdef OS_WIN
   orig_file.reset();

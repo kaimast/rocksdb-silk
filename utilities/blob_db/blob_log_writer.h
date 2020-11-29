@@ -16,7 +16,7 @@
 #include "rocksdb/types.h"
 #include "utilities/blob_db/blob_log_format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WritableFileWriter;
 

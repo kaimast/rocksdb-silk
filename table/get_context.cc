@@ -13,7 +13,7 @@
 #include "rocksdb/merge_operator.h"
 #include "rocksdb/statistics.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

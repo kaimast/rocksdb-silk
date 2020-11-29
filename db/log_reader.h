@@ -16,7 +16,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SequentialFileReader;
 class Logger;

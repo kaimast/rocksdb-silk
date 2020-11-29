@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBEncryptionTest : public DBTestBase {
  public:
@@ -88,7 +88,7 @@ TEST_F(DBEncryptionTest, CheckEncrypted) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

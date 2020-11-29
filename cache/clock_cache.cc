@@ -11,7 +11,7 @@
 
 #ifndef SUPPORT_CLOCK_CACHE
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::shared_ptr<Cache> NewClockCache(size_t capacity, int num_shard_bits,
                                      bool strict_capacity_limit) {
@@ -34,7 +34,7 @@ std::shared_ptr<Cache> NewClockCache(size_t capacity, int num_shard_bits,
 #include "util/autovector.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

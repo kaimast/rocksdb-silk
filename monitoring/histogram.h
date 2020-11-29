@@ -16,7 +16,7 @@
 #include <map>
 #include <mutex>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class HistogramBucketMapper {
  public:

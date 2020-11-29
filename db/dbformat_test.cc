@@ -11,7 +11,7 @@
 #include "util/logging.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static std::string IKey(const std::string& user_key,
                         uint64_t seq,

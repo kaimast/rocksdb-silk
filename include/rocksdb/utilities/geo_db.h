@@ -12,7 +12,7 @@
 #include "rocksdb/utilities/stackable_db.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // Configurable options needed for setting up a Geo database

@@ -21,7 +21,7 @@
 #include "table/scoped_arena_iterator.h"
 #include "util/event_logger.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct Options;
 struct FileMetaData;

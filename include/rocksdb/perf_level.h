@@ -9,7 +9,7 @@
 #include <stdint.h>
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // How much perf stats to collect. Affects perf_context and iostats_context.
 enum PerfLevel : unsigned char {

@@ -13,7 +13,7 @@
 #include "table/plain_table_factory.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 enum PlainTableEntryType : unsigned char {
   kFullKey = 0,

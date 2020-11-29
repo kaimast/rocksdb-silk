@@ -20,7 +20,7 @@
 #include "table/table_builder.h"
 #include "util/kv_map.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // A RangeDelAggregator aggregates range deletion tombstones as they are
 // encountered in memtables/SST files. It provides methods that check whether a

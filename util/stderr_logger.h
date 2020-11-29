@@ -10,7 +10,7 @@
 
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Prints logs to stderr for faster debugging
 class StderrLogger : public Logger {

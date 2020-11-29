@@ -21,7 +21,7 @@
 #include "table/table_reader.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Arena;
 class TableReader;

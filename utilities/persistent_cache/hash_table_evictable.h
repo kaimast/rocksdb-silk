@@ -13,7 +13,7 @@
 #include "utilities/persistent_cache/hash_table.h"
 #include "utilities/persistent_cache/lrulist.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Evictable Hash Table
 //

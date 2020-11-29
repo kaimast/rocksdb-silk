@@ -26,7 +26,7 @@
 #include "util/testharness.h"
 #include "utilities/persistent_cache/volatile_tier_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // Unit tests for testing PersistentCacheTier

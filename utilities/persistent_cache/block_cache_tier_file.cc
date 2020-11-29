@@ -17,7 +17,7 @@
 #include "util/crc32c.h"
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // File creation factories

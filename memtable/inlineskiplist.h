@@ -49,7 +49,7 @@
 #include "util/allocator.h"
 #include "util/random.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 template <class Comparator>
 class InlineSkipList {

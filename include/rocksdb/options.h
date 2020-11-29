@@ -29,7 +29,7 @@
 #undef max
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Cache;
 class CompactionFilter;

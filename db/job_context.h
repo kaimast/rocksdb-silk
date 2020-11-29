@@ -14,7 +14,7 @@
 
 #include "db/log_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MemTable;
 

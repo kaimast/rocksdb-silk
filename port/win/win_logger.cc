@@ -24,7 +24,7 @@
 #include "monitoring/iostats_context_imp.h"
 #include "port/sys_time.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace port {
 

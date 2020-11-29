@@ -31,7 +31,7 @@
 #include "util/coding.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Block;
 class BlockIter;

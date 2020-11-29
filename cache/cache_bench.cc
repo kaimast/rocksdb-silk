@@ -48,7 +48,7 @@ DEFINE_int32(erase_percent, 10,
 
 DEFINE_bool(use_clock_cache, false, "");
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CacheBench;
 namespace {

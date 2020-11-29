@@ -43,7 +43,7 @@ DEFINE_bool(stat, false,
 DEFINE_string(compression_type, "kNoCompression",
               "The compression algorithm used to compress data blocks");
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnAwareEncodingExp {
  public:
@@ -158,7 +158,7 @@ int main(int argc, char** argv) {
     fprintf(stderr, "Format must be 'primary' or 'secondary'\n");
     exit(1);
   }
-  rocksdb::ColumnAwareEncodingExp::Run(sst_file);
+  rocksdb_silk::ColumnAwareEncodingExp::Run(sst_file);
   return 0;
 }
 

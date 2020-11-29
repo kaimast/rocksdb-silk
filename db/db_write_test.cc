@@ -11,7 +11,7 @@
 #include "port/stack_trace.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Test variations of WriteImpl.
 class DBWriteTest : public DBTestBase, public testing::WithParamInterface<int> {
@@ -75,7 +75,7 @@ INSTANTIATE_TEST_CASE_P(DBWriteTestInstance, DBWriteTest,
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

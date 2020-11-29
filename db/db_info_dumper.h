@@ -8,7 +8,7 @@
 
 #include "options/db_options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 void DumpDBFileSummary(const ImmutableDBOptions& options,
                        const std::string& dbname);
 }  // namespace rocksdb

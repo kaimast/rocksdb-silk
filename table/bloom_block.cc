@@ -9,7 +9,7 @@
 #include "rocksdb/slice.h"
 #include "util/dynamic_bloom.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void BloomBlockBuilder::AddKeysHashes(const std::vector<uint32_t>& keys_hashes) {
   for (auto hash : keys_hashes) {

@@ -9,7 +9,7 @@
 
 #include "db/db_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status GetAllKeyVersions(DB* db, Slice begin_key, Slice end_key,
                          std::vector<KeyVersion>* key_versions) {

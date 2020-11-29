@@ -11,7 +11,7 @@
 #include <mutex>
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 #ifndef ROCKSDB_LITE
 namespace {
 const size_t kSizeDummyEntry = 1024 * 1024;

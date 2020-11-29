@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct InternalKeyTablePropertiesNames {
   static const std::string kDeletedKeys;

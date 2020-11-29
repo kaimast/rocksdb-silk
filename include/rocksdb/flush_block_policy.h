@@ -8,7 +8,7 @@
 #include <string>
 #include "rocksdb/table.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class BlockBuilder;

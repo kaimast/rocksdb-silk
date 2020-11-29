@@ -19,7 +19,7 @@
 #ifndef INCLUDE_ROCKSDB_CLEANABLE_H_
 #define INCLUDE_ROCKSDB_CLEANABLE_H_
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Cleanable {
  public:

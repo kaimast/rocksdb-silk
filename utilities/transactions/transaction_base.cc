@@ -14,7 +14,7 @@
 #include "rocksdb/status.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 TransactionBaseImpl::TransactionBaseImpl(DB* db,
                                          const WriteOptions& write_options)

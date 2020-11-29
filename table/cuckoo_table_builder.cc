@@ -24,7 +24,7 @@
 #include "util/random.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 const std::string CuckooTablePropertyNames::kEmptyKey =
       "rocksdb.cuckoo.bucket.empty.key";
 const std::string CuckooTablePropertyNames::kNumHashFunc =

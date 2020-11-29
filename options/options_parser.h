@@ -15,7 +15,7 @@
 #include "rocksdb/options.h"
 #include "table/block_based_table_factory.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 

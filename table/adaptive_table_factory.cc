@@ -9,7 +9,7 @@
 #include "table/format.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 AdaptiveTableFactory::AdaptiveTableFactory(
     std::shared_ptr<TableFactory> table_factory_to_write,

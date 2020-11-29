@@ -13,7 +13,7 @@
 
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 struct ColumnFamilyMetaData;
 struct LevelMetaData;
 struct SstFileMetaData;

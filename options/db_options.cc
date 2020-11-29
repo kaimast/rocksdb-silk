@@ -18,7 +18,7 @@
 #include "rocksdb/wal_filter.h"
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ImmutableDBOptions::ImmutableDBOptions() : ImmutableDBOptions(Options()) {}
 

@@ -8,7 +8,7 @@
 #include "rocksdb/utilities/ldb_cmd.h"
 #include "tools/ldb_cmd_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 LDBOptions::LDBOptions() {}
 

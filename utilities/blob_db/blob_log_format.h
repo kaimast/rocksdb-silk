@@ -18,7 +18,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 class BlobFile;
@@ -47,7 +47,7 @@ class Reader;
 
 typedef std::pair<uint32_t, uint32_t> ttlrange_t;
 typedef std::pair<uint64_t, uint64_t> tsrange_t;
-typedef std::pair<rocksdb::SequenceNumber, rocksdb::SequenceNumber> snrange_t;
+typedef std::pair<rocksdb_silk::SequenceNumber, rocksdb_silk::SequenceNumber> snrange_t;
 
 class BlobLogHeader {
   friend class BlobFile;

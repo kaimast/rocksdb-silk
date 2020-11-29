@@ -14,7 +14,7 @@
 #include "util/logging.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class FileNameTest : public testing::Test {};
 

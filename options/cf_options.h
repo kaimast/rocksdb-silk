@@ -13,7 +13,7 @@
 #include "rocksdb/options.h"
 #include "util/compression.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // ImmutableCFOptions is a data struct used by RocksDB internal. It contains a
 // subset of Options that should not be changed during the entire lifetime

@@ -98,7 +98,7 @@
 #include <stdint.h>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class HyperLogLog {
  public:

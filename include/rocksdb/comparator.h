@@ -11,7 +11,7 @@
 
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 

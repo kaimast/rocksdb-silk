@@ -34,7 +34,7 @@
 #include "util/autovector.h"
 #include "util/compression.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ColumnFamilyHandleImpl::ColumnFamilyHandleImpl(
     ColumnFamilyData* column_family_data, DBImpl* db, InstrumentedMutex* mutex)

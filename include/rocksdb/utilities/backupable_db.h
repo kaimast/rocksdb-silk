@@ -25,7 +25,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct BackupableDBOptions {
   // Where to keep the backup files. Has to be different than dbname_

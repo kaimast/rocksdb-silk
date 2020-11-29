@@ -17,7 +17,7 @@
 
 #include <time.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace port {
 

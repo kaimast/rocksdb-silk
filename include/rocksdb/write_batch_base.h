@@ -10,7 +10,7 @@
 
 #include <cstddef>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class Status;

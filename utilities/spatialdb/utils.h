@@ -9,7 +9,7 @@
 
 #include "rocksdb/utilities/spatial_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace spatial {
 
 // indexing idea from http://msdn.microsoft.com/en-us/library/bb259689.aspx

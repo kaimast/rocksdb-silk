@@ -17,7 +17,7 @@
 
 class ColumnFamilyData;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MemTableList;
 class DBImpl;

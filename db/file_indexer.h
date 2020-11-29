@@ -16,7 +16,7 @@
 #include "util/arena.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Comparator;
 struct FileMetaData;
@@ -60,7 +60,7 @@ class FileIndexer {
 
   enum {
     // MSVC version 1800 still does not have constexpr for ::max()
-    kLevelMaxIndex = rocksdb::port::kMaxInt32
+    kLevelMaxIndex = rocksdb_silk::port::kMaxInt32
   };
 
  private:

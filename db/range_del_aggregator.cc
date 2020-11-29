@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 RangeDelAggregator::RangeDelAggregator(
     const InternalKeyComparator& icmp,

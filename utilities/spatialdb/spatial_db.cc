@@ -33,7 +33,7 @@
 #include "utilities/spatialdb/utils.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace spatial {
 
 // Column families are used to store element's data and spatial indexes. We use

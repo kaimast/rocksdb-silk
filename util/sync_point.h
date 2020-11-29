@@ -25,7 +25,7 @@ extern std::vector<std::string> rocksdb_kill_prefix_blacklist;
 #define TEST_KILL_RANDOM(kill_point, rocksdb_kill_odds)
 #else
 
-namespace rocksdb {
+namespace rocksdb_silk {
 // Kill the process with probablity 1/odds for testing.
 extern void TestKillRandom(std::string kill_point, int odds,
                            const std::string& srcfile, int srcline);
@@ -49,7 +49,7 @@ extern void TestKillRandom(std::string kill_point, int odds,
 #define TEST_SYNC_POINT_CALLBACK(x, y)
 #else
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // This class provides facility to reproduce race conditions deterministically
 // in unit tests.
@@ -134,7 +134,7 @@ class SyncPoint {
 // utilized to re-produce race conditions between threads.
 // See TransactionLogIteratorRace in db_test.cc for an example use case.
 // TEST_SYNC_POINT is no op in release build.
-#define TEST_SYNC_POINT(x) rocksdb::SyncPoint::GetInstance()->Process(x)
+#define TEST_SYNC_POINT(x) rocksdb_silk::SyncPoint::GetInstance()->Process(x)
 #define TEST_SYNC_POINT_CALLBACK(x, y) \
-  rocksdb::SyncPoint::GetInstance()->Process(x, y)
+  rocksdb_silk::SyncPoint::GetInstance()->Process(x, y)
 #endif  // NDEBUG

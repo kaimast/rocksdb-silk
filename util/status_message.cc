@@ -5,7 +5,7 @@
 
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const char* Status::msgs[] = {
     "",                                                   // kNone

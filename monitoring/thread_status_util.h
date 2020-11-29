@@ -12,7 +12,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/thread_status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnFamilyData;
 

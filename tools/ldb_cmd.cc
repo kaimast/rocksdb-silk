@@ -45,7 +45,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const std::string LDBCommand::ARG_DB = "db";
 const std::string LDBCommand::ARG_PATH = "path";
@@ -1582,7 +1582,7 @@ std::vector<std::string> ReduceDBLevelsCommand::PrepareArgs(
   std::vector<std::string> ret;
   ret.push_back("reduce_levels");
   ret.push_back("--" + ARG_DB + "=" + db_path);
-  ret.push_back("--" + ARG_NEW_LEVELS + "=" + rocksdb::ToString(new_levels));
+  ret.push_back("--" + ARG_NEW_LEVELS + "=" + rocksdb_silk::ToString(new_levels));
   if(print_old_level) {
     ret.push_back("--" + ARG_PRINT_OLD_LEVELS);
   }
@@ -2794,7 +2794,7 @@ void DumpSstFile(std::string filename, bool output_hex, bool show_properties) {
     return;
   }
   // no verification
-  rocksdb::SstFileReader reader(filename, false, output_hex);
+  rocksdb_silk::SstFileReader reader(filename, false, output_hex);
   Status st = reader.ReadSequential(true, -1, false,  // has_from
                                     from_key, false,  // has_to
                                     to_key);
@@ -2805,9 +2805,9 @@ void DumpSstFile(std::string filename, bool output_hex, bool show_properties) {
   }
 
   if (show_properties) {
-    const rocksdb::TableProperties* table_properties;
+    const rocksdb_silk::TableProperties* table_properties;
 
-    std::shared_ptr<const rocksdb::TableProperties>
+    std::shared_ptr<const rocksdb_silk::TableProperties>
         table_properties_from_reader;
     st = reader.ReadTableProperties(&table_properties_from_reader);
     if (!st.ok()) {
@@ -2821,7 +2821,7 @@ void DumpSstFile(std::string filename, bool output_hex, bool show_properties) {
       std::cout << std::endl << "Table Properties:" << std::endl;
       std::cout << table_properties->ToString("\n") << std::endl;
       std::cout << "# deleted keys: "
-                << rocksdb::GetDeletedKeys(
+                << rocksdb_silk::GetDeletedKeys(
                        table_properties->user_collected_properties)
                 << std::endl;
     }
@@ -2881,7 +2881,7 @@ void DBFileDumperCommand::DoCommand() {
 
   std::cout << "Write Ahead Log Files" << std::endl;
   std::cout << "==============================" << std::endl;
-  rocksdb::VectorLogPtr wal_files;
+  rocksdb_silk::VectorLogPtr wal_files;
   s = db_->GetSortedWalFiles(wal_files);
   if (!s.ok()) {
     std::cerr << "Error when getting WAL files" << std::endl;

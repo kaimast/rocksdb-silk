@@ -8,7 +8,7 @@
 #include "util/event_logger.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class EventLoggerTest : public testing::Test {};
 

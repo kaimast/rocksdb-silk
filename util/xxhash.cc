@@ -93,7 +93,7 @@ FORCE_INLINE void  XXH_free  (void* p)  { free(p); }
 FORCE_INLINE void* XXH_memcpy(void* dest, const void* src, size_t size) { return memcpy(dest,src,size); }
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 //**************************************
 // Basic Types
 //**************************************

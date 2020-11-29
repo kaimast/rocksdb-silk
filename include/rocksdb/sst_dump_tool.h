@@ -5,7 +5,7 @@
 #ifndef ROCKSDB_LITE
 #pragma once
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SSTDumpTool {
  public:

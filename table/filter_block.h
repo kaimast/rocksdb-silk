@@ -30,7 +30,7 @@
 #include "util/hash.h"
 #include "format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const uint64_t kNotValid = ULLONG_MAX;
 class FilterPolicy;

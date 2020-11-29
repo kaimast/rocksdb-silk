@@ -16,7 +16,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // For testing: emit an array with one hash value per key
 class TestHashFilter : public FilterPolicy {

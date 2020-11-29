@@ -13,7 +13,7 @@
 
 #include <rados/librados.hpp>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class LibradosWritableFile;
 
 class EnvLibrados : public EnvWrapper {

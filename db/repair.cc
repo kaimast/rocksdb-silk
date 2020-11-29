@@ -85,7 +85,7 @@
 #include "util/filename.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

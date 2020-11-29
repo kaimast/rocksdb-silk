@@ -13,7 +13,7 @@
 #include "util/coding.h"
 #include "util/filename.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void DBWithTTLImpl::SanitizeOptions(int32_t ttl, ColumnFamilyOptions* options,
                                     Env* env) {

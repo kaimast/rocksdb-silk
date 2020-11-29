@@ -15,7 +15,7 @@
 #include "options/cf_options.h"
 #include "table/block_based_table_reader.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct ColDeclaration;
 struct KVPairColDeclarations;

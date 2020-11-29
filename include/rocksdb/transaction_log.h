@@ -12,7 +12,7 @@
 #include <memory>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LogFile;
 typedef std::vector<std::unique_ptr<LogFile>> VectorLogPtr;

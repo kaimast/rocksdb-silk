@@ -12,7 +12,7 @@
 #include "rocksdb/utilities/optimistic_transaction_db.h"
 #include "rocksdb/utilities/transaction_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DB;
 class Random64;

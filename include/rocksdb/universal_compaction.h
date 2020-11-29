@@ -10,7 +10,7 @@
 #include <climits>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // Algorithm used to make a compaction request stop picking new files

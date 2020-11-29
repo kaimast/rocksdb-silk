@@ -15,7 +15,7 @@
 
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 /**
  * Keep adding ticker's here.

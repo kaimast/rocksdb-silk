@@ -9,7 +9,7 @@
 #include "env/mock_env.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class EnvMirrorTest : public testing::Test {
  public:

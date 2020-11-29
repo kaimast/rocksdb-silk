@@ -65,7 +65,7 @@
 
 #if !defined(IOS_CROSS_COMPILE)
 #ifndef ROCKSDB_LITE
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static std::string RandomString(Random* rnd, int len, double ratio) {
   std::string r;
@@ -114,9 +114,9 @@ class CompactionJobStatsTest : public testing::Test,
   }
 
   ~CompactionJobStatsTest() {
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-    rocksdb::SyncPoint::GetInstance()->LoadDependency({});
-    rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({});
+    rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
     Close();
     Options options;
     options.db_paths.emplace_back(dbname_, 0);
@@ -805,7 +805,7 @@ TEST_P(CompactionJobStatsTest, CompactionJobStatsTest) {
 
     stats_checker->set_verify_next_comp_io_stats(true);
     std::atomic<bool> first_prepare_write(true);
-    rocksdb::SyncPoint::GetInstance()->SetCallBack(
+    rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
         "WritableFileWriter::Append:BeforePrepareWrite", [&](void* arg) {
           if (first_prepare_write.load()) {
             options.env->SleepForMicroseconds(3);
@@ -814,7 +814,7 @@ TEST_P(CompactionJobStatsTest, CompactionJobStatsTest) {
         });
 
     std::atomic<bool> first_flush(true);
-    rocksdb::SyncPoint::GetInstance()->SetCallBack(
+    rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
         "WritableFileWriter::Flush:BeforeAppend", [&](void* arg) {
           if (first_flush.load()) {
             options.env->SleepForMicroseconds(3);
@@ -823,7 +823,7 @@ TEST_P(CompactionJobStatsTest, CompactionJobStatsTest) {
         });
 
     std::atomic<bool> first_sync(true);
-    rocksdb::SyncPoint::GetInstance()->SetCallBack(
+    rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
         "WritableFileWriter::SyncInternal:0", [&](void* arg) {
           if (first_sync.load()) {
             options.env->SleepForMicroseconds(3);
@@ -832,14 +832,14 @@ TEST_P(CompactionJobStatsTest, CompactionJobStatsTest) {
         });
 
     std::atomic<bool> first_range_sync(true);
-    rocksdb::SyncPoint::GetInstance()->SetCallBack(
+    rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
         "WritableFileWriter::RangeSync:0", [&](void* arg) {
           if (first_range_sync.load()) {
             options.env->SleepForMicroseconds(3);
             first_range_sync.store(false);
           }
         });
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
     Compact(1, smallest_key, largest_key);
 
@@ -848,7 +848,7 @@ TEST_P(CompactionJobStatsTest, CompactionJobStatsTest) {
     ASSERT_TRUE(!first_flush.load());
     ASSERT_TRUE(!first_sync.load());
     ASSERT_TRUE(!first_range_sync.load());
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   }
   ASSERT_EQ(stats_checker->NumberOfUnverifiedStats(), 0U);
 }
@@ -1026,7 +1026,7 @@ INSTANTIATE_TEST_CASE_P(CompactionJobStatsTest, CompactionJobStatsTest,
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

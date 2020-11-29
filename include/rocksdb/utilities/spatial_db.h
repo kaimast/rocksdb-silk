@@ -13,7 +13,7 @@
 #include "rocksdb/slice.h"
 #include "rocksdb/utilities/stackable_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace spatial {
 
 // NOTE: SpatialDB is experimental and we might change its API without warning.

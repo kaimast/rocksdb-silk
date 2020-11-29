@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <cstdio>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::shared_ptr<Statistics> CreateDBStatistics() {
   return std::make_shared<StatisticsImpl>(nullptr, false);

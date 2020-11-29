@@ -25,7 +25,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DeleteFileTest : public testing::Test {
  public:
@@ -335,11 +335,11 @@ TEST_F(DeleteFileTest, BackgroundPurgeTestMultipleJobs) {
   CheckFileTypeCounts(dbname_, 0, 5, 1);
 
   // ~DBImpl should wait until all BGWorkPurge are finished
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"DBImpl::~DBImpl:WaitJob", "DBImpl::BGWorkPurge"},
        {"DeleteFileTest::GuardFinish",
         "DeleteFileTest::BackgroundPurgeTestMultipleJobs:DBClose"}});
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   delete itr1;
   env_->Schedule(&DeleteFileTest::DoSleep, this, Env::Priority::HIGH);
@@ -350,7 +350,7 @@ TEST_F(DeleteFileTest, BackgroundPurgeTestMultipleJobs) {
   TEST_SYNC_POINT("DeleteFileTest::BackgroundPurgeTestMultipleJobs:DBClose");
   // 1 sst after iterator deletion
   CheckFileTypeCounts(dbname_, 0, 1, 1);
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DeleteFileTest, DeleteFileWithIterator) {
@@ -430,8 +430,8 @@ TEST_F(DeleteFileTest, DeleteNonDefaultColumnFamily) {
   column_families.emplace_back();
   column_families.emplace_back("new_cf", ColumnFamilyOptions());
 
-  std::vector<rocksdb::ColumnFamilyHandle*> handles;
-  rocksdb::DB* db;
+  std::vector<rocksdb_silk::ColumnFamilyHandle*> handles;
+  rocksdb_silk::DB* db;
   ASSERT_OK(DB::Open(db_options, dbname_, column_families, &handles, &db));
 
   Random rnd(5);

@@ -12,7 +12,7 @@
 
 #include "db/compaction_picker.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class UniversalCompactionPicker : public CompactionPicker {
  public:
   UniversalCompactionPicker(const ImmutableCFOptions& ioptions,

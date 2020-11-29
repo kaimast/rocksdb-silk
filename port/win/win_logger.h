@@ -19,7 +19,7 @@
 #include <stdint.h>
 #include <windows.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Env;
 

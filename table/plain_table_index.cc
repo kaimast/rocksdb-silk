@@ -15,7 +15,7 @@
 #include "util/coding.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 inline uint32_t GetBucketIdFromHash(uint32_t hash, uint32_t num_buckets) {

@@ -81,7 +81,7 @@
 #define fdatasync fsync
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 // For use at db/file_indexer.h kLevelMaxIndex

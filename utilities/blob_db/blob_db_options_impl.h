@@ -9,7 +9,7 @@
 
 #include "utilities/blob_db/blob_db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 

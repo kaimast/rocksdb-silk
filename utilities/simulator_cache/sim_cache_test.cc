@@ -8,7 +8,7 @@
 #include "db/db_test_util.h"
 #include "port/stack_trace.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SimCacheTest : public DBTestBase {
  private:
@@ -34,7 +34,7 @@ class SimCacheTest : public DBTestBase {
     Options options = CurrentOptions();
     options.create_if_missing = true;
     // options.compression = kNoCompression;
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     options.table_factory.reset(new BlockBasedTableFactory(table_options));
     return options;
   }
@@ -141,7 +141,7 @@ TEST_F(SimCacheTest, SimCache) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

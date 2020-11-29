@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Define all public custom types here.
 

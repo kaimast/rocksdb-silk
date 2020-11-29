@@ -62,7 +62,7 @@
 #include "rocksdb/slice.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 
 // Identify the type of the column.

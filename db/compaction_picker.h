@@ -22,7 +22,7 @@
 #include "rocksdb/options.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LogBuffer;
 class Compaction;

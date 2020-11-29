@@ -10,7 +10,7 @@
 
 #include "rocksdb/utilities/env_mirror.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // An implementation of Env that mirrors all work over two backend
 // Env's.  This is useful for debugging purposes.

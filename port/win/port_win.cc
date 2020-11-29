@@ -28,7 +28,7 @@
 
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 void gettimeofday(struct timeval* tv, struct timezone* /* tz */) {
@@ -235,7 +235,7 @@ int GetMaxOpenFiles() { return -1; }
 
 #ifndef JEMALLOC_NON_INIT
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace port {
 

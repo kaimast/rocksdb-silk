@@ -18,7 +18,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/utilities/write_batch_with_index.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MergeContext;
 struct Options;

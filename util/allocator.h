@@ -15,7 +15,7 @@
 #include <cstddef>
 #include "rocksdb/write_buffer_manager.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Logger;
 

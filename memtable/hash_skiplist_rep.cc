@@ -18,7 +18,7 @@
 #include "db/memtable.h"
 #include "memtable/skiplist.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 
 class HashSkipListRep : public MemTableRep {

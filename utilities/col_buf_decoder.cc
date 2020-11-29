@@ -8,7 +8,7 @@
 #include <string>
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ColBufDecoder::~ColBufDecoder() {}
 

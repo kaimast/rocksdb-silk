@@ -12,7 +12,7 @@
 
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SnapshotList;
 

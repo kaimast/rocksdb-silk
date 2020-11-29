@@ -12,7 +12,7 @@
 #include "table/table_properties_internal.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const uint32_t TablePropertiesCollectorFactory::Context::kUnknownColumnFamily =
     port::kMaxInt32;
@@ -108,10 +108,10 @@ std::string TableProperties::ToString(
       prop_delim, kv_delim);
 
   AppendProperty(result, "column family ID",
-                 column_family_id == rocksdb::TablePropertiesCollectorFactory::
+                 column_family_id == rocksdb_silk::TablePropertiesCollectorFactory::
                                          Context::kUnknownColumnFamily
                      ? std::string("N/A")
-                     : rocksdb::ToString(column_family_id),
+                     : rocksdb_silk::ToString(column_family_id),
                  prop_delim, kv_delim);
   AppendProperty(
       result, "column family name",

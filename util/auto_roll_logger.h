@@ -16,7 +16,7 @@
 #include "util/mutexlock.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 // Rolls the log file by size and/or time

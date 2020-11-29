@@ -20,7 +20,7 @@
 #include "table/block_based_table_reader.h"
 #include "table/format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 BlockBasedTableFactory::BlockBasedTableFactory(
     const BlockBasedTableOptions& _table_options)

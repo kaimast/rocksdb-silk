@@ -32,7 +32,7 @@
 #undef DeleteFile
 #undef GetTickCount
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 // Currently not designed for inheritance but rather a replacement

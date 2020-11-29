@@ -18,7 +18,7 @@
 #include "rocksdb/utilities/lua/rocks_lua_compaction_filter.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class StopOnErrorLogger : public Logger {
  public:
@@ -51,13 +51,13 @@ class RocksLuaTest : public testing::Test {
       const std::string& db_path,
       std::unordered_map<std::string, std::string>* kvs,
       const int kNumFlushes = 5,
-      std::shared_ptr<rocksdb::lua::RocksLuaCompactionFilterFactory>*
+      std::shared_ptr<rocksdb_silk::lua::RocksLuaCompactionFilterFactory>*
           output_factory = nullptr) {
     const int kKeySize = 10;
     const int kValueSize = 50;
     const int kKeysPerFlush = 2;
     auto factory =
-        std::make_shared<rocksdb::lua::RocksLuaCompactionFilterFactory>(
+        std::make_shared<rocksdb_silk::lua::RocksLuaCompactionFilterFactory>(
             lua_opt);
     if (output_factory != nullptr) {
       *output_factory = factory;
@@ -376,19 +376,19 @@ TEST_F(RocksLuaTest, DynamicChangeScript) {
       "\n";
 
   std::unordered_map<std::string, std::string> kvs;
-  std::shared_ptr<rocksdb::lua::RocksLuaCompactionFilterFactory> factory;
+  std::shared_ptr<rocksdb_silk::lua::RocksLuaCompactionFilterFactory> factory;
   CreateDBWithLuaCompactionFilter(lua_opt, db_path, &kvs, 30, &factory);
   uint64_t count = 0;
   ASSERT_TRUE(db_->GetIntProperty(
-      rocksdb::DB::Properties::kNumEntriesActiveMemTable, &count));
+      rocksdb_silk::DB::Properties::kNumEntriesActiveMemTable, &count));
   ASSERT_EQ(count, 0);
   ASSERT_TRUE(db_->GetIntProperty(
-      rocksdb::DB::Properties::kNumEntriesImmMemTables, &count));
+      rocksdb_silk::DB::Properties::kNumEntriesImmMemTables, &count));
   ASSERT_EQ(count, 0);
 
   CompactRangeOptions cr_opt;
   cr_opt.bottommost_level_compaction =
-      rocksdb::BottommostLevelCompaction::kForce;
+      rocksdb_silk::BottommostLevelCompaction::kForce;
 
   // Issue full compaction and expect everything is in the DB.
   ASSERT_OK(db_->CompactRange(cr_opt, nullptr, nullptr));
@@ -476,7 +476,7 @@ TEST_F(RocksLuaTest, LuaConditionalTypeError) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

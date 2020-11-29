@@ -6,7 +6,7 @@
 
 #include "utilities/blob_db/blob_db_options_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 

@@ -30,7 +30,7 @@ DEFINE_int32(record_interval, 10000, "Interval between records (microSec)");
 DEFINE_int32(bytes_per_sync, 0, "bytes_per_sync parameter in EnvOptions");
 DEFINE_bool(enable_sync, false, "sync after each write.");
 
-namespace rocksdb {
+namespace rocksdb_silk {
 void RunBenchmark() {
   std::string file_name = test::TmpDir() + "/log_write_benchmark.log";
   Env* env = Env::Default();
@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
                   " [OPTIONS]...");
   ParseCommandLineFlags(&argc, &argv, true);
 
-  rocksdb::RunBenchmark();
+  rocksdb_silk::RunBenchmark();
   return 0;
 }
 

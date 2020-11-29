@@ -12,7 +12,7 @@
 #include <rocksdb/env.h>
 #include "port/win/env_win.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 // We choose to create this on the heap and using std::once for the following

@@ -21,7 +21,7 @@
 #include "db/version_set.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 Status DBImpl::SuggestCompactRange(ColumnFamilyHandle* column_family,

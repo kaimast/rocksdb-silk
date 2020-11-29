@@ -25,7 +25,7 @@
 // can still build
 #include <compressapi.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 namespace xpress {
 

@@ -13,7 +13,7 @@
 #include "rocksdb/slice.h"
 #include "rocksdb/slice_transform.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 char* EncodeVarint32(char* dst, uint32_t v) {
   // Operate on characters as unsigneds

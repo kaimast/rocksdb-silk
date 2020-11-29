@@ -16,7 +16,7 @@
 #ifdef USE_HDFS
 #include <hdfs.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Thrown during execution when there is an issue with the supplied
 // arguments.
@@ -238,7 +238,7 @@ class HdfsEnv : public Env {
 #else // USE_HDFS
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 static const Status notsup;
 

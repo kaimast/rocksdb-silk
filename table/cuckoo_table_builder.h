@@ -17,7 +17,7 @@
 #include "rocksdb/table_properties.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CuckooTableBuilder: public TableBuilder {
  public:

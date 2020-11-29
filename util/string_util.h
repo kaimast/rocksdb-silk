@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 

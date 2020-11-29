@@ -19,7 +19,7 @@
 #include "util/mutexlock.h"
 #include "util/random.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class GenericRateLimiter : public RateLimiter {
  public:

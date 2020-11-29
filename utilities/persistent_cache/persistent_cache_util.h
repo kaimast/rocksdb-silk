@@ -9,7 +9,7 @@
 
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // Simple synchronized queue implementation with the option of

@@ -26,7 +26,7 @@
 #include "util/sync_point.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class CheckpointTest : public testing::Test {
  protected:
   // Sequence of option configurations to try
@@ -59,9 +59,9 @@ class CheckpointTest : public testing::Test {
   }
 
   ~CheckpointTest() {
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-    rocksdb::SyncPoint::GetInstance()->LoadDependency({});
-    rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({});
+    rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
     Close();
     Options options;
     options.db_paths.emplace_back(dbname_, 0);
@@ -276,11 +276,11 @@ TEST_F(CheckpointTest, GetSnapshotLink) {
 TEST_F(CheckpointTest, CheckpointCF) {
   Options options = CurrentOptions();
   CreateAndReopenWithCF({"one", "two", "three", "four", "five"}, options);
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"CheckpointTest::CheckpointCF:2", "DBImpl::GetLiveFiles:2"},
        {"DBImpl::GetLiveFiles:1", "CheckpointTest::CheckpointCF:1"}});
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   ASSERT_OK(Put(0, "Default", "Default"));
   ASSERT_OK(Put(1, "one", "one"));
@@ -300,7 +300,7 @@ TEST_F(CheckpointTest, CheckpointCF) {
 
   Status s;
   // Take a snapshot
-  rocksdb::port::Thread t([&]() {
+  rocksdb_silk::port::Thread t([&]() {
     Checkpoint* checkpoint;
     ASSERT_OK(Checkpoint::Create(db_, &checkpoint));
     ASSERT_OK(checkpoint->CreateCheckpoint(snapshot_name));
@@ -315,7 +315,7 @@ TEST_F(CheckpointTest, CheckpointCF) {
   ASSERT_OK(Put(5, "five", "fifteen"));
   TEST_SYNC_POINT("CheckpointTest::CheckpointCF:2");
   t.join();
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   ASSERT_OK(Put(1, "one", "twentyone"));
   ASSERT_OK(Put(2, "two", "twentytwo"));
   ASSERT_OK(Put(3, "three", "twentythree"));
@@ -351,7 +351,7 @@ TEST_F(CheckpointTest, CheckpointCFNoFlush) {
   Options options = CurrentOptions();
   CreateAndReopenWithCF({"one", "two", "three", "four", "five"}, options);
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   ASSERT_OK(Put(0, "Default", "Default"));
   ASSERT_OK(Put(1, "one", "one"));
@@ -369,16 +369,16 @@ TEST_F(CheckpointTest, CheckpointCFNoFlush) {
 
   Status s;
   // Take a snapshot
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBImpl::BackgroundCallFlush:start", [&](void* arg) {
         // Flush should never trigger.
         FAIL();
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   Checkpoint* checkpoint;
   ASSERT_OK(Checkpoint::Create(db_, &checkpoint));
   ASSERT_OK(checkpoint->CreateCheckpoint(snapshot_name, 1000000));
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   delete checkpoint;
   ASSERT_OK(Put(1, "one", "two"));
@@ -421,7 +421,7 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing) {
   options.max_manifest_file_size = 0;  // always rollover manifest for file add
   Reopen(options);
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {// Get past the flush in the checkpoint thread before adding any keys to
        // the db so the checkpoint thread won't hit the WriteManifest
        // syncpoints.
@@ -433,9 +433,9 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing) {
         "VersionSet::LogAndApply:WriteManifest"},
        {"VersionSet::LogAndApply:WriteManifestDone",
         "CheckpointImpl::CreateCheckpoint:SavedLiveFiles2"}});
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
-  rocksdb::port::Thread t([&]() {
+  rocksdb_silk::port::Thread t([&]() {
     Checkpoint* checkpoint;
     ASSERT_OK(Checkpoint::Create(db_, &checkpoint));
     ASSERT_OK(checkpoint->CreateCheckpoint(kSnapshotName));
@@ -447,7 +447,7 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing) {
   ASSERT_OK(Flush());
   t.join();
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   DB* snapshotDB;
   // Successful Open() implies that CURRENT pointed to the manifest in the
@@ -512,13 +512,13 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing2PC) {
     }
     delete tx;
   }
-  rocksdb::SyncPoint::GetInstance()->LoadDependency(
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency(
       {{"CheckpointImpl::CreateCheckpoint:SavedLiveFiles1",
         "CheckpointTest::CurrentFileModifiedWhileCheckpointing2PC:PreCommit"},
        {"CheckpointTest::CurrentFileModifiedWhileCheckpointing2PC:PostCommit",
         "CheckpointImpl::CreateCheckpoint:SavedLiveFiles2"}});
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
-  rocksdb::port::Thread t([&]() {
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::port::Thread t([&]() {
     Checkpoint* checkpoint;
     ASSERT_OK(Checkpoint::Create(txdb, &checkpoint));
     ASSERT_OK(checkpoint->CreateCheckpoint(kSnapshotName));
@@ -532,7 +532,7 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing2PC) {
       "CheckpointTest::CurrentFileModifiedWhileCheckpointing2PC:PostCommit");
   t.join();
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 
   // No more than two logs files should exist.
   std::vector<std::string> files;
@@ -558,7 +558,7 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing2PC) {
       ColumnFamilyDescriptor("CFA", ColumnFamilyOptions()));
   column_families.push_back(
       ColumnFamilyDescriptor("CFB", ColumnFamilyOptions()));
-  std::vector<rocksdb::ColumnFamilyHandle*> cf_handles;
+  std::vector<rocksdb_silk::ColumnFamilyHandle*> cf_handles;
   ASSERT_OK(TransactionDB::Open(options, txn_db_options, kSnapshotName,
                                 column_families, &cf_handles, &snapshotDB));
   ASSERT_OK(snapshotDB->Get(read_options, "foo", &value));
@@ -579,7 +579,7 @@ TEST_F(CheckpointTest, CurrentFileModifiedWhileCheckpointing2PC) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

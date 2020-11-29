@@ -15,9 +15,9 @@
 #include "utilities/cassandra/merge_operator.h"
 #include "utilities/cassandra/test_utils.h"
 
-using namespace rocksdb;
+using namespace rocksdb_silk;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 
 // Path to the database on file system

@@ -18,7 +18,7 @@
 #include "include/rocksdb/env.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // HashTable<T, Hash, Equal>
 //

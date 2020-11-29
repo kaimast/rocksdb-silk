@@ -17,7 +17,7 @@
 
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 LRUHandleTable::LRUHandleTable() : list_(nullptr), length_(0), elems_(0) {
   Resize();

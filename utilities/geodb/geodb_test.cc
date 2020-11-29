@@ -9,7 +9,7 @@
 #include <cctype>
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class GeoDBTest : public testing::Test {
  public:

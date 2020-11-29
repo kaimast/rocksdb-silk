@@ -16,7 +16,7 @@
 #include "rocksdb/options.h"
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 // Constructs the DBOptions and ColumnFamilyDescriptors by loading the
 // latest RocksDB options file stored in the specified rocksdb database.
 //

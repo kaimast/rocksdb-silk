@@ -12,7 +12,7 @@
 
 #pragma once
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 namespace {
 const int64_t kCharMask = 0xFFLL;

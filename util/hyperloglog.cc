@@ -12,7 +12,7 @@
 
 using namespace std;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 HyperLogLog::HyperLogLog(int num_sharding_bits) :
   num_sharding_bits_(num_sharding_bits),

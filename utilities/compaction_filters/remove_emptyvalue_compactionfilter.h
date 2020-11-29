@@ -12,7 +12,7 @@
 #include "rocksdb/compaction_filter.h"
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class RemoveEmptyValueCompactionFilter : public CompactionFilter {
  public:

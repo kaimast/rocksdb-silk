@@ -12,7 +12,7 @@
 #include <cstring>
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const char* Status::CopyState(const char* state) {
   char* const result =

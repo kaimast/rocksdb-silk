@@ -12,7 +12,7 @@
 #include "monitoring/histogram.h"
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class HistogramWindowingImpl : public Histogram
 {

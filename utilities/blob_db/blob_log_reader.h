@@ -16,7 +16,7 @@
 #include "rocksdb/status.h"
 #include "utilities/blob_db/blob_log_format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class SequentialFileReader;
 class Logger;

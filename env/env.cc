@@ -17,7 +17,7 @@
 #include "util/arena.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Env::~Env() {
 }

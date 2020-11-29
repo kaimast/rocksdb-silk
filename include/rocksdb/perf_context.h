@@ -11,7 +11,7 @@
 
 #include "rocksdb/perf_level.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // A thread local context for gathering performance counter efficiently
 // and transparently.

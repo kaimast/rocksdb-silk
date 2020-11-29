@@ -39,7 +39,7 @@
 #include "util/stop_watch.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

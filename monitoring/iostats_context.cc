@@ -8,7 +8,7 @@
 #include "rocksdb/env.h"
 #include "util/thread_local.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_SUPPORT_THREAD_LOCAL
 __thread IOStatsContext iostats_context;

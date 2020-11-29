@@ -5,7 +5,7 @@
 
 #include "rocksdb/compaction_job_stats.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 

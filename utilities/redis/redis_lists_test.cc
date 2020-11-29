@@ -24,9 +24,9 @@
 #include "util/testharness.h"
 #include "util/random.h"
 
-using namespace rocksdb;
+using namespace rocksdb_silk;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class RedisListsTest : public testing::Test {
  public:
@@ -877,7 +877,7 @@ int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
   if (found_arg(argc, argv, "-m")) {
     bool destructive = found_arg(argc, argv, "-d");
-    return rocksdb::manual_redis_test(destructive);
+    return rocksdb_silk::manual_redis_test(destructive);
   } else {
     return RUN_ALL_TESTS();
   }

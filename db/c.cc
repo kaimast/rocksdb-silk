@@ -38,65 +38,65 @@
 #include "rocksdb/utilities/transaction_db.h"
 #include "rocksdb/utilities/checkpoint.h"
 
-using rocksdb::BytewiseComparator;
-using rocksdb::Cache;
-using rocksdb::ColumnFamilyDescriptor;
-using rocksdb::ColumnFamilyHandle;
-using rocksdb::ColumnFamilyOptions;
-using rocksdb::CompactionFilter;
-using rocksdb::CompactionFilterFactory;
-using rocksdb::CompactionFilterContext;
-using rocksdb::CompactionOptionsFIFO;
-using rocksdb::Comparator;
-using rocksdb::CompressionType;
-using rocksdb::WALRecoveryMode;
-using rocksdb::DB;
-using rocksdb::DBOptions;
-using rocksdb::DbPath;
-using rocksdb::Env;
-using rocksdb::EnvOptions;
-using rocksdb::InfoLogLevel;
-using rocksdb::FileLock;
-using rocksdb::FilterPolicy;
-using rocksdb::FlushOptions;
-using rocksdb::IngestExternalFileOptions;
-using rocksdb::Iterator;
-using rocksdb::Logger;
-using rocksdb::MergeOperator;
-using rocksdb::MergeOperators;
-using rocksdb::NewBloomFilterPolicy;
-using rocksdb::NewLRUCache;
-using rocksdb::Options;
-using rocksdb::BlockBasedTableOptions;
-using rocksdb::CuckooTableOptions;
-using rocksdb::RandomAccessFile;
-using rocksdb::Range;
-using rocksdb::ReadOptions;
-using rocksdb::SequentialFile;
-using rocksdb::Slice;
-using rocksdb::SliceParts;
-using rocksdb::SliceTransform;
-using rocksdb::Snapshot;
-using rocksdb::SstFileWriter;
-using rocksdb::Status;
-using rocksdb::WritableFile;
-using rocksdb::WriteBatch;
-using rocksdb::WriteBatchWithIndex;
-using rocksdb::WriteOptions;
-using rocksdb::LiveFileMetaData;
-using rocksdb::BackupEngine;
-using rocksdb::BackupableDBOptions;
-using rocksdb::BackupInfo;
-using rocksdb::RestoreOptions;
-using rocksdb::CompactRangeOptions;
-using rocksdb::RateLimiter;
-using rocksdb::NewGenericRateLimiter;
-using rocksdb::PinnableSlice;
-using rocksdb::TransactionDBOptions;
-using rocksdb::TransactionDB;
-using rocksdb::TransactionOptions;
-using rocksdb::Transaction;
-using rocksdb::Checkpoint;
+using rocksdb_silk::BytewiseComparator;
+using rocksdb_silk::Cache;
+using rocksdb_silk::ColumnFamilyDescriptor;
+using rocksdb_silk::ColumnFamilyHandle;
+using rocksdb_silk::ColumnFamilyOptions;
+using rocksdb_silk::CompactionFilter;
+using rocksdb_silk::CompactionFilterFactory;
+using rocksdb_silk::CompactionFilterContext;
+using rocksdb_silk::CompactionOptionsFIFO;
+using rocksdb_silk::Comparator;
+using rocksdb_silk::CompressionType;
+using rocksdb_silk::WALRecoveryMode;
+using rocksdb_silk::DB;
+using rocksdb_silk::DBOptions;
+using rocksdb_silk::DbPath;
+using rocksdb_silk::Env;
+using rocksdb_silk::EnvOptions;
+using rocksdb_silk::InfoLogLevel;
+using rocksdb_silk::FileLock;
+using rocksdb_silk::FilterPolicy;
+using rocksdb_silk::FlushOptions;
+using rocksdb_silk::IngestExternalFileOptions;
+using rocksdb_silk::Iterator;
+using rocksdb_silk::Logger;
+using rocksdb_silk::MergeOperator;
+using rocksdb_silk::MergeOperators;
+using rocksdb_silk::NewBloomFilterPolicy;
+using rocksdb_silk::NewLRUCache;
+using rocksdb_silk::Options;
+using rocksdb_silk::BlockBasedTableOptions;
+using rocksdb_silk::CuckooTableOptions;
+using rocksdb_silk::RandomAccessFile;
+using rocksdb_silk::Range;
+using rocksdb_silk::ReadOptions;
+using rocksdb_silk::SequentialFile;
+using rocksdb_silk::Slice;
+using rocksdb_silk::SliceParts;
+using rocksdb_silk::SliceTransform;
+using rocksdb_silk::Snapshot;
+using rocksdb_silk::SstFileWriter;
+using rocksdb_silk::Status;
+using rocksdb_silk::WritableFile;
+using rocksdb_silk::WriteBatch;
+using rocksdb_silk::WriteBatchWithIndex;
+using rocksdb_silk::WriteOptions;
+using rocksdb_silk::LiveFileMetaData;
+using rocksdb_silk::BackupEngine;
+using rocksdb_silk::BackupableDBOptions;
+using rocksdb_silk::BackupInfo;
+using rocksdb_silk::RestoreOptions;
+using rocksdb_silk::CompactRangeOptions;
+using rocksdb_silk::RateLimiter;
+using rocksdb_silk::NewGenericRateLimiter;
+using rocksdb_silk::PinnableSlice;
+using rocksdb_silk::TransactionDBOptions;
+using rocksdb_silk::TransactionDB;
+using rocksdb_silk::TransactionOptions;
+using rocksdb_silk::Transaction;
+using rocksdb_silk::Checkpoint;
 
 using std::shared_ptr;
 
@@ -429,7 +429,7 @@ struct rocksdb_slicetransform_t : public SliceTransform {
 };
 
 struct rocksdb_universal_compaction_options_t {
-  rocksdb::CompactionOptionsUniversal *rep;
+  rocksdb_silk::CompactionOptionsUniversal *rep;
 };
 
 static bool SaveError(char** errptr, const Status& s) {
@@ -598,7 +598,7 @@ void rocksdb_close(rocksdb_t* db) {
 }
 
 void rocksdb_options_set_uint64add_merge_operator(rocksdb_options_t* opt) {
-  opt->rep.merge_operator = rocksdb::MergeOperators::CreateUInt64AddOperator();
+  opt->rep.merge_operator = rocksdb_silk::MergeOperators::CreateUInt64AddOperator();
 }
 
 rocksdb_t* rocksdb_open_column_families(
@@ -1878,7 +1878,7 @@ void rocksdb_options_set_block_based_table_factory(
     rocksdb_block_based_table_options_t* table_options) {
   if (table_options) {
     opt->rep.table_factory.reset(
-        rocksdb::NewBlockBasedTableFactory(table_options->rep));
+        rocksdb_silk::NewBlockBasedTableFactory(table_options->rep));
   }
 }
 
@@ -1923,7 +1923,7 @@ void rocksdb_options_set_cuckoo_table_factory(
     rocksdb_cuckoo_table_options_t* table_options) {
   if (table_options) {
     opt->rep.table_factory.reset(
-        rocksdb::NewCuckooTableFactory(table_options->rep));
+        rocksdb_silk::NewCuckooTableFactory(table_options->rep));
   }
 }
 
@@ -2099,7 +2099,7 @@ void rocksdb_options_set_max_bytes_for_level_multiplier_additional(
 }
 
 void rocksdb_options_enable_statistics(rocksdb_options_t* opt) {
-  opt->rep.statistics = rocksdb::CreateDBStatistics();
+  opt->rep.statistics = rocksdb_silk::CreateDBStatistics();
 }
 
 void rocksdb_options_set_num_levels(rocksdb_options_t* opt, int n) {
@@ -2233,16 +2233,16 @@ void rocksdb_options_set_access_hint_on_compaction_start(
     rocksdb_options_t* opt, int v) {
   switch(v) {
     case 0:
-      opt->rep.access_hint_on_compaction_start = rocksdb::Options::NONE;
+      opt->rep.access_hint_on_compaction_start = rocksdb_silk::Options::NONE;
       break;
     case 1:
-      opt->rep.access_hint_on_compaction_start = rocksdb::Options::NORMAL;
+      opt->rep.access_hint_on_compaction_start = rocksdb_silk::Options::NORMAL;
       break;
     case 2:
-      opt->rep.access_hint_on_compaction_start = rocksdb::Options::SEQUENTIAL;
+      opt->rep.access_hint_on_compaction_start = rocksdb_silk::Options::SEQUENTIAL;
       break;
     case 3:
-      opt->rep.access_hint_on_compaction_start = rocksdb::Options::WILLNEED;
+      opt->rep.access_hint_on_compaction_start = rocksdb_silk::Options::WILLNEED;
       break;
   }
 }
@@ -2374,7 +2374,7 @@ void rocksdb_options_prepare_for_bulk_load(rocksdb_options_t* opt) {
 }
 
 void rocksdb_options_set_memtable_vector_rep(rocksdb_options_t *opt) {
-  opt->rep.memtable_factory.reset(new rocksdb::VectorRepFactory);
+  opt->rep.memtable_factory.reset(new rocksdb_silk::VectorRepFactory);
 }
 
 void rocksdb_options_set_memtable_prefix_bloom_size_ratio(
@@ -2390,26 +2390,26 @@ void rocksdb_options_set_memtable_huge_page_size(rocksdb_options_t* opt,
 void rocksdb_options_set_hash_skip_list_rep(
     rocksdb_options_t *opt, size_t bucket_count,
     int32_t skiplist_height, int32_t skiplist_branching_factor) {
-  rocksdb::MemTableRepFactory* factory = rocksdb::NewHashSkipListRepFactory(
+  rocksdb_silk::MemTableRepFactory* factory = rocksdb_silk::NewHashSkipListRepFactory(
       bucket_count, skiplist_height, skiplist_branching_factor);
   opt->rep.memtable_factory.reset(factory);
 }
 
 void rocksdb_options_set_hash_link_list_rep(
     rocksdb_options_t *opt, size_t bucket_count) {
-  opt->rep.memtable_factory.reset(rocksdb::NewHashLinkListRepFactory(bucket_count));
+  opt->rep.memtable_factory.reset(rocksdb_silk::NewHashLinkListRepFactory(bucket_count));
 }
 
 void rocksdb_options_set_plain_table_factory(
     rocksdb_options_t *opt, uint32_t user_key_len, int bloom_bits_per_key,
     double hash_table_ratio, size_t index_sparseness) {
-  rocksdb::PlainTableOptions options;
+  rocksdb_silk::PlainTableOptions options;
   options.user_key_len = user_key_len;
   options.bloom_bits_per_key = bloom_bits_per_key;
   options.hash_table_ratio = hash_table_ratio;
   options.index_sparseness = index_sparseness;
 
-  rocksdb::TableFactory* factory = rocksdb::NewPlainTableFactory(options);
+  rocksdb_silk::TableFactory* factory = rocksdb_silk::NewPlainTableFactory(options);
   opt->rep.table_factory.reset(factory);
 }
 
@@ -2439,7 +2439,7 @@ void rocksdb_options_set_report_bg_io_stats(
 }
 
 void rocksdb_options_set_compaction_style(rocksdb_options_t *opt, int style) {
-  opt->rep.compaction_style = static_cast<rocksdb::CompactionStyle>(style);
+  opt->rep.compaction_style = static_cast<rocksdb_silk::CompactionStyle>(style);
 }
 
 void rocksdb_options_set_universal_compaction_options(rocksdb_options_t *opt, rocksdb_universal_compaction_options_t *uco) {
@@ -2453,7 +2453,7 @@ void rocksdb_options_set_fifo_compaction_options(
 }
 
 char *rocksdb_options_statistics_get_string(rocksdb_options_t *opt) {
-  rocksdb::Statistics *statistics = opt->rep.statistics.get();
+  rocksdb_silk::Statistics *statistics = opt->rep.statistics.get();
   if (statistics) {
     return strdup(statistics->ToString().c_str());
   }
@@ -2707,7 +2707,7 @@ void rocksdb_readoptions_set_iterate_upper_bound(
 
 void rocksdb_readoptions_set_read_tier(
     rocksdb_readoptions_t* opt, int v) {
-  opt->rep.read_tier = static_cast<rocksdb::ReadTier>(v);
+  opt->rep.read_tier = static_cast<rocksdb_silk::ReadTier>(v);
 }
 
 void rocksdb_readoptions_set_tailing(
@@ -2825,7 +2825,7 @@ rocksdb_env_t* rocksdb_create_default_env() {
 
 rocksdb_env_t* rocksdb_create_mem_env() {
   rocksdb_env_t* result = new rocksdb_env_t;
-  result->rep = rocksdb::NewMemEnv(Env::Default());
+  result->rep = rocksdb_silk::NewMemEnv(Env::Default());
   result->is_default = false;
   return result;
 }
@@ -3008,7 +3008,7 @@ rocksdb_slicetransform_t* rocksdb_slicetransform_create_fixed_prefix(size_t pref
     static void DoNothing(void*) { }
   };
   Wrapper* wrapper = new Wrapper;
-  wrapper->rep_ = rocksdb::NewFixedPrefixTransform(prefixLen);
+  wrapper->rep_ = rocksdb_silk::NewFixedPrefixTransform(prefixLen);
   wrapper->state_ = nullptr;
   wrapper->destructor_ = &Wrapper::DoNothing;
   return wrapper;
@@ -3029,7 +3029,7 @@ rocksdb_slicetransform_t* rocksdb_slicetransform_create_noop() {
     static void DoNothing(void*) { }
   };
   Wrapper* wrapper = new Wrapper;
-  wrapper->rep_ = rocksdb::NewNoopTransform();
+  wrapper->rep_ = rocksdb_silk::NewNoopTransform();
   wrapper->state_ = nullptr;
   wrapper->destructor_ = &Wrapper::DoNothing;
   return wrapper;
@@ -3037,7 +3037,7 @@ rocksdb_slicetransform_t* rocksdb_slicetransform_create_noop() {
 
 rocksdb_universal_compaction_options_t* rocksdb_universal_compaction_options_create() {
   rocksdb_universal_compaction_options_t* result = new rocksdb_universal_compaction_options_t;
-  result->rep = new rocksdb::CompactionOptionsUniversal;
+  result->rep = new rocksdb_silk::CompactionOptionsUniversal;
   return result;
 }
 
@@ -3068,7 +3068,7 @@ void rocksdb_universal_compaction_options_set_compression_size_percent(
 
 void rocksdb_universal_compaction_options_set_stop_style(
   rocksdb_universal_compaction_options_t* uco, int style) {
-  uco->rep->stop_style = static_cast<rocksdb::CompactionStopStyle>(style);
+  uco->rep->stop_style = static_cast<rocksdb_silk::CompactionStopStyle>(style);
 }
 
 void rocksdb_universal_compaction_options_destroy(
@@ -3098,7 +3098,7 @@ void rocksdb_options_set_min_level_to_compress(rocksdb_options_t* opt, int level
     assert(level <= opt->rep.num_levels);
     opt->rep.compression_per_level.resize(opt->rep.num_levels);
     for (int i = 0; i < level; i++) {
-      opt->rep.compression_per_level[i] = rocksdb::kNoCompression;
+      opt->rep.compression_per_level[i] = rocksdb_silk::kNoCompression;
     }
     for (int i = level; i < opt->rep.num_levels; i++) {
       opt->rep.compression_per_level[i] = opt->rep.compression;

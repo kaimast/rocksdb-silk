@@ -14,7 +14,7 @@
 #include "rocksdb/table_properties.h"
 #include "util/event_logger.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class EventHelpers {
  public:

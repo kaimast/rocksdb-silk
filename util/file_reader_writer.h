@@ -14,7 +14,7 @@
 #include "rocksdb/rate_limiter.h"
 #include "util/aligned_buffer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Statistics;
 class HistogramImpl;

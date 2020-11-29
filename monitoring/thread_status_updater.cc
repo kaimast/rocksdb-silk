@@ -9,7 +9,7 @@
 #include "rocksdb/env.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_USING_THREAD_STATUS
 

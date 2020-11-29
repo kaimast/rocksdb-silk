@@ -16,7 +16,7 @@
 #include "rocksdb/options.h"
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MemTable;
 class FlushScheduler;

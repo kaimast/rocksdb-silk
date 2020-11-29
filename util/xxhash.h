@@ -60,7 +60,7 @@ It depends on successfully passing SMHasher test set.
 #pragma once
 
 #if defined (__cplusplus)
-namespace rocksdb {
+namespace rocksdb_silk {
 #endif
 
 

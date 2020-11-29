@@ -19,7 +19,7 @@
 #include <windows.h>
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 std::string GetWindowsErrSz(DWORD err);

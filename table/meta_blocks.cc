@@ -17,7 +17,7 @@
 #include "table/table_properties_internal.h"
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 MetaIndexBuilder::MetaIndexBuilder()
     : meta_index_block_(new BlockBuilder(1 /* restart interval */)) {}

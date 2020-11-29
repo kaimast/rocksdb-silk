@@ -134,7 +134,7 @@ DEFINE_int64(seed, 0,
              "Seed base for random number generators. "
              "When 0 it is deterministic.");
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 struct CallbackVerifyArgs {

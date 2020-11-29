@@ -40,7 +40,7 @@
 
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 using std::dynamic_pointer_cast;
 
@@ -179,7 +179,7 @@ int SstFileReader::ShowAllCompressionSizes(size_t block_size) {
   ReadOptions read_options;
   Options opts;
   const ImmutableCFOptions imoptions(opts);
-  rocksdb::InternalKeyComparator ikc(opts.comparator);
+  rocksdb_silk::InternalKeyComparator ikc(opts.comparator);
   std::vector<std::unique_ptr<IntTblPropCollectorFactory> >
       block_based_table_factories;
 
@@ -219,7 +219,7 @@ Status SstFileReader::ReadTableProperties(uint64_t table_magic_number,
                                           RandomAccessFileReader* file,
                                           uint64_t file_size) {
   TableProperties* table_properties = nullptr;
-  Status s = rocksdb::ReadTableProperties(file, file_size, table_magic_number,
+  Status s = rocksdb_silk::ReadTableProperties(file, file_size, table_magic_number,
                                           ioptions_, &table_properties);
   if (s.ok()) {
     table_properties_.reset(table_properties);
@@ -469,14 +469,14 @@ int SSTDumpTool::Run(int argc, char** argv) {
     } else if (strncmp(argv[i], "--parse_internal_key=", 21) == 0) {
       std::string in_key(argv[i] + 21);
       try {
-        in_key = rocksdb::LDBCommand::HexToString(in_key);
+        in_key = rocksdb_silk::LDBCommand::HexToString(in_key);
       } catch (...) {
         std::cerr << "ERROR: Invalid key input '"
           << in_key
           << "' Use 0x{hex representation of internal rocksdb key}" << std::endl;
         return -1;
       }
-      Slice sl_key = rocksdb::Slice(in_key);
+      Slice sl_key = rocksdb_silk::Slice(in_key);
       ParsedInternalKey ikey;
       int retc = 0;
       if (!ParseInternalKey(sl_key, &ikey)) {
@@ -500,10 +500,10 @@ int SSTDumpTool::Run(int argc, char** argv) {
 
   if (input_key_hex) {
     if (has_from || use_from_as_prefix) {
-      from_key = rocksdb::LDBCommand::HexToString(from_key);
+      from_key = rocksdb_silk::LDBCommand::HexToString(from_key);
     }
     if (has_to) {
-      to_key = rocksdb::LDBCommand::HexToString(to_key);
+      to_key = rocksdb_silk::LDBCommand::HexToString(to_key);
     }
   }
 
@@ -514,8 +514,8 @@ int SSTDumpTool::Run(int argc, char** argv) {
   }
 
   std::vector<std::string> filenames;
-  rocksdb::Env* env = rocksdb::Env::Default();
-  rocksdb::Status st = env->GetChildren(dir_or_file, &filenames);
+  rocksdb_silk::Env* env = rocksdb_silk::Env::Default();
+  rocksdb_silk::Status st = env->GetChildren(dir_or_file, &filenames);
   bool dir = true;
   if (!st.ok()) {
     filenames.clear();
@@ -524,8 +524,8 @@ int SSTDumpTool::Run(int argc, char** argv) {
   }
 
   fprintf(stdout, "from [%s] to [%s]\n",
-      rocksdb::Slice(from_key).ToString(true).c_str(),
-      rocksdb::Slice(to_key).ToString(true).c_str());
+      rocksdb_silk::Slice(from_key).ToString(true).c_str(),
+      rocksdb_silk::Slice(to_key).ToString(true).c_str());
 
   uint64_t total_read = 0;
   for (size_t i = 0; i < filenames.size(); i++) {
@@ -539,7 +539,7 @@ int SSTDumpTool::Run(int argc, char** argv) {
       filename = std::string(dir_or_file) + "/" + filename;
     }
 
-    rocksdb::SstFileReader reader(filename, verify_checksum,
+    rocksdb_silk::SstFileReader reader(filename, verify_checksum,
                                   output_hex);
     if (!reader.getStatus().ok()) {
       fprintf(stderr, "%s: %s\n", filename.c_str(),
@@ -587,9 +587,9 @@ int SSTDumpTool::Run(int argc, char** argv) {
     }
 
     if (show_properties || show_summary) {
-      const rocksdb::TableProperties* table_properties;
+      const rocksdb_silk::TableProperties* table_properties;
 
-      std::shared_ptr<const rocksdb::TableProperties>
+      std::shared_ptr<const rocksdb_silk::TableProperties>
           table_properties_from_reader;
       st = reader.ReadTableProperties(&table_properties_from_reader);
       if (!st.ok()) {
@@ -607,11 +607,11 @@ int SSTDumpTool::Run(int argc, char** argv) {
                   "  %s",
                   table_properties->ToString("\n  ", ": ").c_str());
           fprintf(stdout, "# deleted keys: %" PRIu64 "\n",
-                  rocksdb::GetDeletedKeys(
+                  rocksdb_silk::GetDeletedKeys(
                       table_properties->user_collected_properties));
 
           bool property_present;
-          uint64_t merge_operands = rocksdb::GetMergeOperands(
+          uint64_t merge_operands = rocksdb_silk::GetMergeOperands(
               table_properties->user_collected_properties, &property_present);
           if (property_present) {
             fprintf(stdout, "  # merge operands: %" PRIu64 "\n",

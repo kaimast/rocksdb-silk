@@ -18,7 +18,7 @@
 #include "port/port.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 
 using namespace stl_wrappers;

@@ -17,7 +17,7 @@
 
 using std::unique_ptr;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 
 static const Comparator* comparator;

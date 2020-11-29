@@ -8,7 +8,7 @@
 #include "util/testutil.h"
 #include "utilities/merge_operators.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBRangeDelTest : public DBTestBase {
  public:
@@ -873,7 +873,7 @@ TEST_F(DBRangeDelTest, SubcompactionHasEmptyDedicatedRangeDelFile) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

@@ -7,7 +7,7 @@
 #include <string>
 #include <map>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class WriteBatch;
 

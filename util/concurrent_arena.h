@@ -26,7 +26,7 @@
 #define ROCKSDB_FIELD_UNUSED
 #endif  // __clang__
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Logger;
 

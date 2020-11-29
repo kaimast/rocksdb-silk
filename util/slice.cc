@@ -13,7 +13,7 @@
 #include "util/string_util.h"
 #include <stdio.h>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

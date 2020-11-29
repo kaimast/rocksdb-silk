@@ -22,7 +22,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/transaction_log.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Env;
 class Directory;

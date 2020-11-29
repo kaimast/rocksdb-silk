@@ -83,16 +83,16 @@ struct ShardState {
   Reader* reader;
   char pad2[128] __attribute__((__unused__));
   std::atomic<uint64_t> last_read{0};
-  std::unique_ptr<rocksdb::Iterator> it;
-  std::unique_ptr<rocksdb::Iterator> it_cacheonly;
+  std::unique_ptr<rocksdb_silk::Iterator> it;
+  std::unique_ptr<rocksdb_silk::Iterator> it_cacheonly;
   Key upper_bound;
-  rocksdb::Slice upper_bound_slice;
+  rocksdb_silk::Slice upper_bound_slice;
   char pad3[128] __attribute__((__unused__));
 };
 
 struct Reader {
  public:
-  explicit Reader(std::vector<ShardState>* shard_states, rocksdb::DB* db)
+  explicit Reader(std::vector<ShardState>* shard_states, rocksdb_silk::DB* db)
       : shard_states_(shard_states), db_(db) {
     sem_init(&sem_, 0, 0);
     thread_ = port::Thread(&Reader::run, this);
@@ -121,11 +121,11 @@ struct Reader {
     ShardState& state = (*shard_states_)[shard];
     if (!state.it) {
       // Initialize iterators
-      rocksdb::ReadOptions options;
+      rocksdb_silk::ReadOptions options;
       options.tailing = true;
       if (FLAGS_iterate_upper_bound) {
         state.upper_bound = Key(shard, std::numeric_limits<uint64_t>::max());
-        state.upper_bound_slice = rocksdb::Slice(
+        state.upper_bound_slice = rocksdb_silk::Slice(
             (const char*)&state.upper_bound, sizeof(state.upper_bound));
         options.iterate_upper_bound = &state.upper_bound_slice;
       }
@@ -133,13 +133,13 @@ struct Reader {
       state.it.reset(db_->NewIterator(options));
 
       if (FLAGS_cache_only_first) {
-        options.read_tier = rocksdb::ReadTier::kBlockCacheTier;
+        options.read_tier = rocksdb_silk::ReadTier::kBlockCacheTier;
         state.it_cacheonly.reset(db_->NewIterator(options));
       }
     }
 
     const uint64_t upto = state.last_written.load();
-    for (rocksdb::Iterator* it : {state.it_cacheonly.get(), state.it.get()}) {
+    for (rocksdb_silk::Iterator* it : {state.it_cacheonly.get(), state.it.get()}) {
       if (it == nullptr) {
         continue;
       }
@@ -150,7 +150,7 @@ struct Reader {
       for (uint64_t seq = state.last_read.load() + 1; seq <= upto; ++seq) {
         if (need_seek) {
           Key from(shard, state.last_read.load() + 1);
-          it->Seek(rocksdb::Slice((const char*)&from, sizeof(from)));
+          it->Seek(rocksdb_silk::Slice((const char*)&from, sizeof(from)));
           need_seek = false;
         } else {
           it->Next();
@@ -193,8 +193,8 @@ struct Reader {
  private:
   char pad1[128] __attribute__((__unused__));
   std::vector<ShardState>* shard_states_;
-  rocksdb::DB* db_;
-  rocksdb::port::Thread thread_;
+  rocksdb_silk::DB* db_;
+  rocksdb_silk::port::Thread thread_;
   sem_t sem_;
   std::mutex queue_mutex_;
   std::bitset<MAX_SHARDS + 1> shards_pending_set_;
@@ -204,7 +204,7 @@ struct Reader {
 };
 
 struct Writer {
-  explicit Writer(std::vector<ShardState>* shard_states, rocksdb::DB* db)
+  explicit Writer(std::vector<ShardState>* shard_states, rocksdb_silk::DB* db)
       : shard_states_(shard_states), db_(db) {}
 
   void start() { thread_ = port::Thread(&Writer::run, this); }
@@ -244,10 +244,10 @@ struct Writer {
         uint64_t seqno = state.last_written.load() + 1;
         Key key(shard, seqno);
         // fprintf(stderr, "Writing (%ld, %ld)\n", shard, seqno);
-        rocksdb::Status status =
-            db_->Put(rocksdb::WriteOptions(),
-                     rocksdb::Slice((const char*)&key, sizeof(key)),
-                     rocksdb::Slice(value));
+        rocksdb_silk::Status status =
+            db_->Put(rocksdb_silk::WriteOptions(),
+                     rocksdb_silk::Slice((const char*)&key, sizeof(key)),
+                     rocksdb_silk::Slice(value));
         assert(status.ok());
         state.last_written.store(seqno);
         state.reader->onWrite(shard);
@@ -263,13 +263,13 @@ struct Writer {
  private:
   char pad1[128] __attribute__((__unused__));
   std::vector<ShardState>* shard_states_;
-  rocksdb::DB* db_;
-  rocksdb::port::Thread thread_;
+  rocksdb_silk::DB* db_;
+  rocksdb_silk::port::Thread thread_;
   char pad2[128] __attribute__((__unused__));
 };
 
 struct StatsThread {
-  explicit StatsThread(rocksdb::DB* db)
+  explicit StatsThread(rocksdb_silk::DB* db)
       : db_(db), thread_(&StatsThread::run, this) {}
 
   void run() {
@@ -311,10 +311,10 @@ struct StatsThread {
   }
 
  private:
-  rocksdb::DB* db_;
+  rocksdb_silk::DB* db_;
   std::mutex cvm_;
   std::condition_variable cv_;
-  rocksdb::port::Thread thread_;
+  rocksdb_silk::port::Thread thread_;
   std::atomic<bool> done_{false};
 };
 
@@ -322,29 +322,29 @@ int main(int argc, char** argv) {
   GFLAGS::ParseCommandLineFlags(&argc, &argv, true);
 
   std::mt19937 rng{std::random_device()()};
-  rocksdb::Status status;
-  std::string path = rocksdb::test::TmpDir() + "/forward_iterator_test";
+  rocksdb_silk::Status status;
+  std::string path = rocksdb_silk::test::TmpDir() + "/forward_iterator_test";
   fprintf(stderr, "db path is %s\n", path.c_str());
-  rocksdb::Options options;
+  rocksdb_silk::Options options;
   options.create_if_missing = true;
-  options.compression = rocksdb::CompressionType::kNoCompression;
-  options.compaction_style = rocksdb::CompactionStyle::kCompactionStyleNone;
+  options.compression = rocksdb_silk::CompressionType::kNoCompression;
+  options.compaction_style = rocksdb_silk::CompactionStyle::kCompactionStyleNone;
   options.level0_slowdown_writes_trigger = 99999;
   options.level0_stop_writes_trigger = 99999;
   options.use_direct_io_for_flush_and_compaction = true;
   options.write_buffer_size = FLAGS_memtable_size;
-  rocksdb::BlockBasedTableOptions table_options;
-  table_options.block_cache = rocksdb::NewLRUCache(FLAGS_block_cache_size);
+  rocksdb_silk::BlockBasedTableOptions table_options;
+  table_options.block_cache = rocksdb_silk::NewLRUCache(FLAGS_block_cache_size);
   table_options.block_size = FLAGS_block_size;
   options.table_factory.reset(
-      rocksdb::NewBlockBasedTableFactory(table_options));
+      rocksdb_silk::NewBlockBasedTableFactory(table_options));
 
-  status = rocksdb::DestroyDB(path, options);
+  status = rocksdb_silk::DestroyDB(path, options);
   assert(status.ok());
-  rocksdb::DB* db_raw;
-  status = rocksdb::DB::Open(options, path, &db_raw);
+  rocksdb_silk::DB* db_raw;
+  status = rocksdb_silk::DB::Open(options, path, &db_raw);
   assert(status.ok());
-  std::unique_ptr<rocksdb::DB> db(db_raw);
+  std::unique_ptr<rocksdb_silk::DB> db(db_raw);
 
   std::vector<ShardState> shard_states(FLAGS_shards + 1);
   std::deque<Reader> readers;

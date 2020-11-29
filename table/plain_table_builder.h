@@ -17,7 +17,7 @@
 #include "table/plain_table_key_coding.h"
 #include "table/table_builder.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class BlockBuilder;
 class BlockHandle;

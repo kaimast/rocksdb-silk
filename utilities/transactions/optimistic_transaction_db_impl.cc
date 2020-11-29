@@ -16,7 +16,7 @@
 #include "rocksdb/utilities/optimistic_transaction_db.h"
 #include "utilities/transactions/optimistic_transaction_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Transaction* OptimisticTransactionDBImpl::BeginTransaction(
     const WriteOptions& write_options,

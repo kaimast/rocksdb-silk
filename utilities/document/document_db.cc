@@ -18,7 +18,7 @@
 #include "util/mutexlock.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // IMPORTANT NOTE: Secondary index column families should be very small and
 // generally fit in memory. Assume that accessing secondary index column

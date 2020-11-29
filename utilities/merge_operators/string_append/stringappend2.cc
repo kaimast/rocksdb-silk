@@ -13,7 +13,7 @@
 #include "rocksdb/merge_operator.h"
 #include "utilities/merge_operators.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Constructor: also specify the delimiter character.
 StringAppendTESTOperator::StringAppendTESTOperator(char delim_char)

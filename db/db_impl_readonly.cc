@@ -12,7 +12,7 @@
 #include "db/range_del_aggregator.h"
 #include "monitoring/perf_context_imp.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 

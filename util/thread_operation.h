@@ -17,7 +17,7 @@
 
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_USING_THREAD_STATUS
 

@@ -5,7 +5,7 @@
 
 #include "db/event_helpers.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 template<class T>

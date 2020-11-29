@@ -4,7 +4,7 @@
 //  (found in the LICENSE.Apache file in the root directory).
 //
 #pragma once
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 // Install a signal handler to print callstack on the following signals:

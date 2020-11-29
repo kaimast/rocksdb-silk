@@ -10,16 +10,16 @@
 #include "util/coding.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LockTest : public testing::Test {
  public:
   static LockTest* current_;
   std::string file_;
-  rocksdb::Env* env_;
+  rocksdb_silk::Env* env_;
 
   LockTest() : file_(test::TmpDir() + "/db_testlock_file"),
-               env_(rocksdb::Env::Default()) {
+               env_(rocksdb_silk::Env::Default()) {
     current_ = this;
   }
 

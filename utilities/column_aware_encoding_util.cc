@@ -31,7 +31,7 @@
 
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ColumnAwareEncodingReader::ColumnAwareEncodingReader(
     const std::string& file_path)

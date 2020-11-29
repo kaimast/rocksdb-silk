@@ -54,7 +54,7 @@
 #include "util/testutil.h"
 #include "utilities/merge_operators.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace anon {
 class AtomicCounter {

@@ -7,7 +7,7 @@
 
 #include <unordered_map>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Helper methods to estimate memroy usage by std containers.
 

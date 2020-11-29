@@ -16,7 +16,7 @@
 
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 

@@ -23,7 +23,7 @@
 #include "rocksdb/env.h"
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const std::string kNullptrString = "nullptr";
 

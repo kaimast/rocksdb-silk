@@ -12,7 +12,7 @@
 #include "rocksdb/db.h"
 #include "util/filename.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CheckpointImpl : public Checkpoint {
  public:

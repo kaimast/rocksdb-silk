@@ -23,7 +23,7 @@ extern "C" {
 #include "rocksdb/utilities/lua/rocks_lua_custom_library.h"
 #include "rocksdb/utilities/lua/rocks_lua_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace lua {
 
 struct RocksLuaCompactionFilterOptions {
@@ -156,7 +156,7 @@ class RocksLuaCompactionFilterFactory : public CompactionFilterFactory {
 
 // A wrapper class that invokes Lua script to perform CompactionFilter
 // functions.
-class RocksLuaCompactionFilter : public rocksdb::CompactionFilter {
+class RocksLuaCompactionFilter : public rocksdb_silk::CompactionFilter {
  public:
   explicit RocksLuaCompactionFilter(const RocksLuaCompactionFilterOptions& opt)
       : options_(opt),

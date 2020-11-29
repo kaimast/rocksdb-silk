@@ -11,7 +11,7 @@
 #include "rocksdb/env.h"
 #include "util/filename.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status GetInfoLogList(DB* db, std::vector<std::string>* info_log_list) {
   uint64_t number = 0;

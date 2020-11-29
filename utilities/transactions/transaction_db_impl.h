@@ -18,7 +18,7 @@
 #include "utilities/transactions/transaction_impl.h"
 #include "utilities/transactions/transaction_lock_mgr.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TransactionDBImpl : public TransactionDB {
  public:

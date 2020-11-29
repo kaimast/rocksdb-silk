@@ -20,7 +20,7 @@
 #define STORAGE_DECL static
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Random* Random::GetTLSInstance() {
   STORAGE_DECL Random* tls_instance;

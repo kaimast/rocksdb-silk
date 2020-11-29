@@ -44,7 +44,7 @@
 #include "port/port.h"
 #include "rocksdb/env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace log {
 class Writer;
@@ -243,7 +243,7 @@ class VersionStorageInfo {
     return files_[level];
   }
 
-  const rocksdb::LevelFilesBrief& LevelFilesBrief(int level) const {
+  const rocksdb_silk::LevelFilesBrief& LevelFilesBrief(int level) const {
     assert(level < static_cast<int>(level_files_brief_.size()));
     return level_files_brief_[level];
   }
@@ -365,7 +365,7 @@ class VersionStorageInfo {
   std::vector<uint64_t> level_max_bytes_;
 
   // A short brief metadata of files per level
-  autovector<rocksdb::LevelFilesBrief> level_files_brief_;
+  autovector<rocksdb_silk::LevelFilesBrief> level_files_brief_;
   FileIndexer file_indexer_;
   Arena arena_;  // Used to allocate space for file_levels_
 

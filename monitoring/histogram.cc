@@ -20,7 +20,7 @@
 
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 HistogramBucketMapper::HistogramBucketMapper()
     :

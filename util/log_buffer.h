@@ -11,7 +11,7 @@
 #include "port/sys_time.h"
 #include <ctime>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Logger;
 

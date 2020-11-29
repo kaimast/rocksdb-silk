@@ -39,7 +39,7 @@
 #include "db/dbformat.h"
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 BlockBuilder::BlockBuilder(int block_restart_interval, bool use_delta_encoding)
     : block_restart_interval_(block_restart_interval),

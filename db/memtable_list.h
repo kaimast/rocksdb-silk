@@ -23,7 +23,7 @@
 #include "util/filename.h"
 #include "util/log_buffer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnFamilyData;
 class InternalKeyComparator;

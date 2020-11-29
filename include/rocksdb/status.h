@@ -20,7 +20,7 @@
 #include <string>
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Status {
  public:

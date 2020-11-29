@@ -27,7 +27,7 @@
 
 #include "rocksdb/cleanable.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice {
  public:

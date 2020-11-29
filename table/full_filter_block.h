@@ -17,7 +17,7 @@
 #include "util/hash.h"
 #include "table/filter_block.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class FilterPolicy;
 class FilterBitsBuilder;

@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "monitoring/perf_level_imp.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_SUPPORT_THREAD_LOCAL
 __thread PerfLevel perf_level = kEnableCount;

@@ -10,7 +10,7 @@
 #include "table/format.h"
 #include "table/persistent_cache_options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct BlockContents;
 

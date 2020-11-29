@@ -9,7 +9,7 @@
 #undef FAILED
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class LDBCommandExecuteResult {
 public:

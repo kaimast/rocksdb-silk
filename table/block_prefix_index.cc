@@ -14,10 +14,10 @@
 #include "util/coding.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 inline uint32_t Hash(const Slice& s) {
-  return rocksdb::Hash(s.data(), s.size(), 0);
+  return rocksdb_silk::Hash(s.data(), s.size(), 0);
 }
 
 inline uint32_t PrefixToBucket(const Slice& prefix, uint32_t num_buckets) {

@@ -24,7 +24,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // TODO(icanadi) mock out VersionSet
 // TODO(icanadi) move other WalManager-specific tests from db_test here

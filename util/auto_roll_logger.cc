@@ -6,7 +6,7 @@
 #include "util/auto_roll_logger.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 // -- AutoRollLogger

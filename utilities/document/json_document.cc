@@ -139,7 +139,7 @@ void CreateObject(std::unique_ptr<char[]>* data, fbson::FbsonValue** value) {
 
 }  // namespace
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 
 // TODO(stash): find smth easier

@@ -12,7 +12,7 @@
 #include "table/iterator_wrapper.h"
 #include "util/arena.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Cleanable::Cleanable() {
   cleanup_.function = nullptr;

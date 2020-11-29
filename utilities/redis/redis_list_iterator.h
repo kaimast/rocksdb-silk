@@ -46,7 +46,7 @@
 #include "rocksdb/slice.h"
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 /// An abstraction over the "list" concept.
 /// All operations may throw a RedisListException

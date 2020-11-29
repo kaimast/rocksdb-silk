@@ -4,6 +4,6 @@
 //  (found in the LICENSE.Apache file in the root directory).
 #pragma once
 
-namespace rocksdb {
+namespace rocksdb_silk {
 int db_bench_tool(int argc, char** argv);
 }  // namespace rocksdb

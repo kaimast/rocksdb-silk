@@ -11,7 +11,7 @@
 
 #include "table/internal_iterator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // PinnedIteratorsManager will be notified whenever we need to pin an Iterator
 // and it will be responsible for deleting pinned Iterators when they are

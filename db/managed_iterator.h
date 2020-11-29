@@ -17,7 +17,7 @@
 #include "rocksdb/options.h"
 #include "util/arena.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBImpl;
 struct SuperVersion;

@@ -17,7 +17,7 @@
 #include "util/sst_file_manager_impl.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 DeleteScheduler::DeleteScheduler(Env* env, const std::string& trash_dir,
                                  int64_t rate_bytes_per_sec, Logger* info_log,

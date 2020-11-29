@@ -12,7 +12,7 @@ extern "C" {
 
 #include "rocksdb/compaction_filter.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace lua {
 
 const std::string kFilterFunctionName = "Filter";

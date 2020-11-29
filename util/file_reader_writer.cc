@@ -19,7 +19,7 @@
 #include "util/rate_limiter.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef NDEBUG
 namespace {

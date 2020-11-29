@@ -21,7 +21,7 @@
 #define ROCKSDB_DEPRECATED_FUNC __declspec(deprecated)
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Comparator;
 

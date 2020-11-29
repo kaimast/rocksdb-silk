@@ -15,7 +15,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CuckooTableDBTest : public testing::Test {
  private:
@@ -320,7 +320,7 @@ TEST_F(CuckooTableDBTest, AdaptiveTable) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  if (rocksdb::port::kLittleEndian) {
+  if (rocksdb_silk::port::kLittleEndian) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
   }

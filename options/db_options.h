@@ -10,7 +10,7 @@
 
 #include "rocksdb/options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct ImmutableDBOptions {
   ImmutableDBOptions();

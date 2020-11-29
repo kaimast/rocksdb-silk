@@ -11,7 +11,7 @@
 
 #include "env.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class EncryptionProvider;
 

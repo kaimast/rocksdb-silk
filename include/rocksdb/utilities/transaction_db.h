@@ -19,7 +19,7 @@
 //
 // See transaction.h and examples/transaction_example.cc
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class TransactionDBMutexFactory;
 

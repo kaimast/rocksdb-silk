@@ -9,7 +9,7 @@
 
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 void VolatileCacheTier::DeleteCacheData(VolatileCacheTier::CacheData* data) {
   assert(data);

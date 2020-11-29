@@ -17,7 +17,7 @@
 
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ShardedCache::ShardedCache(size_t capacity, int num_shard_bits,
                            bool strict_capacity_limit)

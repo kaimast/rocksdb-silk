@@ -13,7 +13,7 @@
 #include "rocksdb/sst_file_manager.h"
 #include "util/sst_file_manager_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBSSTTest : public DBTestBase {
  public:
@@ -230,13 +230,13 @@ TEST_F(DBSSTTest, DBWithSstFileManager) {
   int files_added = 0;
   int files_deleted = 0;
   int files_moved = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "SstFileManagerImpl::OnAddFile", [&](void* arg) { files_added++; });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "SstFileManagerImpl::OnDeleteFile", [&](void* arg) { files_deleted++; });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "SstFileManagerImpl::OnMoveFile", [&](void* arg) { files_moved++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   Options options = CurrentOptions();
   options.sst_file_manager = sst_file_manager;
@@ -284,21 +284,21 @@ TEST_F(DBSSTTest, DBWithSstFileManager) {
   ASSERT_EQ(sfm->GetTrackedFiles(), files_in_db);
   ASSERT_EQ(sfm->GetTotalSize(), total_files_size);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBSSTTest, RateLimitedDelete) {
   Destroy(last_options_);
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DBSSTTest::RateLimitedDelete:1",
        "DeleteScheduler::BackgroundEmptyTrash"},
   });
 
   std::vector<uint64_t> penalties;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::BackgroundEmptyTrash:Wait",
       [&](void* arg) { penalties.push_back(*(static_cast<uint64_t*>(arg))); });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "InstrumentedCondVar::TimedWaitInternal", [&](void* arg) {
         // Turn timed wait into a simulated sleep
         uint64_t* abs_time_us = static_cast<uint64_t*>(arg);
@@ -319,7 +319,7 @@ TEST_F(DBSSTTest, RateLimitedDelete) {
         *abs_time_us = static_cast<uint64_t>(real_cur_time);
       });
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   env_->no_slowdown_ = true;
   env_->time_elapse_only_sleep_ = true;
@@ -374,7 +374,7 @@ TEST_F(DBSSTTest, RateLimitedDelete) {
   ASSERT_GT(time_spent_deleting, expected_penlty * 0.9);
   ASSERT_LT(time_spent_deleting, expected_penlty * 1.1);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 // Create a DB with 2 db_paths, and generate multiple files in the 2
@@ -383,10 +383,10 @@ TEST_F(DBSSTTest, RateLimitedDelete) {
 // files in the second path were not.
 TEST_F(DBSSTTest, DeleteSchedulerMultipleDBPaths) {
   int bg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   Options options = CurrentOptions();
   options.disable_auto_compactions = true;
@@ -446,15 +446,15 @@ TEST_F(DBSSTTest, DeleteSchedulerMultipleDBPaths) {
   sfm->WaitForEmptyTrash();
   ASSERT_EQ(bg_delete_file, 8);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DBSSTTest, DestroyDBWithRateLimitedDelete) {
   int bg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   Status s;
   Options options = CurrentOptions();
@@ -530,7 +530,7 @@ TEST_F(DBSSTTest, DBWithMaxSpaceAllowedRandomized) {
   std::atomic<int> estimate_multiplier(1);
   int reached_max_space_on_flush = 0;
   int reached_max_space_on_compaction = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DBImpl::FlushMemTableToOutputFile:MaxAllowedSpaceReached",
       [&](void* arg) {
         Status* bg_error = static_cast<Status*>(arg);
@@ -544,7 +544,7 @@ TEST_F(DBSSTTest, DBWithMaxSpaceAllowedRandomized) {
         estimate_multiplier++;  // used in the main loop assert
       });
 
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "CompactionJob::FinishCompactionOutputFile:MaxAllowedSpaceReached",
       [&](void* arg) {
         bg_error_set = true;
@@ -557,8 +557,8 @@ TEST_F(DBSSTTest, DBWithMaxSpaceAllowedRandomized) {
     total_sst_files_size = 0;
     estimate_multiplier = 1;
     limit_mb_cb = limit_mb;
-    rocksdb::SyncPoint::GetInstance()->ClearTrace();
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
     std::shared_ptr<SstFileManager> sst_file_manager(NewSstFileManager(env_));
     auto sfm = static_cast<SstFileManagerImpl*>(sst_file_manager.get());
 
@@ -586,7 +586,7 @@ TEST_F(DBSSTTest, DBWithMaxSpaceAllowedRandomized) {
     }
     ASSERT_TRUE(bg_error_set);
     ASSERT_GE(total_sst_files_size, limit_mb * 1024 * 1024);
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   }
 
   ASSERT_GT(reached_max_space_on_flush, 0);
@@ -831,7 +831,7 @@ TEST_F(DBSSTTest, GetTotalSstFilesSizeVersionsFilesShared) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

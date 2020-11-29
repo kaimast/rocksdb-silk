@@ -9,7 +9,7 @@
 #include "db/db_test_util.h"
 #include "port/stack_trace.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBTestInPlaceUpdate : public DBTestBase {
  public:
@@ -73,7 +73,7 @@ TEST_F(DBTestInPlaceUpdate, InPlaceUpdateCallbackSmallerSize) {
     options.env = env_;
     options.write_buffer_size = 100000;
     options.inplace_callback =
-      rocksdb::DBTestInPlaceUpdate::updateInPlaceSmallerSize;
+      rocksdb_silk::DBTestInPlaceUpdate::updateInPlaceSmallerSize;
     options.allow_concurrent_memtable_write = false;
     Reopen(options);
     CreateAndReopenWithCF({"pikachu"}, options);
@@ -102,7 +102,7 @@ TEST_F(DBTestInPlaceUpdate, InPlaceUpdateCallbackSmallerVarintSize) {
     options.env = env_;
     options.write_buffer_size = 100000;
     options.inplace_callback =
-      rocksdb::DBTestInPlaceUpdate::updateInPlaceSmallerVarintSize;
+      rocksdb_silk::DBTestInPlaceUpdate::updateInPlaceSmallerVarintSize;
     options.allow_concurrent_memtable_write = false;
     Reopen(options);
     CreateAndReopenWithCF({"pikachu"}, options);
@@ -131,7 +131,7 @@ TEST_F(DBTestInPlaceUpdate, InPlaceUpdateCallbackLargeNewValue) {
     options.env = env_;
     options.write_buffer_size = 100000;
     options.inplace_callback =
-      rocksdb::DBTestInPlaceUpdate::updateInPlaceLargerSize;
+      rocksdb_silk::DBTestInPlaceUpdate::updateInPlaceLargerSize;
     options.allow_concurrent_memtable_write = false;
     Reopen(options);
     CreateAndReopenWithCF({"pikachu"}, options);
@@ -158,7 +158,7 @@ TEST_F(DBTestInPlaceUpdate, InPlaceUpdateCallbackNoAction) {
     options.env = env_;
     options.write_buffer_size = 100000;
     options.inplace_callback =
-        rocksdb::DBTestInPlaceUpdate::updateInPlaceNoAction;
+        rocksdb_silk::DBTestInPlaceUpdate::updateInPlaceNoAction;
     options.allow_concurrent_memtable_write = false;
     Reopen(options);
     CreateAndReopenWithCF({"pikachu"}, options);
@@ -171,7 +171,7 @@ TEST_F(DBTestInPlaceUpdate, InPlaceUpdateCallbackNoAction) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

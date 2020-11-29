@@ -20,7 +20,7 @@
 #include "util/string_util.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Conversions between numeric keys/values and the types expected by Cache.
 static std::string EncodeKey(int k) {

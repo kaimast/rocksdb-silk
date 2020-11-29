@@ -15,7 +15,7 @@
 #include "util/random.h"
 #include "util/rate_limiter.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MemFile {
  public:

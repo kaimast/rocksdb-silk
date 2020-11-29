@@ -24,7 +24,7 @@
 #include "util/arena.h"
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 const uint64_t CACHE_LINE_MASK = ~((uint64_t)CACHE_LINE_SIZE - 1);
 const uint32_t kInvalidIndex = std::numeric_limits<uint32_t>::max();

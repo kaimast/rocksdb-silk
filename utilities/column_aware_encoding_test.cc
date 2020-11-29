@@ -11,7 +11,7 @@
 #include "utilities/col_buf_decoder.h"
 #include "utilities/col_buf_encoder.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnAwareEncodingTest : public testing::Test {
  public:

@@ -25,7 +25,7 @@
 #include "util/mutexlock.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 Status DBImpl::DisableFileDeletions() {
   InstrumentedMutexLock l(&mutex_);

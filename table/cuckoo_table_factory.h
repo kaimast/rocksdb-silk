@@ -11,7 +11,7 @@
 #include "util/murmurhash.h"
 #include "rocksdb/options.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 const uint32_t kCuckooMurmurSeedMultiplier = 816922183;
 static inline uint64_t CuckooHash(

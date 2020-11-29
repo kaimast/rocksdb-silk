@@ -9,9 +9,9 @@
 #include "rocksdb/slice.h"
 #include "utilities/merge_operators.h"
 
-using rocksdb::Slice;
-using rocksdb::Logger;
-using rocksdb::MergeOperator;
+using rocksdb_silk::Slice;
+using rocksdb_silk::Logger;
+using rocksdb_silk::MergeOperator;
 
 namespace {  // anonymous namespace
 
@@ -67,7 +67,7 @@ class MaxOperator : public MergeOperator {
 
 }  // end of anonymous namespace
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::shared_ptr<MergeOperator> MergeOperators::CreateMaxOperator() {
   return std::make_shared<MaxOperator>();

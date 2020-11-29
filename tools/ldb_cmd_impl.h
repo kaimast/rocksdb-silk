@@ -12,7 +12,7 @@
 #include <utility>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class CompactorCommand : public LDBCommand {
  public:

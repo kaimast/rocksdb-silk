@@ -13,7 +13,7 @@
 #include "rocksdb/env.h"
 #include "util/log_buffer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class JSONWriter {
  public:

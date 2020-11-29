@@ -11,7 +11,7 @@
 #include "util/coding.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 uint32_t Hash(const char* data, size_t n, uint32_t seed) {
   // Similar to murmur hash

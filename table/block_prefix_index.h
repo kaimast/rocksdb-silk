@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include "rocksdb/status.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Comparator;
 class Iterator;

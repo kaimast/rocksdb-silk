@@ -20,7 +20,7 @@
 #include "rocksdb/status.h"
 #include "table/table_builder.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class BlockBuilder;
 class BlockHandle;

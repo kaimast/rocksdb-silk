@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <string>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 struct CompactionJobStats {
   CompactionJobStats() { Reset(); }
   void Reset();

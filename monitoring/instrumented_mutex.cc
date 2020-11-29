@@ -8,7 +8,7 @@
 #include "monitoring/thread_status_util.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace {
 bool ShouldReportToStats(Env* env, Statistics* stats) {
   return env != nullptr && stats != nullptr &&

@@ -12,7 +12,7 @@
 #include "rocksdb/utilities/stackable_db.h"
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Database with TTL support.
 //

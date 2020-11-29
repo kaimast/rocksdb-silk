@@ -11,7 +11,7 @@
 #include "rocksdb/sst_file_writer.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifndef ROCKSDB_LITE
 class ExternalSSTFileBasicTest : public DBTestBase {
@@ -522,12 +522,12 @@ TEST_F(ExternalSSTFileBasicTest, FadviseTrigger) {
   const int kNumKeys = 10000;
 
   size_t total_fadvised_bytes = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "SstFileWriter::Rep::InvalidatePageCache", [&](void* arg) {
         size_t fadvise_size = *(reinterpret_cast<size_t*>(arg));
         total_fadvised_bytes += fadvise_size;
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   std::unique_ptr<SstFileWriter> sst_file_writer;
 
@@ -554,7 +554,7 @@ TEST_F(ExternalSSTFileBasicTest, FadviseTrigger) {
   ASSERT_EQ(total_fadvised_bytes, sst_file_writer->FileSize());
   ASSERT_GT(total_fadvised_bytes, 0);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(ExternalSSTFileBasicTest, IngestionWithRangeDeletions) {
@@ -611,7 +611,7 @@ TEST_F(ExternalSSTFileBasicTest, IngestionWithRangeDeletions) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

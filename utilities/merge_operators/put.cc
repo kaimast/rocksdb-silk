@@ -8,7 +8,7 @@
 #include "rocksdb/merge_operator.h"
 #include "utilities/merge_operators.h"
 
-using namespace rocksdb;
+using namespace rocksdb_silk;
 
 namespace { // anonymous namespace
 
@@ -77,7 +77,7 @@ class PutOperatorV2 : public PutOperator {
 
 } // end of anonymous namespace
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::shared_ptr<MergeOperator> MergeOperators::CreateDeprecatedPutOperator() {
   return std::make_shared<PutOperator>();

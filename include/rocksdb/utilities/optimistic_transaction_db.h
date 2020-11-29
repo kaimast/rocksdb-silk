@@ -12,7 +12,7 @@
 #include "rocksdb/comparator.h"
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Transaction;
 

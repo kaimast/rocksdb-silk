@@ -22,7 +22,7 @@
 #include "util/string_util.h"
 #include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Usage:
 //     LevelIterator iter;

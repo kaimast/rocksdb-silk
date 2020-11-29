@@ -13,7 +13,7 @@
 
 #include "rocksdb/slice.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class Logger;

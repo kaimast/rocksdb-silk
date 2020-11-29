@@ -12,7 +12,7 @@
 #include "rocksdb/env.h"
 #include "table/iterator_wrapper.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 struct ReadOptions;
 class InternalKeyComparator;

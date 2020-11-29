@@ -16,7 +16,7 @@
 #include "rocksdb/cache.h"
 #include "util/hash.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Single cache shard interface.
 class CacheShard {

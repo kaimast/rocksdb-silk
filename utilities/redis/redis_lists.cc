@@ -31,8 +31,7 @@
 #include "rocksdb/slice.h"
 #include "util/coding.h"
 
-namespace rocksdb
-{
+namespace rocksdb_silk {
 
 /// Constructors
 

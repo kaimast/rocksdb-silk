@@ -18,7 +18,7 @@
 #include "table/block_builder.h"
 #include "table/format.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class BlockBuilder;
 class BlockHandle;

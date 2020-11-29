@@ -30,7 +30,7 @@
 // will reside on the same HDFS cluster.
 //
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 
@@ -597,7 +597,7 @@ Status NewHdfsEnv(Env** hdfs_env, const std::string& fsname) {
 #else // USE_HDFS
 
 // dummy placeholders used when HDFS is not available
-namespace rocksdb {
+namespace rocksdb_silk {
  Status HdfsEnv::NewSequentialFile(const std::string& fname,
                                    unique_ptr<SequentialFile>* result,
                                    const EnvOptions& options) {

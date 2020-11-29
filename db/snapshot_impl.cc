@@ -7,7 +7,7 @@
 
 #include "rocksdb/db.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 ManagedSnapshot::ManagedSnapshot(DB* db) : db_(db),
                                            snapshot_(db->GetSnapshot()) {}

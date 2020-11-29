@@ -12,7 +12,7 @@
 #include "rocksdb/memtablerep.h"
 #include "rocksdb/slice_transform.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBMemTableTest : public DBTestBase {
  public:
@@ -189,7 +189,7 @@ TEST_F(DBMemTableTest, ColumnFamilyId) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

@@ -30,7 +30,7 @@
 #include "util/mutexlock.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #if 0
 static void DumpInternalIter(Iterator* iter) {

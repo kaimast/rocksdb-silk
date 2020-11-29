@@ -13,7 +13,7 @@
 #include "db/version_edit.h"
 #include "rocksdb/comparator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 FileIndexer::FileIndexer(const Comparator* ucmp)
     : num_levels_(0), ucmp_(ucmp), level_rb_(nullptr) {}

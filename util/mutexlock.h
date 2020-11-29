@@ -14,7 +14,7 @@
 #include <thread>
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Helper class that locks a mutex on construction and unlocks the mutex when
 // the destructor of the MutexLock object is invoked.

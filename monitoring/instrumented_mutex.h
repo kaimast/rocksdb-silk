@@ -12,7 +12,7 @@
 #include "rocksdb/thread_status.h"
 #include "util/stop_watch.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class InstrumentedCondVar;
 
 // A wrapper class for port::Mutex that provides additional layer

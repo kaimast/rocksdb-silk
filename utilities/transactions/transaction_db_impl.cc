@@ -18,7 +18,7 @@
 #include "utilities/transactions/transaction_db_mutex_impl.h"
 #include "utilities/transactions/transaction_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 TransactionDBImpl::TransactionDBImpl(DB* db,
                                      const TransactionDBOptions& txn_db_options)

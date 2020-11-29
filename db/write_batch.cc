@@ -51,7 +51,7 @@
 #include "util/coding.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // anon namespace for file-local types
 namespace {

@@ -13,7 +13,7 @@
 #include "rocksdb/memtablerep.h"
 #include "rocksdb/universal_compaction.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Slice;
 class SliceTransform;

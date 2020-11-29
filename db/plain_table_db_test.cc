@@ -39,7 +39,7 @@
 
 using std::unique_ptr;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class PlainTableKeyDecoderTest : public testing::Test {};
 
 TEST_F(PlainTableKeyDecoderTest, ReadNonMmap) {

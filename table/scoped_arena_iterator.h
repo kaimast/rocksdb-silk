@@ -10,7 +10,7 @@
 #include "table/internal_iterator.h"
 #include "port/port.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 class ScopedArenaIterator {
 
   void reset(InternalIterator* iter) ROCKSDB_NOEXCEPT {

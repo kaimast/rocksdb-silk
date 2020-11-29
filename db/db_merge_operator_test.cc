@@ -10,7 +10,7 @@
 #include "port/stack_trace.h"
 #include "utilities/merge_operators.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Test merge operator functionality.
 class DBMergeOperatorTest : public DBTestBase {
@@ -350,8 +350,8 @@ TEST_P(MergeOperatorPinningTest, TailingIterator) {
     delete iter;
   };
 
-  rocksdb::port::Thread writer_thread(writer_func);
-  rocksdb::port::Thread reader_thread(reader_func);
+  rocksdb_silk::port::Thread writer_thread(writer_func);
+  rocksdb_silk::port::Thread reader_thread(reader_func);
 
   writer_thread.join();
   reader_thread.join();
@@ -361,7 +361,7 @@ TEST_P(MergeOperatorPinningTest, TailingIterator) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

@@ -9,7 +9,7 @@
 
 #include "rocksdb/table_properties.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // Creates a factory of a table property collector that marks a SST
 // file as need-compaction when it observe at least "D" deletion

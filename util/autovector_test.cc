@@ -17,7 +17,7 @@
 using std::cout;
 using std::endl;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class AutoVectorTest : public testing::Test {};
 const unsigned long kSize = 8;
@@ -205,7 +205,7 @@ std::vector<std::string> GetTestKeys(size_t size) {
 
   int index = 0;
   for (auto& key : keys) {
-    key = "item-" + rocksdb::ToString(index++);
+    key = "item-" + rocksdb_silk::ToString(index++);
   }
   return keys;
 }

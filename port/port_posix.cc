@@ -24,7 +24,7 @@
 #include <cstdlib>
 #include "util/logging.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 static int PthreadCall(const char* label, int result) {

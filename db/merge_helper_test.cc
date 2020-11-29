@@ -14,7 +14,7 @@
 #include "util/testutil.h"
 #include "utilities/merge_operators.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MergeHelperTest : public testing::Test {
  public:

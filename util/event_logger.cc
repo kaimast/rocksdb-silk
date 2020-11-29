@@ -17,7 +17,7 @@
 #include "util/logging.h"
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 
 EventLoggerStream::EventLoggerStream(Logger* logger)
@@ -50,7 +50,7 @@ void EventLogger::Log(Logger* logger, const JSONWriter& jwriter) {
 #ifdef ROCKSDB_PRINT_EVENTS_TO_STDOUT
   printf("%s\n", jwriter.Get().c_str());
 #else
-  rocksdb::Log(logger, "%s %s", Prefix(), jwriter.Get().c_str());
+  rocksdb_silk::Log(logger, "%s %s", Prefix(), jwriter.Get().c_str());
 #endif
 }
 
@@ -60,7 +60,7 @@ void EventLogger::LogToBuffer(
   printf("%s\n", jwriter.Get().c_str());
 #else
   assert(log_buffer);
-  rocksdb::LogToBuffer(log_buffer, "%s %s", Prefix(), jwriter.Get().c_str());
+  rocksdb_silk::LogToBuffer(log_buffer, "%s %s", Prefix(), jwriter.Get().c_str());
 #endif
 }
 

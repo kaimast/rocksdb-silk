@@ -9,7 +9,7 @@
 #include "db/version_set.h"
 #include "table/get_context.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 extern void MarkKeyMayExist(void* arg);
 extern bool SaveValue(void* arg, const ParsedInternalKey& parsed_key,

@@ -23,7 +23,7 @@
 
 #ifndef ROCKSDB_LITE
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DeleteSchedulerTest : public testing::Test {
  public:
@@ -35,9 +35,9 @@ class DeleteSchedulerTest : public testing::Test {
   }
 
   ~DeleteSchedulerTest() {
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
-    rocksdb::SyncPoint::GetInstance()->LoadDependency({});
-    rocksdb::SyncPoint::GetInstance()->ClearAllCallBacks();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({});
+    rocksdb_silk::SyncPoint::GetInstance()->ClearAllCallBacks();
     test::DestroyDir(env_, dummy_files_dir_);
   }
 
@@ -90,13 +90,13 @@ class DeleteSchedulerTest : public testing::Test {
 // 4- Verify that BackgroundEmptyTrash used to correct penlties for the files
 // 5- Make sure that all created files were completely deleted
 TEST_F(DeleteSchedulerTest, BasicRateLimiting) {
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DeleteSchedulerTest::BasicRateLimiting:1",
        "DeleteScheduler::BackgroundEmptyTrash"},
   });
 
   std::vector<uint64_t> penalties;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::BackgroundEmptyTrash:Wait",
       [&](void* arg) { penalties.push_back(*(static_cast<uint64_t*>(arg))); });
 
@@ -106,8 +106,8 @@ TEST_F(DeleteSchedulerTest, BasicRateLimiting) {
 
   for (size_t t = 0; t < delete_kbs_per_sec.size(); t++) {
     penalties.clear();
-    rocksdb::SyncPoint::GetInstance()->ClearTrace();
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
     DestroyAndCreateDir(dummy_files_dir_);
     rate_bytes_per_sec_ = delete_kbs_per_sec[t] * 1024;
@@ -145,7 +145,7 @@ TEST_F(DeleteSchedulerTest, BasicRateLimiting) {
     ASSERT_GT(time_spent_deleting, expected_penlty * 0.9);
 
     ASSERT_EQ(CountFilesInDir(trash_dir_), 0);
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   }
 }
 
@@ -157,13 +157,13 @@ TEST_F(DeleteSchedulerTest, BasicRateLimiting) {
 // 4- Verify that BackgroundEmptyTrash used to correct penlties for the files
 // 5- Make sure that all created files were completely deleted
 TEST_F(DeleteSchedulerTest, RateLimitingMultiThreaded) {
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DeleteSchedulerTest::RateLimitingMultiThreaded:1",
        "DeleteScheduler::BackgroundEmptyTrash"},
   });
 
   std::vector<uint64_t> penalties;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::BackgroundEmptyTrash:Wait",
       [&](void* arg) { penalties.push_back(*(static_cast<uint64_t*>(arg))); });
 
@@ -174,8 +174,8 @@ TEST_F(DeleteSchedulerTest, RateLimitingMultiThreaded) {
   std::vector<uint64_t> delete_kbs_per_sec = {512, 200, 100, 50, 25};
   for (size_t t = 0; t < delete_kbs_per_sec.size(); t++) {
     penalties.clear();
-    rocksdb::SyncPoint::GetInstance()->ClearTrace();
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
     DestroyAndCreateDir(dummy_files_dir_);
     rate_bytes_per_sec_ = delete_kbs_per_sec[t] * 1024;
@@ -228,7 +228,7 @@ TEST_F(DeleteSchedulerTest, RateLimitingMultiThreaded) {
 
     ASSERT_EQ(CountFilesInDir(dummy_files_dir_), 0);
     ASSERT_EQ(CountFilesInDir(trash_dir_), 0);
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   }
 }
 
@@ -237,11 +237,11 @@ TEST_F(DeleteSchedulerTest, RateLimitingMultiThreaded) {
 // move it to trash
 TEST_F(DeleteSchedulerTest, DisableRateLimiting) {
   int bg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 0;
   NewDeleteScheduler();
@@ -257,7 +257,7 @@ TEST_F(DeleteSchedulerTest, DisableRateLimiting) {
 
   ASSERT_EQ(bg_delete_file, 0);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 // Testing that moving files to trash with the same name is not a problem
@@ -267,11 +267,11 @@ TEST_F(DeleteSchedulerTest, DisableRateLimiting) {
 // --- Hold DeleteScheduler::BackgroundEmptyTrash ---
 // 4- Make sure that files are deleted from trash
 TEST_F(DeleteSchedulerTest, ConflictNames) {
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DeleteSchedulerTest::ConflictNames:1",
        "DeleteScheduler::BackgroundEmptyTrash"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 1024 * 1024;  // 1 Mb/sec
   NewDeleteScheduler();
@@ -293,7 +293,7 @@ TEST_F(DeleteSchedulerTest, ConflictNames) {
   auto bg_errors = delete_scheduler_->GetBackgroundErrors();
   ASSERT_EQ(bg_errors.size(), 0);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 // 1- Create 10 dummy files
@@ -303,11 +303,11 @@ TEST_F(DeleteSchedulerTest, ConflictNames) {
 // 4- Make sure that DeleteScheduler failed to delete the 10 files and
 //    reported 10 background errors
 TEST_F(DeleteSchedulerTest, BackgroundError) {
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DeleteSchedulerTest::BackgroundError:1",
        "DeleteScheduler::BackgroundEmptyTrash"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 1024 * 1024;  // 1 Mb/sec
   NewDeleteScheduler();
@@ -334,7 +334,7 @@ TEST_F(DeleteSchedulerTest, BackgroundError) {
   auto bg_errors = delete_scheduler_->GetBackgroundErrors();
   ASSERT_EQ(bg_errors.size(), 10);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 // 1- Create 10 dummy files
@@ -344,10 +344,10 @@ TEST_F(DeleteSchedulerTest, BackgroundError) {
 // 5- Repeat previous steps 5 times
 TEST_F(DeleteSchedulerTest, StartBGEmptyTrashMultipleTimes) {
   int bg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 1024 * 1024;  // 1 MB / sec
   NewDeleteScheduler();
@@ -369,7 +369,7 @@ TEST_F(DeleteSchedulerTest, StartBGEmptyTrashMultipleTimes) {
   }
 
   ASSERT_EQ(bg_delete_file, 50);
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 }
 
 // 1- Create a DeleteScheduler with very slow rate limit (1 Byte / sec)
@@ -379,10 +379,10 @@ TEST_F(DeleteSchedulerTest, StartBGEmptyTrashMultipleTimes) {
 //    DeleteScheduler background thread did not delete all files
 TEST_F(DeleteSchedulerTest, DestructorWithNonEmptyQueue) {
   int bg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 1;  // 1 Byte / sec
   NewDeleteScheduler();
@@ -399,7 +399,7 @@ TEST_F(DeleteSchedulerTest, DestructorWithNonEmptyQueue) {
   ASSERT_LT(bg_delete_file, 100);
   ASSERT_GT(CountFilesInDir(trash_dir_), 0);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 // 1- Delete the trash directory
@@ -408,10 +408,10 @@ TEST_F(DeleteSchedulerTest, DestructorWithNonEmptyQueue) {
 //    failed to move them to trash directory
 TEST_F(DeleteSchedulerTest, MoveToTrashError) {
   int bg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 1024;  // 1 Kb / sec
   NewDeleteScheduler();
@@ -427,28 +427,28 @@ TEST_F(DeleteSchedulerTest, MoveToTrashError) {
   ASSERT_EQ(CountFilesInDir(dummy_files_dir_), 0);
   ASSERT_EQ(bg_delete_file, 0);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 TEST_F(DeleteSchedulerTest, DISABLED_DynamicRateLimiting1) {
   std::vector<uint64_t> penalties;
   int bg_delete_file = 0;
   int fg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteFile",
       [&](void* arg) { fg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::BackgroundEmptyTrash:Wait",
       [&](void* arg) { penalties.push_back(*(static_cast<int*>(arg))); });
 
-  rocksdb::SyncPoint::GetInstance()->LoadDependency({
+  rocksdb_silk::SyncPoint::GetInstance()->LoadDependency({
       {"DeleteSchedulerTest::DynamicRateLimiting1:1",
        "DeleteScheduler::BackgroundEmptyTrash"},
   });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   rate_bytes_per_sec_ = 0;  // Disable rate limiting initially
   NewDeleteScheduler();
@@ -462,8 +462,8 @@ TEST_F(DeleteSchedulerTest, DISABLED_DynamicRateLimiting1) {
     penalties.clear();
     bg_delete_file = 0;
     fg_delete_file = 0;
-    rocksdb::SyncPoint::GetInstance()->ClearTrace();
-    rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->ClearTrace();
+    rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
     DestroyAndCreateDir(dummy_files_dir_);
     rate_bytes_per_sec_ = delete_kbs_per_sec[t] * 1024;
@@ -509,20 +509,20 @@ TEST_F(DeleteSchedulerTest, DISABLED_DynamicRateLimiting1) {
     }
 
     ASSERT_EQ(CountFilesInDir(trash_dir_), 0);
-    rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+    rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
   }
 }
 
 TEST_F(DeleteSchedulerTest, ImmediateDeleteOn25PercDBSize) {
   int bg_delete_file = 0;
   int fg_delete_file = 0;
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteTrashFile:DeleteFile",
       [&](void* arg) { bg_delete_file++; });
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "DeleteScheduler::DeleteFile", [&](void* arg) { fg_delete_file++; });
 
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
 
   int num_files = 100;  // 100 files
   uint64_t file_size = 1024 * 10; // 100 KB as a file size
@@ -545,7 +545,7 @@ TEST_F(DeleteSchedulerTest, ImmediateDeleteOn25PercDBSize) {
   // deleting new files immediately
   ASSERT_EQ(fg_delete_file, 74);
 
-  rocksdb::SyncPoint::GetInstance()->DisableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->DisableProcessing();
 }
 
 }  // namespace rocksdb

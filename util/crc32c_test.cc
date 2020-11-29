@@ -10,7 +10,7 @@
 #include "util/crc32c.h"
 #include "util/testharness.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace crc32c {
 
 class CRC { };

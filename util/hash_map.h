@@ -12,7 +12,7 @@
 
 #include "util/autovector.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // This is similar to std::unordered_map, except that it tries to avoid
 // allocating or deallocating memory as much as possible. With

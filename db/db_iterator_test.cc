@@ -15,7 +15,7 @@
 #include "rocksdb/iostats_context.h"
 #include "rocksdb/perf_context.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBIteratorTest : public DBTestBase {
  public:
@@ -91,7 +91,7 @@ TEST_F(DBIteratorTest, NonBlockingIteration) {
   do {
     ReadOptions non_blocking_opts, regular_opts;
     Options options = CurrentOptions();
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     non_blocking_opts.read_tier = kBlockCacheTier;
     CreateAndReopenWithCF({"pikachu"}, options);
     // write one kv to the database.
@@ -156,7 +156,7 @@ TEST_F(DBIteratorTest, ManagedNonBlockingIteration) {
   do {
     ReadOptions non_blocking_opts, regular_opts;
     Options options = CurrentOptions();
-    options.statistics = rocksdb::CreateDBStatistics();
+    options.statistics = rocksdb_silk::CreateDBStatistics();
     non_blocking_opts.read_tier = kBlockCacheTier;
     non_blocking_opts.managed = true;
     CreateAndReopenWithCF({"pikachu"}, options);
@@ -559,7 +559,7 @@ TEST_F(DBIteratorTest, IterReseek) {
   Options options = CurrentOptions(options_override);
   options.max_sequential_skip_in_iterations = 3;
   options.create_if_missing = true;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   DestroyAndReopen(options);
   CreateAndReopenWithCF({"pikachu"}, options);
 
@@ -1006,13 +1006,13 @@ TEST_F(DBIteratorTest, DBIteratorBoundTest) {
 TEST_F(DBIteratorTest, DBIteratorBoundOptimizationTest) {
   int upper_bound_hits = 0;
   Options options = CurrentOptions();
-  rocksdb::SyncPoint::GetInstance()->SetCallBack(
+  rocksdb_silk::SyncPoint::GetInstance()->SetCallBack(
       "BlockBasedTable::BlockEntryIteratorState::KeyReachedUpperBound",
       [&upper_bound_hits](void* arg) {
         assert(arg != nullptr);
         upper_bound_hits += (*static_cast<bool*>(arg) ? 1 : 0);
       });
-  rocksdb::SyncPoint::GetInstance()->EnableProcessing();
+  rocksdb_silk::SyncPoint::GetInstance()->EnableProcessing();
   options.env = env_;
   options.create_if_missing = true;
   options.prefix_extractor = nullptr;
@@ -1702,7 +1702,7 @@ TEST_F(DBIteratorTest, IterPrevKeyCrossingBlocksRandomized) {
 
 TEST_F(DBIteratorTest, IteratorWithLocalStatistics) {
   Options options = CurrentOptions();
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   DestroyAndReopen(options);
 
   Random rnd(301);
@@ -1789,7 +1789,7 @@ TEST_F(DBIteratorTest, ReadAhead) {
   options.env = env_;
   options.disable_auto_compactions = true;
   options.write_buffer_size = 4 << 20;
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   BlockBasedTableOptions table_options;
   table_options.block_size = 1024;
   table_options.no_block_cache = true;
@@ -1863,7 +1863,7 @@ TEST_F(DBIteratorTest, DBIteratorSkipRecentDuplicatesTest) {
   options.max_sequential_skip_in_iterations = 3;
   options.prefix_extractor = nullptr;
   options.write_buffer_size = 1 << 27;  // big enough to avoid flush
-  options.statistics = rocksdb::CreateDBStatistics();
+  options.statistics = rocksdb_silk::CreateDBStatistics();
   DestroyAndReopen(options);
 
   // Insert.
@@ -1971,7 +1971,7 @@ TEST_F(DBIteratorTest, Refresh) {
 }  // namespace rocksdb
 
 int main(int argc, char** argv) {
-  rocksdb::port::InstallStackTraceHandler();
+  rocksdb_silk::port::InstallStackTraceHandler();
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

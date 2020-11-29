@@ -22,7 +22,7 @@
 #include "util/filename.h"
 #include "utilities/blob_db/blob_db_impl.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace blob_db {
 port::Mutex listener_mutex;

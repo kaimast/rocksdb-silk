@@ -11,7 +11,7 @@
 
 #include "rocksdb/merge_operator.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class MergeOperators {
  public:

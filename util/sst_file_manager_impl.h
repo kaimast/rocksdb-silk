@@ -14,7 +14,7 @@
 #include "rocksdb/sst_file_manager.h"
 #include "util/delete_scheduler.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class Env;
 class Logger;

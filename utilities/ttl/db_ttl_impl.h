@@ -23,7 +23,7 @@
 #endif
 
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class DBWithTTLImpl : public DBWithTTL {
  public:

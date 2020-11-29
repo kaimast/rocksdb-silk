@@ -16,7 +16,7 @@
 #include "util/testharness.h"
 #include "util/testutil.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 std::map<uint64_t, Slice> slices;
 
@@ -66,7 +66,7 @@ class PartitionedFilterBlockTest : public testing::Test {
   uint64_t MaxFilterSize() {
     uint32_t dont_care1, dont_care2;
     int num_keys = sizeof(keys) / sizeof(*keys);
-    auto filter_bits_reader = dynamic_cast<rocksdb::FullFilterBitsBuilder*>(
+    auto filter_bits_reader = dynamic_cast<rocksdb_silk::FullFilterBitsBuilder*>(
         table_options_.filter_policy->GetFilterBitsBuilder());
     assert(filter_bits_reader);
     auto partition_size =

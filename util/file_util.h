@@ -11,7 +11,7 @@
 #include "rocksdb/status.h"
 #include "rocksdb/types.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 // use_fsync maps to options.use_fsync, which determines the way that
 // the file is synced after copying.
 extern Status CopyFile(Env* env, const std::string& source,

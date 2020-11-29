@@ -7,7 +7,7 @@
 
 #include "test_utils.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 const char kData[] = {'d', 'a', 't', 'a'};
 const char kExpiringData[] = {'e', 'd', 'a', 't', 'a'};

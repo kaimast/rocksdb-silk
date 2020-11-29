@@ -11,7 +11,7 @@
 #include "rocksdb/options.h"
 #include "util/filename.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 Status LoadOptionsFromFile(const std::string& file_name, Env* env,
                            DBOptions* db_options,
                            std::vector<ColumnFamilyDescriptor>* cf_descs,

@@ -12,7 +12,7 @@
 #include "db/db_impl.h"
 #include "monitoring/thread_status_updater.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 uint64_t DBImpl::TEST_GetLevel0TotalSize() {
   InstrumentedMutexLock l(&mutex_);

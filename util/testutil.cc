@@ -16,7 +16,7 @@
 #include "port/port.h"
 #include "util/file_reader_writer.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace test {
 
 Slice RandomString(Random* rnd, int len, std::string* dst) {

@@ -12,7 +12,7 @@
 #include "util/string_util.h"
 #include "util/thread_operation.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 #ifdef ROCKSDB_USING_THREAD_STATUS
 const std::string& ThreadStatus::GetThreadTypeName(

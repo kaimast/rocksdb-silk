@@ -38,7 +38,7 @@
 #include "util/murmurhash.h"
 #include "util/mutexlock.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 MemTableOptions::MemTableOptions(const ImmutableCFOptions& ioptions,
                                  const MutableCFOptions& mutable_cf_options)
@@ -122,7 +122,7 @@ size_t MemTable::ApproximateMemoryUsage() {
   autovector<size_t> usages = {arena_.ApproximateMemoryUsage(),
                                table_->ApproximateMemoryUsage(),
                                range_del_table_->ApproximateMemoryUsage(),
-                               rocksdb::ApproximateMemoryUsage(insert_hints_)};
+                               rocksdb_silk::ApproximateMemoryUsage(insert_hints_)};
   size_t total_usage = 0;
   for (size_t usage : usages) {
     // If usage + total_usage >= kMaxSizet, return kMaxSizet.

@@ -16,7 +16,7 @@
 #include "util/sync_point.h"
 #include "utilities/persistent_cache/block_cache_tier_file.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 //
 // BlockCacheImpl

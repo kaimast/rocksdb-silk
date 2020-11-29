@@ -18,7 +18,7 @@
 #endif
 #include "util/coding.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace crc32c {
 
 static const uint32_t table0_[256] = {

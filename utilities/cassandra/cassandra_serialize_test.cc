@@ -6,9 +6,9 @@
 #include "util/testharness.h"
 #include "utilities/cassandra/serialize.h"
 
-using namespace rocksdb::cassandra;
+using namespace rocksdb_silk::cassandra;
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace cassandra {
 
 TEST(SerializeTest, SerializeI64) {

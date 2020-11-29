@@ -41,7 +41,7 @@
 #include "port/port.h"
 #include "util/thread_operation.h"
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 class ColumnFamilyHandle;
 

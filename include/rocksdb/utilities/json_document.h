@@ -27,7 +27,7 @@ namespace fbson {
   typedef FbsonWriterT<FbsonOutStream> FbsonWriter;
 }  // namespace fbson
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 // NOTE: none of this is thread-safe
 class JSONDocument {

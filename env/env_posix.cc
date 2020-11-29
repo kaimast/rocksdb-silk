@@ -66,7 +66,7 @@
 #define EXT4_SUPER_MAGIC 0xEF53
 #endif
 
-namespace rocksdb {
+namespace rocksdb_silk {
 
 namespace {
 

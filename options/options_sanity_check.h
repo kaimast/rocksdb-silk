@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 #ifndef ROCKSDB_LITE
-namespace rocksdb {
+namespace rocksdb_silk {
 // This enum defines the RocksDB options sanity level.
 enum OptionsSanityCheckLevel : unsigned char {
   // Performs no sanity check at all.

@@ -13,7 +13,7 @@
 #include <functional>
 #include <type_traits>
 
-namespace rocksdb {
+namespace rocksdb_silk {
 namespace port {
 
 // This class is a replacement for std::thread
