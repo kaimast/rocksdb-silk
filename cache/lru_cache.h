@@ -202,11 +202,6 @@ class ALIGN_AS(CACHE_LINE_SIZE) LRUCacheShard : public CacheShard {
   //  not threadsafe
   size_t TEST_GetLRUSize();
 
-  // Overloading to aligned it to cache line size
-  void* operator new(size_t);
-
-  void operator delete(void *);
-
  private:
   void LRU_Remove(LRUHandle* e);
   void LRU_Insert(LRUHandle* e);
@@ -291,7 +286,7 @@ class LRUCache : public ShardedCache {
   size_t TEST_GetLRUSize();
 
  private:
-  LRUCacheShard* shards_;
+  LRUCacheShard* shards_ = nullptr;
   int num_shards_ = 0;
 };
 

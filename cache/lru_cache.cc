@@ -7,12 +7,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
-#ifndef __STDC_FORMAT_MACROS
-#define __STDC_FORMAT_MACROS
-#endif
-
 #include "cache/lru_cache.h"
 
+#include <new>
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -233,14 +230,6 @@ void LRUCacheShard::EvictFromLRU(size_t charge,
   }
 }
 
-void* LRUCacheShard::operator new(size_t size) {
-  return rocksdb::port::cacheline_aligned_alloc(size);
-}
-
-void LRUCacheShard::operator delete(void *memblock) {
-  rocksdb::port::cacheline_aligned_free(memblock);
-}
-
 void LRUCacheShard::SetCapacity(size_t capacity) {
   autovector<LRUHandle*> last_reference_list;
   {
@@ -457,8 +446,14 @@ LRUCache::LRUCache(size_t capacity, int num_shard_bits,
                    bool strict_capacity_limit, double high_pri_pool_ratio)
     : ShardedCache(capacity, num_shard_bits, strict_capacity_limit) {
   num_shards_ = 1 << num_shard_bits;
-  shards_ = reinterpret_cast<LRUCacheShard*>(new uint8_t[num_shards_ * sizeof(LRUCacheShard)]);
-  
+
+  shards_ = reinterpret_cast<LRUCacheShard*>(
+                  port::cacheline_aligned_alloc(sizeof(LRUCacheShard) * num_shards_));
+
+  for (int i = 0; i < num_shards_; i++) {
+    new (&shards_[i]) LRUCacheShard();
+  }
+
   SetCapacity(capacity);
   SetStrictCapacityLimit(strict_capacity_limit);
   for (int i = 0; i < num_shards_; i++) {
@@ -466,7 +461,15 @@ LRUCache::LRUCache(size_t capacity, int num_shard_bits,
   }
 }
 
-LRUCache::~LRUCache() { delete[] shards_; }
+LRUCache::~LRUCache() {
+  if (shards_ != nullptr) {
+    assert(num_shards_ > 0);
+    for (int i = 0; i < num_shards_; i++) {
+      shards_[i].~LRUCacheShard();
+    }
+    port::cacheline_aligned_free(shards_);
+  }
+}
 
 CacheShard* LRUCache::GetShard(int shard) {
   return reinterpret_cast<CacheShard*>(&shards_[shard]);
