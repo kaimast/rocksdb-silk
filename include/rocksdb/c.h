@@ -351,6 +351,10 @@ extern ROCKSDB_LIBRARY_API void rocksdb_silk_compact_range_cf_opt(
 extern ROCKSDB_LIBRARY_API void rocksdb_silk_delete_file(rocksdb_silk_t* db,
                                                     const char* name);
 
+extern ROCKSDB_LIBRARY_API void rocksdb_silk_continue_compaction_work(rocksdb_silk_t* db);
+
+extern ROCKSDB_LIBRARY_API void rocksdb_silk_pause_compaction_work(rocksdb_silk_t* db);
+
 extern ROCKSDB_LIBRARY_API const rocksdb_silk_livefiles_t* rocksdb_silk_livefiles(
     rocksdb_silk_t* db);
 
