@@ -710,6 +710,16 @@ void rocksdb_silk_drop_column_family(
   SaveError(errptr, db->rep->DropColumnFamily(handle->rep));
 }
 
+void rocksdb_silk_continue_compaction_work(
+    rocksdb_silk_t* db) {
+    db->rep->ContinueCompactionWork();
+}
+
+void rocksdb_silk_pause_compaction_work(
+    rocksdb_silk_t* db) {
+    db->rep->PauseCompactionWork();
+}
+
 void rocksdb_silk_column_family_handle_destroy(rocksdb_silk_column_family_handle_t* handle) {
   delete handle->rep;
   delete handle;
